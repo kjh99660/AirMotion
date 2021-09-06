@@ -1,0 +1,658 @@
+Using pre-set license
+Built from '2020.3/staging' branch; Version is '2020.3.17f1 (a4537701e4ab) revision 10769271'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Home; OS build 19042.1165; Version 2009; 64bit' Language: 'ko' Physical Memory: 16260 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2020.3.17f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+D:/_GitHub/airMotion_u
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+3081
+Successfully changed project path to: D:/_GitHub/airMotion_u
+D:/_GitHub/airMotion_u
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 32.98 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.17f1 (a4537701e4ab)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.17f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/_GitHub/airMotion_u/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1060 6GB (ID=0x1c06)
+    Vendor:   
+    VRAM:     6052 MB
+    Driver:   27.21.14.6089
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.17f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.17f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.17f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56156
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.17f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.008342 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 30.44 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  4.787 seconds
+Domain Reload Profiling:
+	ReloadAssembly (4788ms)
+		BeginReloadAssembly (147ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (554ms)
+			LoadAssemblies (140ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (196ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (39ms)
+			SetupLoadedEditorAssemblies (184ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (6ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (31ms)
+				BeforeProcessingInitializeOnLoad (20ms)
+				ProcessInitializeOnLoadAttributes (92ms)
+				ProcessInitializeOnLoadMethodAttributes (34ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.008032 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.42 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.700 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1701ms)
+		BeginReloadAssembly (365ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (8ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (36ms)
+		EndReloadAssembly (1226ms)
+			LoadAssemblies (282ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (336ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (66ms)
+			SetupLoadedEditorAssemblies (575ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (6ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (125ms)
+				ProcessInitializeOnLoadAttributes (407ms)
+				ProcessInitializeOnLoadMethodAttributes (5ms)
+				AfterProcessingInitializeOnLoad (30ms)
+				EditorAssembliesLoaded (1ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (10ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.11 seconds
+Refreshing native plugins compatible for Editor in 0.34 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1397 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 67.4 MB.
+System memory in use after: 67.5 MB.
+
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 1830.
+Total: 3.526900 ms (FindLiveObjects: 0.165400 ms CreateObjectMapping: 0.055700 ms MarkObjects: 3.227200 ms  DeleteObjects: 0.076600 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  path: Assets
+  artifactKey: Guid(00000000000000001000000000000000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets using Guid(00000000000000001000000000000000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '42d402b061de3733987d63b9cc3b64de') in 0.010000 seconds 
+  Import took 0.032164 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.633496 seconds.
+  path: Assets/_airMotion
+  artifactKey: Guid(b162f47e4565feb419fa5c6f3ae13f8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion using Guid(b162f47e4565feb419fa5c6f3ae13f8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bdddbda4e38cbe32ad87b4a8d5836638') in 0.006108 seconds 
+  Import took 0.009211 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.744014 seconds.
+  path: Assets/_airMotion/UIs
+  artifactKey: Guid(a8b92a79584d40941b2b83cb1e9ffe1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs using Guid(a8b92a79584d40941b2b83cb1e9ffe1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c90ffa38fd20a93ec4f484f4b373b393') in 0.005835 seconds 
+  Import took 0.024082 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007763 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.42 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.676 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1677ms)
+		BeginReloadAssembly (250ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (46ms)
+		EndReloadAssembly (1321ms)
+			LoadAssemblies (211ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (383ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (52ms)
+			SetupLoadedEditorAssemblies (581ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (8ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (120ms)
+				ProcessInitializeOnLoadAttributes (415ms)
+				ProcessInitializeOnLoadMethodAttributes (4ms)
+				AfterProcessingInitializeOnLoad (33ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (9ms)
+Platform modules already initialized, skipping
+Switching build target platform(19) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 0.34 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1395 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 67.3 MB.
+System memory in use after: 67.4 MB.
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 1832.
+Total: 3.003200 ms (FindLiveObjects: 0.148000 ms CreateObjectMapping: 0.048700 ms MarkObjects: 2.785900 ms  DeleteObjects: 0.019200 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 5.79 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 11 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 39.9 MB.
+System memory in use after: 40.0 MB.
+
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 1832.
+Total: 4.654000 ms (FindLiveObjects: 0.185800 ms CreateObjectMapping: 0.052900 ms MarkObjects: 4.385400 ms  DeleteObjects: 0.028300 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 266.335683 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06
+  artifactKey: Guid(14506af25ff102f4faa9c70893a3c6f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06 using Guid(14506af25ff102f4faa9c70893a3c6f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '945b7315c16234177e69137fe2f93bc9') in 0.008173 seconds 
+  Import took 0.012138 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.144627 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/!.png
+  artifactKey: Guid(0f18ea40c0231c549be2e5b62481e223) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/!.png using Guid(0f18ea40c0231c549be2e5b62481e223) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57d8d614b92da5a2c51ee70ce47febdf') in 0.177813 seconds 
+  Import took 0.180441 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.799883 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/bg_purple_56.png
+  artifactKey: Guid(e86ce32af74205743afe20129eac9307) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/bg_purple_56.png using Guid(e86ce32af74205743afe20129eac9307) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dfbfe55f7a672ec818571fe498dccce4') in 0.017620 seconds 
+  Import took 0.020290 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.734704 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/bg_purple_56.png
+  artifactKey: Guid(e86ce32af74205743afe20129eac9307) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/bg_purple_56.png using Guid(e86ce32af74205743afe20129eac9307) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e1a854f6ba11b70921828f7db0023fec') in 0.066852 seconds 
+  Import took 0.069716 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 9.850142 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/icn_logo.png
+  artifactKey: Guid(32e5d879fa1189043b684d547ca5e510) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/icn_logo.png using Guid(32e5d879fa1189043b684d547ca5e510) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1af88de9860d20be82252ac28ff12801') in 0.022064 seconds 
+  Import took 0.025380 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 149.050910 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/!.png
+  artifactKey: Guid(0f18ea40c0231c549be2e5b62481e223) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/!.png using Guid(0f18ea40c0231c549be2e5b62481e223) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6eb8c9c66bd78a84bb8d182d9266165b') in 0.072231 seconds 
+  Import took 0.075888 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000538 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/bg_playbar_pre.png
+  artifactKey: Guid(72923fb740c0de744a2f17e5a6411ac4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/bg_playbar_pre.png using Guid(72923fb740c0de744a2f17e5a6411ac4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '38f1aefd4f50d6d76fc2dd4751d9cf98') in 0.032968 seconds 
+  Import took 0.036555 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000539 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/다운로드 기간이 만료되었습니다..png
+  artifactKey: Guid(67cfdded939ac874a8833fa9901eff86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/다운로드 기간이 만료되었습니다..png using Guid(67cfdded939ac874a8833fa9901eff86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '76be86d6a35a82bce3419617c997b0ff') in 0.029314 seconds 
+  Import took 0.037079 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000279 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/btn_play.png
+  artifactKey: Guid(76b66a1cfb7b8914d9f8c18cb9b0fe47) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/btn_play.png using Guid(76b66a1cfb7b8914d9f8c18cb9b0fe47) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f2580ac38192b76e86a98bfa8ef6c086') in 0.035000 seconds 
+  Import took 0.038613 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000316 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/다운로드 기간 만료.png
+  artifactKey: Guid(15ab5a42cdca91d43902ac011ce22437) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/다운로드 기간 만료.png using Guid(15ab5a42cdca91d43902ac011ce22437) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '20407a4b1a1e9fb481416d9c7d00a571') in 0.030826 seconds 
+  Import took 0.043692 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000539 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/btn_wide.png
+  artifactKey: Guid(7e9f5523fe3bab74582780874489fa93) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/btn_wide.png using Guid(7e9f5523fe3bab74582780874489fa93) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7d95e6444ef75bf9696146dae256ff60') in 0.055716 seconds 
+  Import took 0.064891 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000304 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/N.png
+  artifactKey: Guid(39659a096243a0743a92311fd0b0354a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/N.png using Guid(39659a096243a0743a92311fd0b0354a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cdc5974a7fcf6a139955ef72f624006e') in 0.046411 seconds 
+  Import took 0.059947 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000277 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/btn_search.png
+  artifactKey: Guid(ab7240b2dd5df24489c7be8b9feaa9a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/btn_search.png using Guid(ab7240b2dd5df24489c7be8b9feaa9a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a2093b0bd84545716480fe1dc39c77d4') in 0.048453 seconds 
+  Import took 0.054877 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000342 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/다운로드 2020.11.31까지.png
+  artifactKey: Guid(81518236d26fc5446ac1a5208b893759) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/다운로드 2020.11.31까지.png using Guid(81518236d26fc5446ac1a5208b893759) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '56498e64a529cd0c63b4ddf99e3b38a1') in 0.077744 seconds 
+  Import took 0.086612 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000328 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/bg_playbar_circle.png
+  artifactKey: Guid(dd429638c1fc0b34594c3d87b30ae251) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/bg_playbar_circle.png using Guid(dd429638c1fc0b34594c3d87b30ae251) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1b1bb52a9ff221cb0cb3fe4b553840d2') in 0.066422 seconds 
+  Import took 0.176132 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000453 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/사각형 329.png
+  artifactKey: Guid(8ed5eaa349f128843b13031bea106386) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/사각형 329.png using Guid(8ed5eaa349f128843b13031bea106386) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ad62e46404f5cc49905993a928015e53') in 0.089522 seconds 
+  Import took 0.117450 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000338 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/btn_new.png
+  artifactKey: Guid(7313667e037c5af4eaca484ba10e935c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/btn_new.png using Guid(7313667e037c5af4eaca484ba10e935c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'de6f1f2f7242dc7c3f7e40f1c5eebb37') in 0.074859 seconds 
+  Import took 0.079539 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000297 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/170.2m.png
+  artifactKey: Guid(07f12342414cf504daf2c63271c40810) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/170.2m.png using Guid(07f12342414cf504daf2c63271c40810) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6511b70fd85a754de2b58f3452dc989a') in 0.146395 seconds 
+  Import took 0.151397 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000324 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/사각형 317.png
+  artifactKey: Guid(d7f96f14a733fb247b25b1e3f50a31f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/사각형 317.png using Guid(d7f96f14a733fb247b25b1e3f50a31f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '171f31e044c931d1a2dd43fca69fe689') in 0.143305 seconds 
+  Import took 0.150348 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.009810 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/icn_menu_profilenor.png
+  artifactKey: Guid(ae4d6674004dab248855a520822f0b96) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/icn_menu_profilenor.png using Guid(ae4d6674004dab248855a520822f0b96) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d0a4283f0f3143212a36fd16defa473') in 0.033616 seconds 
+  Import took 0.043296 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000410 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/#측면.png
+  artifactKey: Guid(ce66d73325faa24458de6e81825e9e6b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/#측면.png using Guid(ce66d73325faa24458de6e81825e9e6b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e62e4393e4406455c5db0f73c48922e5') in 0.099674 seconds 
+  Import took 0.113080 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.001651 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/bg_gradation.png
+  artifactKey: Guid(a43efc7f47e917846911b683042a926e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/bg_gradation.png using Guid(a43efc7f47e917846911b683042a926e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '24c38b5de94c0fa4d6f9ba896f4124be') in 0.091950 seconds 
+  Import took 0.099224 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000399 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/bg_purple_line_56.png
+  artifactKey: Guid(7dd7bef2ef5060744a8c7909e377c19f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/bg_purple_line_56.png using Guid(7dd7bef2ef5060744a8c7909e377c19f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '18dda4d4d6b61e1abf07d9025164392e') in 0.092696 seconds 
+  Import took 0.100108 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000348 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/bg_playbar_nor.png
+  artifactKey: Guid(83910d8016797de4f9fe887ff08b94ec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/bg_playbar_nor.png using Guid(83910d8016797de4f9fe887ff08b94ec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cf27553ac762f30caf3a987941d515d5') in 0.082024 seconds 
+  Import took 0.115140 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000463 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/icn_arrow_2.png
+  artifactKey: Guid(e014ec907d09eef4b87eff6fb222d447) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/icn_arrow_2.png using Guid(e014ec907d09eef4b87eff6fb222d447) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8e60e17e760c27c0cd47246d7500ecef') in 0.064280 seconds 
+  Import took 0.118783 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.041909 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/#정면.png
+  artifactKey: Guid(bc86b208682a206479ec6549aeb0e2a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/#정면.png using Guid(bc86b208682a206479ec6549aeb0e2a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5aa5026e66bfd2c383c63933eee11c84') in 0.106521 seconds 
+  Import took 0.115300 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000702 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/스윙영상01_11.png
+  artifactKey: Guid(030f4e853ecc97a4c8de39e1f715f3fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/스윙영상01_11.png using Guid(030f4e853ecc97a4c8de39e1f715f3fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3a21358a75c6678a293e474a9c9fd8a8') in 0.081960 seconds 
+  Import took 0.156499 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.038059 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/사각형 113.png
+  artifactKey: Guid(6dcbf37af731fdd4bb2672477e3e0f52) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/사각형 113.png using Guid(6dcbf37af731fdd4bb2672477e3e0f52) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '809a2e94b00ca1e686409a079ae5bfd4') in 0.047360 seconds 
+  Import took 0.103063 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000371 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/#전체.png
+  artifactKey: Guid(30a4a1de74afa554f8ce01d4b0d50e1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/#전체.png using Guid(30a4a1de74afa554f8ce01d4b0d50e1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c2286d8c2a3904570a962342b14c4a1f') in 0.076880 seconds 
+  Import took 0.080396 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000323 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/btn_more.png
+  artifactKey: Guid(d98eff4cfc7056e4caaf892d7f9569b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/btn_more.png using Guid(d98eff4cfc7056e4caaf892d7f9569b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '895d0b67d54f93ab623db4909f5d6627') in 0.059926 seconds 
+  Import took 0.086096 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000359 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/에어모션 골프장.png
+  artifactKey: Guid(11931884e61bc394c8e682f596af8aab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/에어모션 골프장.png using Guid(11931884e61bc394c8e682f596af8aab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '55ed7528c99e4e6d2805bf97fc2e7590') in 0.125247 seconds 
+  Import took 0.131499 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000380 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/GC 무주  Lake 9번홀 Par 4.png
+  artifactKey: Guid(050a1b596fc53b64d95c254adbc0eec5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/GC 무주  Lake 9번홀 Par 4.png using Guid(050a1b596fc53b64d95c254adbc0eec5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ea5a6abde7f7c3520a1812111cdbd58b') in 0.082344 seconds 
+  Import took 0.086207 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.074418 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/조회수 50_2.png
+  artifactKey: Guid(6f90c8cc444a6ea4eb3a2b4887280813) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/조회수 50_2.png using Guid(6f90c8cc444a6ea4eb3a2b4887280813) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8a227658e26bef303b98b914542559ba') in 0.109251 seconds 
+  Import took 0.114037 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.058621 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/구성 요소 24 – 26.png
+  artifactKey: Guid(27f25555928e26448a0357046c2bd437) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/구성 요소 24 – 26.png using Guid(27f25555928e26448a0357046c2bd437) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f2af2599bc6ebf32370c450ea2db5b7f') in 0.075445 seconds 
+  Import took 0.079449 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.326112 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/프로필.png
+  artifactKey: Guid(7db047cd9c2893b40bdc32a31a0776af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/프로필.png using Guid(7db047cd9c2893b40bdc32a31a0776af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '90b2aab06d72c4885c1073efa3ecf7b2') in 0.119076 seconds 
+  Import took 0.126298 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000409 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/#에어모션 레이더 #정면.png
+  artifactKey: Guid(6e4fe36291487304182ffa524603b5de) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/#에어모션 레이더 #정면.png using Guid(6e4fe36291487304182ffa524603b5de) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '620a956d03337787dae166120fc382ff') in 0.067453 seconds 
+  Import took 0.093623 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000432 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/클럽전체.png
+  artifactKey: Guid(cb1a66414a0f22e44ae8d4b723c596a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/클럽전체.png using Guid(cb1a66414a0f22e44ae8d4b723c596a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f93c895bb553b6ede54be376b19291f6') in 0.098882 seconds 
+  Import took 0.106745 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000333 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/bg_purple_line_56_2.png
+  artifactKey: Guid(35c808ff29ac15847a20a643cd8509fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/bg_purple_line_56_2.png using Guid(35c808ff29ac15847a20a643cd8509fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e5ab9e3e0b709efbaacef19da2120469') in 0.112824 seconds 
+  Import took 0.117957 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000664 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/icn_menu_course_nor.png
+  artifactKey: Guid(27e4ef49b5083364188d8aa0658cb34d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/icn_menu_course_nor.png using Guid(27e4ef49b5083364188d8aa0658cb34d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ef655210b6c238f829b07d1c9fd551de') in 0.097327 seconds 
+  Import took 0.123541 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000389 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/내영상.png
+  artifactKey: Guid(10b59bf4a74eb454bac9494dde8ea5bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/내영상.png using Guid(10b59bf4a74eb454bac9494dde8ea5bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '267d71a60417e9020e53b8cc4c58fc39') in 0.088631 seconds 
+  Import took 0.092371 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000341 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/icn_download_end.png
+  artifactKey: Guid(d4d46b27ee078644392ddceb78ef98f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/icn_download_end.png using Guid(d4d46b27ee078644392ddceb78ef98f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'afa214788653e439f930e79262ed356f') in 0.160852 seconds 
+  Import took 0.184929 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.020050 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/GC 무주  Lake 9번홀 Par 4_2.png
+  artifactKey: Guid(eb88191a4733464498e27df4fee9da87) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/GC 무주  Lake 9번홀 Par 4_2.png using Guid(eb88191a4733464498e27df4fee9da87) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1d2954d884cda53f9b03128ad41b05d9') in 0.121401 seconds 
+  Import took 0.162967 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000356 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/bg_black_80_53.png
+  artifactKey: Guid(ccbf7ce06a4061847b22811fe60f3452) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/bg_black_80_53.png using Guid(ccbf7ce06a4061847b22811fe60f3452) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a841684b65def77cff80b457b056aac6') in 0.034419 seconds 
+  Import took 0.068953 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000389 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/!.png
+  artifactKey: Guid(0f18ea40c0231c549be2e5b62481e223) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/!.png using Guid(0f18ea40c0231c549be2e5b62481e223) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6eb8c9c66bd78a84bb8d182d9266165b') in 0.061226 seconds 
+  Import took 0.067297 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000704 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/icn_menu_video_pre.png
+  artifactKey: Guid(e90d039e0835bbe4eace68ee201b73d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/icn_menu_video_pre.png using Guid(e90d039e0835bbe4eace68ee201b73d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f20904a8259e95f26ca81a4eb516081') in 0.068105 seconds 
+  Import took 0.086001 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000360 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/조회수 50.png
+  artifactKey: Guid(71748727500c71a418ffb179141f9297) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/조회수 50.png using Guid(71748727500c71a418ffb179141f9297) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6fa317809697c1568f1941d2ad481b32') in 0.062700 seconds 
+  Import took 0.075477 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000582 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/2020.11.20.png
+  artifactKey: Guid(3fea6551dace08b42a95b1b25d4b22ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/2020.11.20.png using Guid(3fea6551dace08b42a95b1b25d4b22ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65e6e1e27e22a9ff6eea11c8b20873d1') in 0.062277 seconds 
+  Import took 0.067840 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.001711 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/베스트.png
+  artifactKey: Guid(3f3cd3378bc4758449a7f1cff7d77746) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/베스트.png using Guid(3f3cd3378bc4758449a7f1cff7d77746) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9e8c0e4716383cf426582bb736ae6676') in 0.062107 seconds 
+  Import took 0.071431 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000405 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/세상에 없던 필드 스윙모션.png
+  artifactKey: Guid(e06ec580a2845a74f89be7482bbcdfd9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/세상에 없던 필드 스윙모션.png using Guid(e06ec580a2845a74f89be7482bbcdfd9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd302b7e50f472bc96bcad342d5095cde') in 0.065644 seconds 
+  Import took 0.073517 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000354 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/icn_menu_best_nor.png
+  artifactKey: Guid(146b3209ed5f2d94d9e3a68150c208cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/icn_menu_best_nor.png using Guid(146b3209ed5f2d94d9e3a68150c208cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9d31f904d9be1c39ab9c3d034be242c9') in 0.055028 seconds 
+  Import took 0.058151 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000961 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/icn_arrow.png
+  artifactKey: Guid(84b643f579b2d0e42831d6ded76c9126) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/icn_arrow.png using Guid(84b643f579b2d0e42831d6ded76c9126) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '77bc14436eec4485eb0a7d59992b174b') in 0.080547 seconds 
+  Import took 0.090256 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000426 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/2020.11.20_2.png
+  artifactKey: Guid(f4837217b17401d41bacbefe1e357b1c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/2020.11.20_2.png using Guid(f4837217b17401d41bacbefe1e357b1c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '52876abf379496096e6bd6a54c11bd0e') in 0.056115 seconds 
+  Import took 0.059674 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016262 seconds.
+  path: Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/최근순.png
+  artifactKey: Guid(3b6f698d94d583749b4f82b09480c142) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_airMotion/UIs/assets_new_내영상_홈_영상있음_2021-09-06/최근순.png using Guid(3b6f698d94d583749b4f82b09480c142) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5708d9b9d346cd9a08a8e3c00937c5c8') in 0.051293 seconds 
+  Import took 0.086260 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
