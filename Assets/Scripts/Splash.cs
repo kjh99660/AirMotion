@@ -10,6 +10,7 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
     public GameObject[] splash = new GameObject[9];
     public Sprite[] images = new Sprite[2];
     public GameObject[] errors = new GameObject[15];
+    public GameObject[] firstLoginPopup = new GameObject[20];
     public GameObject confirm;
     private WaitForSeconds wait;
     private bool unit;
@@ -21,6 +22,11 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
         InitValue();
         StartCoroutine(Splash_term_on());
     }
+    public void CancelButton()
+    {
+
+    }
+
     public void RadioButton(Image choose, Image another)
     {
         choose.sprite = images[0];
@@ -102,7 +108,14 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
         }
         
     }
-    public void AfterLoginTouchView() => SceneManager.LoadScene("sceneMyVedio");
+    public void AfterLoginTouchView()
+    {
+        if(firstLogin)
+        {
+            PopUpOnOff(firstLoginPopup[0]);
+        }
+        else SceneManager.LoadScene("sceneMyVedio");
+    }
     public void FindPasswordTouchConfirm()
     {
         //ÀÌ¸ÞÀÏ ÁÖ¼Ò¸¦ ¼­¹ö·Î Àü¼Û - server
@@ -179,6 +192,11 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
         yield return wait;
         confirm.SetActive(false);
         SplashOnAndOff(6, 7);
+    }
+    private void PopUpOnOff(GameObject PopUp)
+    {
+        if (PopUp.activeSelf) PopUp.SetActive(false);
+        else PopUp.SetActive(true);
     }
     private void ChangeImage(GameObject gameObject,Image image)
     {
