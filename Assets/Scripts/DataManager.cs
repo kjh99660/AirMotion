@@ -4,15 +4,42 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    private static DataManager instance = null;
+    private Dictionary<string, string> userData;
+
+    public static DataManager Instance
+    { 
+        get
+        {
+            if (!instance)
+            {
+                GameObject.Find("DataManager").GetComponent<DataManager>().Awake();
+            }
+            return instance;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else Destroy(this.gameObject);
+
+        Reference();
     }
+
+    enum DataSet
+    {
+
+    }
+
+
+    private void Reference()
+    {
+        userData = new Dictionary<string, string>();
+    }
+
 }

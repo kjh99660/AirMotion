@@ -3,44 +3,101 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.Text.RegularExpressions;
+using UnityEngine.EventSystems;
+
 
 public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´Â ½ºÅ©¸³Æ®
 {
-    public GameObject[] splash = new GameObject[9];
-    public Sprite[] images = new Sprite[2];
-    public GameObject[] errors = new GameObject[15];
-    public GameObject[] firstLoginPopup = new GameObject[20];
-    public GameObject confirm;
     private WaitForSeconds wait;
     private bool unit;
     private bool firstLogin;
     private float? height,heightFT;
-
+    /// <summary>
+    /// 
+    /// </summary>
+    private UIManager UM;    
+    public Sprite checkBox;
     void Start()
     {
         InitValue();
         StartCoroutine(Splash_term_on());
     }
-    public void CancelButton()
+    public void MoveMain() => UM.PageMove(2);
+    public void MoveLogin() => UM.PageMove(3);
+    public void MoveRegister() => UM.PageMove(4);
+    public void MoveRegisterDetail() => UM.PageMove(5);
+    public void MoveFindPassword() => UM.PageMove(6);
+    public void MoveCertify() => UM.PageMove(7);
+    public void MoveAfterCertify() => UM.PageMove(8);
+    public void ClickLogin()
     {
-
+        string userEmal = "kdh4021200@naver.com";
+        Debug.Log(UM.IsValidEmail(userEmal));
+        //ÀÌ¸ÞÀÏ ÀÔ·Â Çü½Ä ÀÏÄ¡
+        if (!UM.IsValidEmail(userEmal))
+        {
+            //¿¡·¯ ¶ç¿ì±â
+        }       
+        else
+        {
+            //ºñ¹Ð¹øÈ£¿Í ÀÌ¸ÞÀÏ ÀÏÄ¡ => ¼­¹ö·Î º¸³½ µÚ µÑÀÌ ÀÏÄ¡ÇÏ´ÂÁö È®ÀÎ
+            //·Î±×ÀÎ ÀÌÈÄ È­¸éÀ¸·Î ÀÌµ¿
+            //if(ºñ¹Ð¹øÈ£¿Í ÀÌ¸ÞÀÏÀÌ ÀÏÄ¡)            
+        }
     }
-
-    public void RadioButton(Image choose, Image another)
+    public void ClickPasswordConfirm()
     {
-        choose.sprite = images[0];
-        another.sprite = images[1];
+        //ÀÌ¸ÞÀÏ Çü½ÄÀÎÁö È®ÀÎ + °¡ÀÔµÈ ÀÌ¸ÞÀÏÀÎÁö È®ÀÎ ÈÄ
+        //¾Æ¸¶ ÆË¾÷ ¶ç¿ì´Â °É·Î ³ª¿Ã ¿¹Á¤
+        MoveLogin();
     }
+    public void RegisterNext()
+    {
+        //¸ðµç ÀÌ¿ë ¾à°ü¿¡ µ¿ÀÇ Çß´ÂÁö Ã¼Å©
+        //ÀÌ¸ÞÀÏ Çü½ÄÀÌ ÀÏÄ¡ÇÏ´ÂÁö Ã¼Å©
+        //ºñ¹Ð¹øÈ£ Çü½ÄÀÌ ÀÏÄ¡ÇÏ´ÂÁö Ã¼Å©
+        //ºñ¹Ð¹øÈ£³¢¸® ÀÏÄ¡ÇÏ´ÂÁö Ã¼Å©
+        MoveRegisterDetail();
+    }
+    public void RegisterDetailNext()
+    {
+        //´Ð³×ÀÓÀÌ Áßº¹ÀÎÁö È®ÀÎÇÏ±â
+        //Å°°¡ ÀÔ·ÂµÇ¾ú´ÂÁö È®ÀÎÇÏ±â
+        //ÇÚµðÄ¸ÀÌ ÀÔ·ÂµÇ¾ú´ÂÁö È®ÀÎÇÏ±â
+        MoveCertify();
+    }
+    public void PopUpSercvice() => UM.PopUp(0);
+    public void PopUpInformation() => UM.PopUp(1);
+    public void PopUpUpdate() => UM.PopUp(2);
+    public void CheckBox() => UM.CheckBox();
+    public void MoveHome() => SceneManager.LoadScene("home");
+
+    /// <summary>
+    /// //////////////////////////////////////////////////////////
+    /// </summary>
+    /// 
+    /*
     public void ChangeHeight(InputField text) //true => cm false => ft
     {
         float temp = 0f;
-
+        GameObject left = EventSystem.current.currentSelectedGameObject.transform.GetChild(0).gameObject;
+        GameObject right = EventSystem.current.currentSelectedGameObject.transform.GetChild(1).gameObject;
+        if (unit)
+        {
+            left.SetActive(false);
+            right.SetActive(true);
+        }
+        else
+        {
+            left.SetActive(true);
+            right.SetActive(false);
+        }
         if (!float.TryParse(text.text, out temp))//¼ýÀÚ°¡ ¾Æ´Ñ °ªÀ» ÀÔ·ÂÇßÀ» °æ¿ì
         {
             Debug.Log(text.text);
             height = null;
             heightFT = null;
+            unit = !unit;
             return;
         }
         temp = float.Parse(text.text);       
@@ -108,14 +165,6 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
         }
         
     }
-    public void AfterLoginTouchView()
-    {
-        if(firstLogin)
-        {
-            PopUpOnOff(firstLoginPopup[0]);
-        }
-        else SceneManager.LoadScene("sceneMyVedio");
-    }
     public void FindPasswordTouchConfirm()
     {
         //ÀÌ¸ÞÀÏ ÁÖ¼Ò¸¦ ¼­¹ö·Î Àü¼Û - server
@@ -123,31 +172,6 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
         //È®ÀÎ Ã¢ ¶ç¿ì±â + ¸î ÃÊ ÈÄ »èÁ¦     
         StartCoroutine(WaitSendMail());        
     }
-    public void FindPasswordTouchBack() => SplashOnAndOff(6,7);
-    public void LoginTouchBack() => SplashOnAndOff(3, 6);
-    public void LoginTouchFindPassword() => SplashOnAndOff(7, 6);
-    public void LoginTouchLogin()
-    {
-        string userEmal = "kdh4021200@naver.com";
-        Debug.Log(IsValidEmail(userEmal));
-        //ÀÌ¸ÞÀÏ ÀÔ·Â Çü½Ä ÀÏÄ¡
-        if (!IsValidEmail(userEmal))
-        {
-            ErrorOnOff(4);
-        }
-        else
-        {
-            SplashOnAndOff(8, 6);
-            //ºñ¹Ð¹øÈ£¿Í ÀÌ¸ÞÀÏ ÀÏÄ¡ => ¼­¹ö·Î º¸³½ µÚ µÑÀÌ ÀÏÄ¡ÇÏ´ÂÁö È®ÀÎ
-            //if(ºñ¹Ð¹øÈ£¿Í ÀÌ¸ÞÀÏÀÌ ÀÏÄ¡)
-            if(firstLogin)
-            {
-                //ÆË¾÷Ã¢ ¶ç¿ì±â
-            }
-        }
-    }
-
-    public void RegisterTouchBack() => SplashOnAndOff(4, 5);
     public void RegisterTouchConfirm()
     {
         //´Ð³×ÀÓ Áßº¹ È®ÀÎ
@@ -173,26 +197,13 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
     public void TwoTouchBack() => SplashOnAndOff(3, 4);
     public void LoadTouchRegister() => SplashOnAndOff(4, 3);
     public void LoadTouchLogin() => SplashOnAndOff(6, 3);
-
     public void OneTouchStart() => SplashOnAndOff(3, 2);
-
     public void TermTouchYes() => SplashOnAndOff(2, 1);
     public void TermTouchNo() => Application.Quit();
 
-    /************/
+    
 
-    IEnumerator Splash_term_on()
-    {
-        yield return wait;
-        UIOn(splash[1]);
-    }
-    IEnumerator WaitSendMail()
-    {
-        confirm.SetActive(true);
-        yield return wait;
-        confirm.SetActive(false);
-        SplashOnAndOff(6, 7);
-    }
+    
     private void PopUpOnOff(GameObject PopUp)
     {
         if (PopUp.activeSelf) PopUp.SetActive(false);
@@ -203,35 +214,26 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
         Image temp = gameObject.transform.GetComponent<Image>();
         temp = image;
     }
-    private void ErrorOnOff(int errorpos)
-    {
-        if (errors[errorpos].activeSelf) errors[errorpos].SetActive(false);
-        else errors[errorpos].SetActive(true);
-    }
-    private bool IsValidEmail(string email)
-    {
-        bool valid = Regex.IsMatch(email, @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=
-?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?");
-        return valid;
-    }
-    private void SplashOnAndOff(int on, int off)
-    {
-        UIOn(splash[on]);
-        UIOff(splash[off]);
-        //UI ÃÊ±âÈ­ÇÏ´Â ÄÚµå°¡ Ãß°¡·Î ÇÊ¿äÇÏ´Ù
-    }
     private void UIOff(GameObject UI) => UI.SetActive(false);
     private void UIOn(GameObject UI) => UI.SetActive(true);
+    */
+    /// <summary>
+    /// 
+    /// </summary>
 
+    IEnumerator Splash_term_on()
+    {
+        yield return wait;
+        UM.PageMove(1);
+    }
     private void InitValue()
     {
+        UM = UIManager.Instance;
         firstLogin = true; //¼­¹ö ³ª¿À¸é ¼öÁ¤
         height = null;
         heightFT = null;
         unit = true;
         wait = new WaitForSeconds(3f);
-        foreach (GameObject panel in splash)panel.SetActive(false);
-        //foreach (GameObject error in errors) error.SetActive(false);
-        splash[0].SetActive(true);
+       
     }
 }
