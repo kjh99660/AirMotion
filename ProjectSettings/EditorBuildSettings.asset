@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/login.unity
+    path: Assets/_airMotion/Scenes/login.unity
     guid: 01eea4eded9843f4f93bc61b19788baa
   - enabled: 1
-    path: Assets/Scenes/sceneMyVedio.unity
+    path: Assets/_airMotion/Scenes/sceneMyVedio.unity
     guid: 308db4d4fd3e3fa4294d01e326e9f502
   - enabled: 1
-    path: Assets/Scenes/sceneGlofCourse.unity
+    path: Assets/_airMotion/Scenes/sceneGlofCourse.unity
     guid: 2b15a61c4d12a7042a06c20805eceffd
   m_configObjects: {}
