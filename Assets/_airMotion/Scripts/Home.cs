@@ -5,15 +5,18 @@ using UnityEngine;
 public class Home : MonoBehaviour
 {
     private UIManager UM;
-    void Start()
+    private void Start()
     {
         InitValue();
+        Debug.Log("start");
     }
-    
 
+    public void MoveDirectSearch() => UM.PageMove(1);
     private void InitValue()
     {
         UM = UIManager.Instance;
-        
+        UM.ResetUIManager();       
     }
+
+
 }

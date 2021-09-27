@@ -17,8 +17,8 @@ public class MyVedio : MonoBehaviour//MyVedio관련해서 화면 이동 및 UI를 처리하는
     void Start()
     {
         //서버로부터 사용자 정보를 받는다
-        InitValue();
-        LoadFirstPage();
+        //InitValue();
+        //LoadFirstPage();
     }
     public void ButtonDownload()
     {
@@ -38,6 +38,7 @@ public class MyVedio : MonoBehaviour//MyVedio관련해서 화면 이동 및 UI를 처리하는
     }
     public void TouchViedio()
     {
+        /*
         //터치한 비디오를 서버에서 가져와서 myvedios[1]에 넣는다
         Debug.Log(myvedios[1]);
         myvedios[1].SetActive(true);
@@ -56,6 +57,7 @@ public class MyVedio : MonoBehaviour//MyVedio관련해서 화면 이동 및 UI를 처리하는
                 vedios[0].SetActive(true);
             }
         }
+        */
         
     }
     public void TouchBest()

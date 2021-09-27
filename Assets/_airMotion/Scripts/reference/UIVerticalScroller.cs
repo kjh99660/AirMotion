@@ -17,9 +17,9 @@ namespace UnityEngine.UI.Extensions
         [Tooltip("Size / spacing of elements")]
         public RectTransform elementSize;
         [Tooltip("Scale = 1/ (1+distance from center * shrinkage)")]
-        public Vector2 elementShrinkage = new Vector2(1f / 200, 1f / 200);
+        public Vector2 elementShrinkage = new Vector2(1f / 500, 1f / 500);
         [Tooltip("Minimum element scale (furthest from center)")]
-        public Vector2 minScale = new Vector2(0.7f, 0.7f);
+        public Vector2 minScale = new Vector2(0.6f, 0.6f);
         [Tooltip("Select the item to be in center on start.")]
         public int startingIndex = -1;
         [Tooltip("Stop scrolling past last element from inertia.")]
@@ -188,9 +188,11 @@ namespace UnityEngine.UI.Extensions
             for (var i = 0; i < _arrayOfElements.Length; i++)
             {
                 _arrayOfElements[i].GetComponent<CanvasGroup>().interactable = !disableUnfocused || minDistance == distance[i];
+                _arrayOfElements[i].GetComponentInChildren<Text>().color = new Color(0f, 0f, 0f);
                 if (minDistance == distance[i])
                 {
                     focusedElementIndex = i;
+                    _arrayOfElements[i].GetComponentInChildren<Text>().color = new Color(1f, 49f/255f, 75f/255f);
                     result = _arrayOfElements[i].GetComponentInChildren<Text>().text;
                 }
             }

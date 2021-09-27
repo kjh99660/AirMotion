@@ -41,17 +41,17 @@ namespace UnityEngine.UI.Extensions.Examples
         {
             int currentYear = int.Parse(System.DateTime.Now.ToString("yyyy"));
 
-            int[] arrayYears = new int[currentYear + 1 - 1900];
+            int[] arrayYears = new int[currentYear + 1 - 1980];
 
             yearsButtons = new GameObject[arrayYears.Length];
 
             for (int i = 0; i < arrayYears.Length; i++)
             {
-                arrayYears[i] = 1900 + i;
+                arrayYears[i] = currentYear - i;
 
                 GameObject clone = Instantiate(yearsButtonPrefab, yearsScrollingPanel);
                 clone.transform.localScale = new Vector3(1, 1, 1);
-                clone.GetComponentInChildren<Text>().text = "" + arrayYears[i];
+                clone.GetComponentInChildren<Text>().text = "" + arrayYears[i] + "년";
                 clone.name = "Year_" + arrayYears[i];
                 clone.AddComponent<CanvasGroup>();
                 yearsButtons[i] = clone;
@@ -68,53 +68,12 @@ namespace UnityEngine.UI.Extensions.Examples
             monthsButtons = new GameObject[months.Length];
             for (int i = 0; i < months.Length; i++)
             {
-                string month = "";
-                months[i] = i;
+                months[i] = i + 1;
+                string month = "" + months[i];
 
                 GameObject clone = Instantiate(monthsButtonPrefab, monthsScrollingPanel);
-                clone.transform.localScale = new Vector3(1, 1, 1);
-
-                switch (i)
-                {
-                    case 0:
-                        month = "Jan";
-                        break;
-                    case 1:
-                        month = "Feb";
-                        break;
-                    case 2:
-                        month = "Mar";
-                        break;
-                    case 3:
-                        month = "Apr";
-                        break;
-                    case 4:
-                        month = "May";
-                        break;
-                    case 5:
-                        month = "Jun";
-                        break;
-                    case 6:
-                        month = "Jul";
-                        break;
-                    case 7:
-                        month = "Aug";
-                        break;
-                    case 8:
-                        month = "Sep";
-                        break;
-                    case 9:
-                        month = "Oct";
-                        break;
-                    case 10:
-                        month = "Nov";
-                        break;
-                    case 11:
-                        month = "Dec";
-                        break;
-                }
-
-                clone.GetComponentInChildren<Text>().text = month;
+                clone.transform.localScale = new Vector3(1, 1, 1);               
+                clone.GetComponentInChildren<Text>().text = month+"월";
                 clone.name = "Month_" + months[i];
                 clone.AddComponent<CanvasGroup>();
                 monthsButtons[i] = clone;
@@ -130,7 +89,7 @@ namespace UnityEngine.UI.Extensions.Examples
             {
                 days[i] = i + 1;
                 GameObject clone = Instantiate(daysButtonPrefab, daysScrollingPanel);
-                clone.GetComponentInChildren<Text>().text = "" + days[i];
+                clone.GetComponentInChildren<Text>().text = "" + days[i]+"일";
                 clone.name = "Day_" + days[i];
                 clone.AddComponent<CanvasGroup>();
                 daysButtons[i] = clone;

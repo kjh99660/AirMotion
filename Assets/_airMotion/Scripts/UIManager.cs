@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
             return instance;
         }
     }
-
+    public void ResetUIManager() => GameObject.Find("UIManager").GetComponent<UIManager>().Awake();
 
     private void Awake()
     {
@@ -110,6 +110,7 @@ public class UIManager : MonoBehaviour
 
     private void Reference()
     {
+        Debug.Log("ref UI");
         black = new Color(0f, 0f, 0f, 0f);
         white = new Color(1f, 1f, 1f, 1f);
         LoginWindows = new Dictionary<int, GameObject>();
