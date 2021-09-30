@@ -30,11 +30,16 @@ public class UIManager : MonoBehaviour
     {
         if (instance == null)
         {
+            Debug.Log("make UIManager");
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
         }
-        else Destroy(this.gameObject);
-
+        /*
+        else
+        {
+            Destroy(this.gameObject);
+            Debug.Log("delete UIManager");
+        }
+        */
         Reference();
         InitValue();
     }
@@ -67,6 +72,7 @@ public class UIManager : MonoBehaviour
     }
     public void PopUp(int PopUpNumber)
     {
+        Debug.Log(LoginPopUps[PopUpNumber]);
         LoginPopUps[PopUpNumber].SetActive(true);
     }
     public void CancelPopUp()//자신의 부모 오브젝트를 끈다
@@ -81,7 +87,18 @@ public class UIManager : MonoBehaviour
     {
         bool valid = Regex.IsMatch(email, @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=
 ?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?");
+        Debug.Log("ISValidEmail: " + valid);
         return valid;
+    }
+    public bool IsValidPhone(string phone)
+    {
+        bool regPhone = Regex.IsMatch(phone,@"^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$");
+        Debug.Log("ISValidPhone: " + regPhone);
+        return regPhone;
+    }
+    public void ChangeImage(Sprite sprite, GameObject button)//이미지를 바꾼다
+    {       
+        button.GetComponent<Button>().image.overrideSprite = sprite;
     }
     public bool IsValidPssword(string password)//
     {
@@ -128,7 +145,7 @@ public class UIManager : MonoBehaviour
             LoginPopUps.Add(value, popup.transform.GetChild(value).gameObject);
         }
         LoginWindows.Remove(temp - 2);
-
+        LoginWindows.Remove(temp - 1);
     }
     private void InitValue()
     {
@@ -140,6 +157,5 @@ public class UIManager : MonoBehaviour
         {
             Page.Value.SetActive(false);
         }
-        PageMove(0);
     }
 }

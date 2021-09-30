@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_airMotion/Scenes/glofCourse.unity
     guid: 2b15a61c4d12a7042a06c20805eceffd
+  - enabled: 1
+    path: Assets/_airMotion/Scenes/best.unity
+    guid: ac59e97e5b06b244eb5d3c4d7c875c3f
+  - enabled: 1
+    path: Assets/_airMotion/Scenes/more.unity
+    guid: 4254e3e49dc974a41a07386eb71a06fe
   m_configObjects: {}

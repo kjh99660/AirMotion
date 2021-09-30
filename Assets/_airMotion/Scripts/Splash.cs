@@ -20,6 +20,11 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
     [Header ("Warning Object")]
     public GameObject[] login_3_warn;
     public GameObject[] register_4_warn;
+    [Space (8)]
+    public GameObject passwordButton;
+    public GameObject phoneButton;
+    public Sprite redButton_password;
+    public Sprite redButton_phone;
     
     void Start()
     {
@@ -33,7 +38,25 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
     public void MoveFindPassword() => UM.PageMove(6);
     public void MoveCertify() => UM.PageMove(7);
     public void MoveAfterCertify() => UM.PageMove(8);
+    public void PopUp_service() => UM.PopUp(0);
+    public void PopUp_information() => UM.PopUp(1);
+    public void CheckBox() => UM.CheckBox();
+    public void MoveHome() => SceneManager.LoadScene("home");
 
+    public void ChangeButtonImage(Text text)//¹öÆ°ÀÇ ÀÌ¹ÌÁö¸¦ ¹Ù²Û´Ù<ºñ¹Ð¹øÈ£>
+    {
+        if(UM.IsValidEmail(text.text))
+        {
+            UM.ChangeImage(redButton_password, passwordButton);
+        }
+    }
+    public void ChangeButtonImage_phone(Text text)//¹öÆ°ÀÇ ÀÌ¹ÌÁö¸¦ ¹Ù²Û´Ù<ÇîµåÆù>
+    {
+        if (UM.IsValidPhone(text.text))
+        {
+            UM.ChangeImage(redButton_phone, phoneButton);
+        }
+    }
     public void EndEmailEdit(Text text)//·Î±×ÀÎ ÀÌ¸ÞÀÏ ÀÔ·Â
     {
         if (UM.EndEditInput(text, 1)) login_3_warn[0].SetActive(false);
@@ -96,11 +119,6 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
         //ÇÚµðÄ¸ÀÌ ÀÔ·ÂµÇ¾ú´ÂÁö È®ÀÎÇÏ±â
         MoveCertify();
     }
-    public void PopUpSercvice() => UM.PopUp(0);
-    public void PopUpInformation() => UM.PopUp(1);
-    public void PopUpUpdate() => UM.PopUp(2);
-    public void CheckBox() => UM.CheckBox();
-    public void MoveHome() => SceneManager.LoadScene("home");
 
     /// <summary>
     /// //////////////////////////////////////////////////////////
@@ -253,6 +271,7 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
 
     IEnumerator Splash_term_on()
     {
+        UM.PageMove(0);
         yield return wait;
         UM.PageMove(1);
     }
