@@ -43,6 +43,7 @@ public class Splash : MonoBehaviour  //Splash 관련해서 화면 이동 및 UI를 처리하�
     public void CheckBox() => UM.CheckBox();
     public void MoveHome() => SceneManager.LoadScene("home");
 
+
     public void ChangeButtonImage(Text text)//버튼의 이미지를 바꾼다<비밀번호>
     {
         if(UM.IsValidEmail(text.text))

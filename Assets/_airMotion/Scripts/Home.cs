@@ -35,8 +35,9 @@ public class Home : MonoBehaviour
     }
 
     public void MoveBest() => SceneManager.LoadScene("best");
-    public void MoveGolfCourse() => SceneManager.LoadScene("glofCourse");
+    public void MoveGolfCourse() => SceneManager.LoadScene("golfCourse");
     public void MoveMore() => SceneManager.LoadScene("more");
+    public void MoveMyVedio() => SceneManager.LoadScene("myVedio");
     public void PopUp_noVedio() => UM.PopUp(0);
     public void PopUp_search() => UM.PopUp(1);
     public void PopUp_vediolist() => UM.PopUp(2);

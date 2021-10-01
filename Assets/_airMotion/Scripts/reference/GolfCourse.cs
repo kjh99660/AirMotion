@@ -14,11 +14,7 @@ public class GolfCourse : MonoBehaviour
     {
         InitValue();
         Debug.Log("GolfCourse OnEnable");
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+        StartCoroutine(LoadGolfCourse());
     }
     public void ToggleTopButtons()
     {
@@ -35,18 +31,21 @@ public class GolfCourse : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    IEnumerator LoadGolfCourse()
     {
-        
+        yield return new WaitForSeconds(1f);
+        MoveMain();
     }
+    public void MoveMain() => UM.PageMove(0);
     public void MoveMyVedio() => SceneManager.LoadScene("myVedio");
     public void MoveBest() => SceneManager.LoadScene("best");
     public void MoveMore() => SceneManager.LoadScene("more");
+    public void MoveGolfCourse() => SceneManager.LoadScene("golfCourse");
 
     private void InitValue()
     {
         if (UM == null) UM = UIManager.Instance;
-        UM.ResetUIManager();
+        UM.ResetUIManager();       
         white = new Color(1f, 1f, 1f, 1f);
         red = new Color(1f, 0.1921569f, 0.2941177f, 1f);
     }

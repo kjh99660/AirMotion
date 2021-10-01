@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/_airMotion/Scenes/myVedio.unity
     guid: 308db4d4fd3e3fa4294d01e326e9f502
   - enabled: 1
-    path: Assets/_airMotion/Scenes/glofCourse.unity
+    path: Assets/_airMotion/Scenes/golfCourse.unity
     guid: 2b15a61c4d12a7042a06c20805eceffd
   - enabled: 1
     path: Assets/_airMotion/Scenes/best.unity
