@@ -16,6 +16,8 @@ namespace UnityEngine.UI.Extensions
         IPointerEnterHandler, IPointerExitHandler,
         IPointerDownHandler, IPointerUpHandler,
         ISelectHandler, IDeselectHandler
+
+
     {
         Selectable button { get { return GetComponent<Selectable>(); } }
 

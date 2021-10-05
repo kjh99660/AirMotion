@@ -24,6 +24,8 @@ namespace UnityEngine.UI.Extensions {
             public Sprite sprite;
 			public Vector2 offset;
 			public Vector2 scale;
+
+
         }
 
 		// Icons and text to replace

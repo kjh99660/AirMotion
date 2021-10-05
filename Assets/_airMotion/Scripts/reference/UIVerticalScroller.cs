@@ -215,6 +215,9 @@ namespace UnityEngine.UI.Extensions
                 || _arrayOfElements[_arrayOfElements.Length - 1].GetComponent<RectTransform>().position.y < center.position.y))
             {
                 scrollRect.velocity = Vector2.zero;
+
+
+
             }
         }
 
