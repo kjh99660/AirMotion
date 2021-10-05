@@ -43,7 +43,17 @@ public class UIManager : MonoBehaviour
         Reference();
         InitValue();
     }
-    public void CheckBox()
+    public void ChildActiveOnOff()//자식 오브젝트를 키거나 끈다
+    {
+        GameObject parent = EventSystem.current.currentSelectedGameObject;
+        for(int i = 0; i < parent.transform.childCount; i++)
+        {
+            GameObject child = parent.transform.GetChild(i).gameObject;
+            if (child.activeSelf) child.SetActive(false);
+            else child.SetActive(true);          
+        }
+    }
+    public void CheckBox()//체크박스
     {
         GameObject temp = EventSystem.current.currentSelectedGameObject;
         Toggle toggle = temp.GetComponent<Toggle>();
@@ -92,17 +102,20 @@ public class UIManager : MonoBehaviour
     }
     public bool IsValidPhone(string phone)
     {
-        bool regPhone = Regex.IsMatch(phone,@"^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$");
+        bool regPhone = Regex.IsMatch(phone,@"^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$", RegexOptions.IgnorePatternWhitespace);
         Debug.Log("ISValidPhone: " + regPhone);
         return regPhone;
     }
+    public bool IsValidPassword(string password)
+    {
+        bool valid = Regex.IsMatch(password, @"^(?=.*?[A-Za-z0-9])(?=.*?[#?!@$%^&*-]).{10,}$", RegexOptions.IgnorePatternWhitespace);
+        Debug.Log("ISValidPassword: " + password);
+        return valid;
+    }
+
     public void ChangeImage(Sprite sprite, GameObject button)//이미지를 바꾼다
     {       
         button.GetComponent<Button>().image.overrideSprite = sprite;
-    }
-    public bool IsValidPssword(string password)//
-    {
-        return true;
     }
     public bool EndEditInput(Text text, int propose) //1 = 이메일 형식 확인 2 = 비밀번호 형식 확인
     {

@@ -9,9 +9,15 @@ using UnityEngine.EventSystems;
 public class Splash : MonoBehaviour  //Splash 관련해서 화면 이동 및 UI를 처리하는 스크립트
 {
     private WaitForSeconds wait;
-    private bool unit;
+    private string login_email, login_password;
+    private string user_password;
+    private bool Name, Height, Handycap;
     private bool firstLogin;
+    private bool unit;
+    private bool Service, Infromation, Over14;
+    private bool RegisterEmail, RegisgerPasswrod, RegisterPasswordTwo;   
     private float? height,heightFT;
+    private float time;
     /// <summary>
     /// 
     /// </summary>
@@ -20,14 +26,25 @@ public class Splash : MonoBehaviour  //Splash 관련해서 화면 이동 및 UI를 처리하�
     [Header ("Warning Object")]
     public GameObject[] login_3_warn;
     public GameObject[] register_4_warn;
-    [Space (8)]
+    [Space(8)]
+    public GameObject registerButtonDetail;
+    public GameObject registerButtonNext;
     public GameObject passwordButton;
     public GameObject phoneButton;
+    [Space(8)]
     public Sprite redButton_password;
     public Sprite redButton_phone;
-    
-    void Start()
+    public Sprite redButton_register;
+    [Space(8)]
+    public Sprite grayButton_password;
+    public Sprite grayButton_phone;
+    public Sprite grayButton_register;
+    [Space(8)]
+    public Text Timer;
+
+    public void Start()
     {
+        time = 180f;
         InitValue();
         StartCoroutine(Splash_term_on());
     }
@@ -43,61 +60,101 @@ public class Splash : MonoBehaviour  //Splash 관련해서 화면 이동 및 UI를 처리하�
     public void CheckBox() => UM.CheckBox();
     public void MoveHome() => SceneManager.LoadScene("home");
 
-
+    
+    public void SetAfterCerity()//핸드폰 인증요청 
+    {
+        time = 180f;
+        MoveAfterCertify();
+    }
     public void ChangeButtonImage(Text text)//버튼의 이미지를 바꾼다<비밀번호>
     {
-        if(UM.IsValidEmail(text.text))
+        if (UM.IsValidEmail(text.text))
         {
+            passwordButton.GetComponent<Button>().interactable = true;
             UM.ChangeImage(redButton_password, passwordButton);
+        }
+        else
+        {
+            UM.ChangeImage(grayButton_password, passwordButton);
+            passwordButton.GetComponent<Button>().interactable = false;
         }
     }
     public void ChangeButtonImage_phone(Text text)//버튼의 이미지를 바꾼다<헨드폰>
     {
         if (UM.IsValidPhone(text.text))
         {
+            phoneButton.GetComponent<Button>().interactable = true;
             UM.ChangeImage(redButton_phone, phoneButton);
+        }
+        else
+        {
+            phoneButton.GetComponent<Button>().interactable = false;
+            UM.ChangeImage(grayButton_phone, phoneButton);
         }
     }
     public void EndEmailEdit(Text text)//로그인 이메일 입력
     {
         if (UM.EndEditInput(text, 1)) login_3_warn[0].SetActive(false);
         else login_3_warn[0].SetActive(true);
+        login_email = text.text;
     }
     public void EndPasswordEdit(Text text)//로그인 비밀번호 입력
     {
         if (UM.EndEditInput(text, 2)) login_3_warn[1].SetActive(false);
         else login_3_warn[1].SetActive(true);
+        login_password = text.text;
     }
-    public void EndEmialRegister(Text text)
+    public void EndEmialRegister(Text text)//회원가입
     {
-        if (UM.EndEditInput(text, 1)) login_3_warn[0].SetActive(false);
-        else register_4_warn[0].SetActive(true);
+        if (UM.EndEditInput(text, 1))
+        {
+            register_4_warn[0].SetActive(false);
+            RegisterEmail = true;
+        }
+        else
+        {
+            register_4_warn[0].SetActive(true);
+            RegisterEmail = false;
+        }
     }
-    public void EndPasswordRegister(Text text)
+    public void EndPasswordRegister(InputField inputField)//회원가입 비밀번호 형식 확인
     {
-        if (UM.EndEditInput(text, 2)) login_3_warn[0].SetActive(false);
-        else register_4_warn[1].SetActive(true);
+        if (UM.IsValidPassword(inputField.text))
+        {
+            register_4_warn[1].SetActive(false);
+            RegisgerPasswrod = true;
+        }
+        else
+        {
+            register_4_warn[1].SetActive(true);
+            RegisgerPasswrod = false;
+        }
+        user_password = inputField.text;
     }
-    public void EndPasswordRegisterAgain(Text text)
+    public void EndPasswordRegisterAgain(InputField inputField)//회원가입 비밀번호 2번 체크
     {
-        if (UM.EndEditInput(text, 2)) login_3_warn[0].SetActive(false);
-        else register_4_warn[2].SetActive(true);
+        if (user_password == inputField.text)
+        {
+            register_4_warn[2].SetActive(false);
+            RegisterPasswordTwo = true;
+        }
+        else
+        {
+            register_4_warn[2].SetActive(true);
+            RegisterPasswordTwo = false;
+        }
     }
     public void ClickLogin()
     {
-        string userEmal = "kdh4021200@naver.com";
-        Debug.Log(UM.IsValidEmail(userEmal));
+        string userEmail = login_email;
+        string userPassword = login_password;
+      
         //이메일 입력 형식 일치
-        if (!UM.IsValidEmail(userEmal))
-        {
-            //에러 띄우기
-        }       
-        else
-        {
-            //비밀번호와 이메일 일치 => 서버로 보낸 뒤 둘이 일치하는지 확인
-            //로그인 이후 화면으로 이동
-            //if(비밀번호와 이메일이 일치)            
-        }
+        //에러 띄우기
+        //비밀번호와 이메일 일치 => 서버로 보낸 뒤 둘이 일치하는지 확인
+        //로그인 이후 화면으로 이동
+        //if(비밀번호와 이메일이 일치)            
+        
     }
     public void ClickPasswordConfirm()
     {
@@ -107,25 +164,71 @@ public class Splash : MonoBehaviour  //Splash 관련해서 화면 이동 및 UI를 처리하�
     }
     public void RegisterNext()
     {
-        //모든 이용 약관에 동의 했는지 체크
-        //이메일 형식이 일치하는지 체크
-        //비밀번호 형식이 일치하는지 체크
-        //비밀번호끼리 일치하는지 체크
-        MoveRegisterDetail();
+        if (OkToMoveRegisterNext())MoveRegisterDetail();
     }
     public void RegisterDetailNext()
     {
-        //닉네임이 중복인지 확인하기
-        //키가 입력되었는지 확인하기
-        //핸디캡이 입력되었는지 확인하기
-        MoveCertify();
+        if (OkToMoveRegisterDetailNext()) MoveCertify();
+    }
+    private bool OkToMoveRegisterNext()
+    {
+        if (Service && Infromation && Over14){
+            if (RegisterPasswordTwo && RegisgerPasswrod && RegisterEmail){
+                UM.ChangeImage(redButton_register,registerButtonNext);
+                registerButtonNext.GetComponent<Button>().interactable = true;
+                return true;
+            }
+        }
+        registerButtonNext.GetComponent<Button>().interactable = false;
+        UM.ChangeImage(grayButton_register, registerButtonNext);
+        return false;
+    }
+    private bool OkToMoveRegisterDetailNext()
+    {
+        if (Name && Height && Handycap)
+        {
+            if (RegisterPasswordTwo && RegisgerPasswrod && RegisterEmail)
+            {
+                UM.ChangeImage(redButton_register, registerButtonDetail);
+                registerButtonDetail.GetComponent<Button>().interactable = true;
+                return true;
+            }
+        }
+        registerButtonDetail.GetComponent<Button>().interactable = false;
+        UM.ChangeImage(grayButton_register, registerButtonDetail);
+        return false;
+    }
+    public void ServiceCheck()
+    {
+        Service = !Service;
+        CheckBox();
+    }
+    public void InformationCheck()
+    {
+        Infromation = !Infromation;
+        CheckBox();
+    }
+    public void Over14Check()
+    {
+        Over14 = !Over14;
+        CheckBox();
+    }
+    public void CheckNameBlank(Text text)
+    {
+        if (text.text == "") Name = false;
+        else Name = true;
+    }
+    public void CheckHeightBlank(Text text)
+    {
+        if (text.text == "") Height = false;
+        else Height = true;
+    }
+    public void CheckHandyBlank(Text text)
+    {
+        if (text.text == "") Handycap = false;
+        else Handycap = true;
     }
 
-    /// <summary>
-    /// //////////////////////////////////////////////////////////
-    /// </summary>
-    /// 
-    /*
     public void ChangeHeight(InputField text) //true => cm false => ft
     {
         float temp = 0f;
@@ -214,61 +317,15 @@ public class Splash : MonoBehaviour  //Splash 관련해서 화면 이동 및 UI를 처리하�
         }
         
     }
-    public void FindPasswordTouchConfirm()
-    {
-        //이메일 주소를 서버로 전송 - server
-
-        //확인 창 띄우기 + 몇 초 후 삭제     
-        StartCoroutine(WaitSendMail());        
-    }
-    public void RegisterTouchConfirm()
-    {
-        //닉네임 중복 확인
-        //성별 체크
-        //키 입력 완료
-        //헨디켑 선택 완료
-        SplashOnAndOff(6, 5);
-    }
-    public void CheckEmail(Text text)//이메일 아이디 체크용
-    {
-        
-    }
-    public void TwoTouchNext()
-    {
-        //if(email 입력 확인, 형식 일치, 미등록 이메일)
-        //이메일 오류 활성화
-        //return
-        //if(비밀번호 조건 만족, 두 비밀번호가 일치)
-        //비밀번호 오류 활성화
-        //return
-        SplashOnAndOff(5, 4);
-    }
-    public void TwoTouchBack() => SplashOnAndOff(3, 4);
-    public void LoadTouchRegister() => SplashOnAndOff(4, 3);
-    public void LoadTouchLogin() => SplashOnAndOff(6, 3);
-    public void OneTouchStart() => SplashOnAndOff(3, 2);
-    public void TermTouchYes() => SplashOnAndOff(2, 1);
-    public void TermTouchNo() => Application.Quit();
-
     
-
-    
-    private void PopUpOnOff(GameObject PopUp)
+    public void Update()
     {
-        if (PopUp.activeSelf) PopUp.SetActive(false);
-        else PopUp.SetActive(true);
+        OkToMoveRegisterNext();
+        OkToMoveRegisterDetailNext();
+        time -= Time.deltaTime;
+        Timer.text = string.Format("{0:0}", System.Math.Truncate((time / 60))) + ":" + string.Format("{0:00}", System.Math.Truncate((time % 60)));
+        Debug.Log(time / 60);
     }
-    private void ChangeImage(GameObject gameObject,Image image)
-    {
-        Image temp = gameObject.transform.GetComponent<Image>();
-        temp = image;
-    }
-    private void UIOff(GameObject UI) => UI.SetActive(false);
-    private void UIOn(GameObject UI) => UI.SetActive(true);
-    */
-    /// <summary>
-    /// 
-    /// </summary>
 
     IEnumerator Splash_term_on()
     {
@@ -280,9 +337,12 @@ public class Splash : MonoBehaviour  //Splash 관련해서 화면 이동 및 UI를 처리하�
     {
         UM = UIManager.Instance;
         firstLogin = true; //서버 나오면 수정
+        unit = true;
+        Service = false; Infromation = false; Over14 = false;
+        RegisterEmail = false; RegisgerPasswrod = false; RegisterPasswordTwo = false;
+        Name = false; Height = false; Handycap = false;
         height = null;
         heightFT = null;
-        unit = true;
         wait = new WaitForSeconds(3f);
         foreach (GameObject _ in login_3_warn) _.SetActive(false);
         foreach (GameObject _ in register_4_warn) _.SetActive(false);

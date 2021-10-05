@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
-public class Home : MonoBehaviour
+public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
 {
     private UIManager UM;
     public GameObject[] TopButtons;
@@ -22,6 +22,18 @@ public class Home : MonoBehaviour
         InitValue();
         Debug.Log("Home OnEnable");
     }
+    public void ClickAutoSearch()
+    {
+        StartCoroutine(CheckNewVedio());
+    }
+    public void ClickPassiveSearch()
+    {
+        MoveDirectSearch();
+    }
+    public void ClickSearchVedio()
+    {
+        UM.ChildActiveOnOff();
+    }
     public void ClickTopButton()
     {
         GameObject Button = EventSystem.current.currentSelectedGameObject.gameObject;      
@@ -32,26 +44,27 @@ public class Home : MonoBehaviour
         }
         UM.ChangeImage(redButton_top, Button);
         Button.transform.GetChild(0).GetComponent<Text>().color = white;
+        //if(Button.name == ~~)
     }
 
-    public void MoveBest() => SceneManager.LoadScene("best");
-    public void MoveGolfCourse() => SceneManager.LoadScene("golfCourse");
-    public void MoveMore() => SceneManager.LoadScene("more");
-    public void MoveMyVedio() => SceneManager.LoadScene("myVedio");
+    private void MoveBest() => SceneManager.LoadScene("best");
+    private void MoveGolfCourse() => SceneManager.LoadScene("golfCourse");
+    private void MoveMore() => SceneManager.LoadScene("more");
+    private void MoveMyVedio() => SceneManager.LoadScene("myVedio");
     public void PopUp_noVedio() => UM.PopUp(0);
-    public void PopUp_search() => UM.PopUp(1);
-    public void PopUp_vediolist() => UM.PopUp(2);
-    public void PopUp_golfCourse() => UM.PopUp(3);
-    public void PopUp_deleteVedio() => UM.PopUp(4);
-    public void PopUp_roundDay() => UM.PopUp(5);
-    public void PopUp_teaTime() => UM.PopUp(6);
-    public void MoveHome() => UM.PageMove(0);
-    public void MoveDirectSearch() => UM.PageMove(1);
-    public void MoveAutoSearch() => PopUp_search();
+    private void PopUp_search() => UM.PopUp(1);
+    private void PopUp_vediolist() => UM.PopUp(2);
+    private void PopUp_golfCourse() => UM.PopUp(3);
+    private void PopUp_deleteVedio() => UM.PopUp(4);
+    private void PopUp_roundDay() => UM.PopUp(5);
+    private void PopUp_teaTime() => UM.PopUp(6);
+    private void MoveHome() => UM.PageMove(0);
+    private void MoveDirectSearch() => UM.PageMove(1);
     IEnumerator CheckNewVedio()
     {
         
         yield return new WaitForSeconds(1f);
+        //영상을 검색하는 내용
         UM.PageMove(0);
         if (firstVisit)
         {
