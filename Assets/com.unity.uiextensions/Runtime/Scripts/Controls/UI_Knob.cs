@@ -66,6 +66,9 @@ namespace UnityEngine.UI.Extensions
         protected override void Start()
         {
             CheckForParentTouchMask();
+
+
+
         }
 
         private void CheckForParentTouchMask()

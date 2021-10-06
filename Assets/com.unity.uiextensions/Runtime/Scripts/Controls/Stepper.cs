@@ -34,6 +34,8 @@ namespace UnityEngine.UI.Extensions
         private Graphic _separator;
         private float _separatorWidth = 0;
 
+
+
         private float separatorWidth
         {
             get
