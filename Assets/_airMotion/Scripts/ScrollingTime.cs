@@ -30,6 +30,15 @@ namespace UnityEngine.UI.Extensions.Examples
         private int monthsSet;
         private int yearsSet;
 
+        public Text[] time;
+        public void ShowTime()
+        {
+            foreach (Text _ in time)
+            {
+                _.color = new Color(_.color.r, _.color.g, _.color.b, 1f);
+                _.text = hoursVerticalScroller.result + " " + minutesVerticalScroller.result;
+            }
+        }
         private void InitializeHour()
         {
             int[] Hour = new int[24];

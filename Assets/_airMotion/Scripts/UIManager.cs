@@ -25,6 +25,10 @@ public class UIManager : MonoBehaviour
         }
     }
     public void ResetUIManager() => GameObject.Find("UIManager").GetComponent<UIManager>().Awake();
+    public GameObject CurrentSelectedGameObject()
+    {
+        return EventSystem.current.currentSelectedGameObject.gameObject;
+    }
 
     private void Awake()
     {
@@ -67,7 +71,7 @@ public class UIManager : MonoBehaviour
             image.color = white;
         }
     }
-    public void PageMove(int PageNumber)
+    public void PageMove(int PageNumber)//페이지 이동
     {
         Debug.Log("PageMove: " + PageNumber);
         foreach(KeyValuePair<int, GameObject> Page in LoginWindows)
@@ -80,7 +84,7 @@ public class UIManager : MonoBehaviour
         }
         LoginWindows[PageNumber].SetActive(true);
     }
-    public void PopUp(int PopUpNumber)
+    public void PopUp(int PopUpNumber)//팝업
     {
         Debug.Log(LoginPopUps[PopUpNumber]);
         LoginPopUps[PopUpNumber].SetActive(true);
@@ -93,20 +97,20 @@ public class UIManager : MonoBehaviour
     {
         EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite = image;
     }
-    public bool IsValidEmail(string email)
+    public bool IsValidEmail(string email)//이메일 형식 일치 확인
     {
         bool valid = Regex.IsMatch(email, @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=
 ?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?");
         Debug.Log("ISValidEmail: " + valid);
         return valid;
     }
-    public bool IsValidPhone(string phone)
+    public bool IsValidPhone(string phone)//헨드폰 형식 일치 확인
     {
         bool regPhone = Regex.IsMatch(phone,@"^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$", RegexOptions.IgnorePatternWhitespace);
         Debug.Log("ISValidPhone: " + regPhone);
         return regPhone;
     }
-    public bool IsValidPassword(string password)
+    public bool IsValidPassword(string password)//비밀번호 형식 일치 확인
     {
         bool valid = Regex.IsMatch(password, @"^(?=.*?[A-Za-z0-9])(?=.*?[#?!@$%^&*-]).{10,}$", RegexOptions.IgnorePatternWhitespace);
         Debug.Log("ISValidPassword: " + password);

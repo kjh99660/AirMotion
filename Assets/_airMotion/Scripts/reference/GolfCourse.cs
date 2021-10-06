@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 public class GolfCourse : MonoBehaviour
 {
     private UIManager UM;
+    private GlobalCourutine GC;
     private Color red;
     private Color white;
     private void OnEnable()
@@ -16,6 +17,7 @@ public class GolfCourse : MonoBehaviour
         Debug.Log("GolfCourse OnEnable");
         StartCoroutine(LoadGolfCourse());
     }
+    
     public void ToggleTopButtons()
     {
         GameObject Button = EventSystem.current.currentSelectedGameObject.gameObject;
@@ -29,15 +31,25 @@ public class GolfCourse : MonoBehaviour
         Button.transform.GetChild(0).GetComponent<Text>().color = white;
         */
     }
+    public void ClickSearchVedio()//영상매칭 버튼
+    {
+        UM.ChildActiveOnOff();
+    }
+    public void ClickDirecctSearch()//수동검색 영상 검색 확인 버튼
+    {
+        MoveHome();
+        
+    }
 
-    // Update is called once per frame
     IEnumerator LoadGolfCourse()
     {
+        //서버에서 골프장 목록 받아오는 내용
         yield return new WaitForSeconds(1f);
         MoveMain();
     }
     public void MoveMain() => UM.PageMove(0);
-    public void MoveMyVedio() => SceneManager.LoadScene("myVedio");
+    public void MovePanorma() => SceneManager.LoadScene("PANORAMA");
+    public void MoveHome() => SceneManager.LoadScene("home");
     public void MoveBest() => SceneManager.LoadScene("best");
     public void MoveMore() => SceneManager.LoadScene("more");
     public void MoveGolfCourse() => SceneManager.LoadScene("golfCourse");
