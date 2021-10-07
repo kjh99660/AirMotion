@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class GlobalCourutine : MonoBehaviour
 {
     private static GlobalCourutine instance = null;
-    private Dictionary<string, string> CourutineList = new Dictionary<string, string>();
+    private static UIManager UM;
+    private Dictionary<string, string> CourutineList;
     public static GlobalCourutine Instance
     {
         get
@@ -18,7 +19,6 @@ public class GlobalCourutine : MonoBehaviour
             return instance;
         }
     }
-
     private void Awake()
     {
         //GameObject game = gameObject.transform.Find("CourutineManager").gameObject;
@@ -43,7 +43,7 @@ public class GlobalCourutine : MonoBehaviour
         //코루틴이 실행되야하는 씬의 이름과 코루틴의 이름이 들어간다
         CourutineList.Add(Scene, Courutine);
     }
-    public void StartCourutine() //스택에 해당하는 코루틴이 있는지 확인하는 함수
+    public void CheckCourutine() //스택에 해당하는 코루틴이 있는지 확인하는 함수
     {
         if (CourutineList.Count != 0)
         {
@@ -52,14 +52,21 @@ public class GlobalCourutine : MonoBehaviour
                 if (SceneManager.GetActiveScene().name == stack.Key)
                 {
                     string temp = stack.Value;
-                    StartCoroutine(temp);
+                    Home home = GameObject.Find("HomeManager").GetComponent<Home>();
+                    if(stack.Value == "DirectSearch")StartCoroutine(home.DirectSearch());                   
                 }
             }
+            CourutineList.Remove(SceneManager.GetActiveScene().name);
         }
     }
 
+    /// <summary>
+    /// /////////
+    /// </summary>
     private void InitValue()
     {
+        if (UM == null) UM = UIManager.Instance;
+        CourutineList = new Dictionary<string, string>();
         //초기화
 
     }

@@ -18,7 +18,13 @@ public class GolfCourse : MonoBehaviour
         Debug.Log("GolfCourse OnEnable");
         StartCoroutine(LoadGolfCourse());
     }
-    
+    private void Start()
+    {
+        InitValue();
+        Debug.Log("GolfCourse OnEnable");
+        StartCoroutine(LoadGolfCourse());
+    }
+
     public void ToggleTopButtons()//위쪽 UI 클릭할 때 색상 변경 코드
     {
         GameObject Button = EventSystem.current.currentSelectedGameObject.gameObject;

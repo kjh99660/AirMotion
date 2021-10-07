@@ -89,6 +89,10 @@ public class UIManager : MonoBehaviour
         Debug.Log(LoginPopUps[PopUpNumber]);
         LoginPopUps[PopUpNumber].SetActive(true);
     }
+    public void CancelPopUp(int PopUpNumber)//팝업을 끈다
+    {
+        LoginPopUps[PopUpNumber].SetActive(false);
+    }
     public void CancelPopUp()//자신의 부모 오브젝트를 끈다
     {
         EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.SetActive(false);
