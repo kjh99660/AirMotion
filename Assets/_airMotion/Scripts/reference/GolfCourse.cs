@@ -11,6 +11,7 @@ public class GolfCourse : MonoBehaviour
     private GlobalCourutine GC;
     private Color red;
     private Color white;
+    public GameObject[] TopButtons;
     private void OnEnable()
     {
         InitValue();
@@ -18,18 +19,18 @@ public class GolfCourse : MonoBehaviour
         StartCoroutine(LoadGolfCourse());
     }
     
-    public void ToggleTopButtons()
+    public void ToggleTopButtons()//위쪽 UI 클릭할 때 색상 변경 코드
     {
         GameObject Button = EventSystem.current.currentSelectedGameObject.gameObject;
-        /*
+        
         foreach (GameObject _ in TopButtons)
         {
-            UM.ChangeImage(whiteButton_top, _);
-            _.transform.GetChild(0).GetComponent<Text>().color = red;
+            //UM.ChangeImage(whiteButton_top, _);
+            //_.transform.GetChild(0).GetComponent<Text>().color = red;
         }
-        UM.ChangeImage(redButton_top, Button);
-        Button.transform.GetChild(0).GetComponent<Text>().color = white;
-        */
+        //UM.ChangeImage(redButton_top, Button);
+        //Button.transform.GetChild(0).GetComponent<Text>().color = white;
+        
     }
     public void ClickSearchVedio()//영상매칭 버튼
     {
@@ -37,8 +38,8 @@ public class GolfCourse : MonoBehaviour
     }
     public void ClickDirecctSearch()//수동검색 영상 검색 확인 버튼
     {
+        GC.AddCourutine("home", "DirectSearch");
         MoveHome();
-        
     }
 
     IEnumerator LoadGolfCourse()
@@ -57,6 +58,7 @@ public class GolfCourse : MonoBehaviour
     private void InitValue()
     {
         if (UM == null) UM = UIManager.Instance;
+        if (GC == null) GC = GlobalCourutine.Instance;
         UM.ResetUIManager();       
         white = new Color(1f, 1f, 1f, 1f);
         red = new Color(1f, 0.1921569f, 0.2941177f, 1f);

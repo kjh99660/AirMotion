@@ -202,9 +202,13 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
             selectedDay = false;
         }
     }
-    IEnumerator CheckNewVedio()
+    IEnumerator DirectSearch()
     {
-        
+        MoveDirectSearch();
+        yield return null;
+    }
+    IEnumerator CheckNewVedio()
+    {     
         yield return new WaitForSeconds(1f);
         //영상을 검색하는 내용
         //만약 영상이 이미 있으면 3번 페이지로 이동

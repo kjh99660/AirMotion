@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/_airMotion/Scenes/golfCourse.unity
+- path: Assets/_airMotion/Scenes/home.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
