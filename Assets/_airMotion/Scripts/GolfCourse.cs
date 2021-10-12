@@ -18,7 +18,7 @@ public class GolfCourse : MonoBehaviour
         Debug.Log("GolfCourse OnEnable");
         StartCoroutine(LoadGolfCourse());
     }
-    private void Start()
+    private void Start()//나중에 날려야함?
     {
         InitValue();
         Debug.Log("GolfCourse OnEnable");
@@ -45,6 +45,11 @@ public class GolfCourse : MonoBehaviour
     public void ClickDirecctSearch()//수동검색 영상 검색 확인 버튼
     {
         GC.AddCourutine("home", "DirectSearch");
+        MoveHome();
+    }
+    public void AutoSearch()
+    {
+        GC.AddCourutine("home", "CheckNewVedio");
         MoveHome();
     }
 

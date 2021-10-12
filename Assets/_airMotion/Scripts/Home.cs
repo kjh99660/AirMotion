@@ -325,6 +325,12 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
         Button.transform.GetChild(0).GetComponent<Text>().color = white;
         //if(Button.name == ~~)
     }
+    public void MoveHomeOrMain()
+    {
+        Debug.Log("HasVedio:" + HasVedio);
+        if (HasVedio) MoveMain();
+        else MoveHome();
+    }
 
     private void MoveBest() => SceneManager.LoadScene("best");
     private void MoveGolfCourse() => SceneManager.LoadScene("golfCourse");
@@ -381,9 +387,17 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
         yield return new WaitForSeconds(1f);
         UM.CancelPopUp(10);
     }
+    //GlobalCourutine 이 실행하는 코루틴 - 1
     public IEnumerator DirectSearch()
     {
+        Debug.Log("DirectSearch");
         MoveDirectSearch();
+        yield return null;
+    }
+    //GlobalCourutine 이 실행하는 코루틴 - 2
+    public IEnumerator BackToVedio()
+    {
+        //이전에 선택했던 영상을 골라서 다시 들어가는 코루틴
         yield return null;
     }
     IEnumerator CheckNewVedio()

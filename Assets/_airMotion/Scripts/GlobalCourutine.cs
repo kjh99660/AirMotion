@@ -14,8 +14,10 @@ public class GlobalCourutine : MonoBehaviour
         {
             if (!instance)
             {
+                Debug.Log("return null instance");
                 return null;
             }
+            Debug.Log("return GC instance");
             return instance;
         }
     }
@@ -51,9 +53,11 @@ public class GlobalCourutine : MonoBehaviour
             {
                 if (SceneManager.GetActiveScene().name == stack.Key)
                 {
+                    Debug.Log(stack.Key);
                     string temp = stack.Value;
                     Home home = GameObject.Find("HomeManager").GetComponent<Home>();
-                    if(stack.Value == "DirectSearch")StartCoroutine(home.DirectSearch());                   
+                    if (stack.Value == "DirectSearch") StartCoroutine(home.DirectSearch());
+                    if (stack.Value == "BackToVedio") StartCoroutine(home.BackToVedio());
                 }
             }
             CourutineList.Remove(SceneManager.GetActiveScene().name);

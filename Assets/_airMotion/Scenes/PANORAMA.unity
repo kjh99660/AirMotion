@@ -2144,7 +2144,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 135917644}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1888284610}
+        m_TargetAssemblyTypeName: Panorama, Assembly-CSharp
+        m_MethodName: ChangeModeToVertical
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &135917644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4049,7 +4061,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 223578253}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 134730964}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: CancelPopUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &223578253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5957,7 +5981,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 345317538}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1888284610}
+        m_TargetAssemblyTypeName: Panorama, Assembly-CSharp
+        m_MethodName: DownloadPanorama
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &345317538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13719,7 +13755,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 793524978}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 134730964}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: CancelPopUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &793524978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15346,7 +15394,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 857173205}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1888284610}
+        m_TargetAssemblyTypeName: Panorama, Assembly-CSharp
+        m_MethodName: DownloadPanorama
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &857173205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15775,7 +15835,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 867272206}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1888284610}
+        m_TargetAssemblyTypeName: Panorama, Assembly-CSharp
+        m_MethodName: ConvertPanorama
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &867272206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17239,7 +17311,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 932288111}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1888284610}
+        m_TargetAssemblyTypeName: Panorama, Assembly-CSharp
+        m_MethodName: ChangeModeToHorizonDownload
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &932288111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17457,7 +17541,7 @@ GameObject:
   m_Component:
   - component: {fileID: 938474961}
   m_Layer: 5
-  m_Name: SNAPPHOTO_5
+  m_Name: "SNAPPHOTO_5_3.6\uCCB4\uD06C"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21952,6 +22036,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1157741036}
   m_CullTransparentMesh: 1
+--- !u!1 &1167666667
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1167666669}
+  - component: {fileID: 1167666668}
+  m_Layer: 0
+  m_Name: GC_temp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1167666668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167666667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27551e3e3cb1d194fbd08f695e222d19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1167666669
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167666667}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1169273136
 GameObject:
   m_ObjectHideFlags: 0
@@ -23772,7 +23899,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1261907669}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1888284610}
+        m_TargetAssemblyTypeName: Panorama, Assembly-CSharp
+        m_MethodName: ChangeModeToVerticalDownload
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1261907669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24317,7 +24456,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1303474922}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1888284610}
+        m_TargetAssemblyTypeName: Panorama, Assembly-CSharp
+        m_MethodName: MovePanoramaHorizon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1303474922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25582,7 +25733,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1361026576}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1888284610}
+        m_TargetAssemblyTypeName: Panorama, Assembly-CSharp
+        m_MethodName: ChangeModeToHorizon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1361026576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27547,7 +27710,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1475203602}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1888284610}
+        m_TargetAssemblyTypeName: Panorama, Assembly-CSharp
+        m_MethodName: MovePanoramaVertical
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1475203602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27747,7 +27922,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1489399202}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1888284610}
+        m_TargetAssemblyTypeName: Panorama, Assembly-CSharp
+        m_MethodName: ConvertPanoramaHorizon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1489399202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28097,7 +28284,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1503158295}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1888284610}
+        m_TargetAssemblyTypeName: Panorama, Assembly-CSharp
+        m_MethodName: MovePanorama
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1503158295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39740,7 +39939,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2107954786}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1888284610}
+        m_TargetAssemblyTypeName: Panorama, Assembly-CSharp
+        m_MethodName: BackToMainHorizon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2107954786
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -120,12 +120,7 @@ public class Splash : MonoBehaviour  //Splash 관련해서 화면 이동 및 UI를 처리하�
         //핸디캡이 입력되었는지 확인하기
         MoveCertify();
     }
-
-    /// <summary>
-    /// //////////////////////////////////////////////////////////
-    /// </summary>
-    /// 
-    /*
+    
     public void ChangeHeight(InputField text) //true => cm false => ft
     {
         float temp = 0f;
@@ -214,61 +209,6 @@ public class Splash : MonoBehaviour  //Splash 관련해서 화면 이동 및 UI를 처리하�
         }
         
     }
-    public void FindPasswordTouchConfirm()
-    {
-        //이메일 주소를 서버로 전송 - server
-
-        //확인 창 띄우기 + 몇 초 후 삭제     
-        StartCoroutine(WaitSendMail());        
-    }
-    public void RegisterTouchConfirm()
-    {
-        //닉네임 중복 확인
-        //성별 체크
-        //키 입력 완료
-        //헨디켑 선택 완료
-        SplashOnAndOff(6, 5);
-    }
-    public void CheckEmail(Text text)//이메일 아이디 체크용
-    {
-        
-    }
-    public void TwoTouchNext()
-    {
-        //if(email 입력 확인, 형식 일치, 미등록 이메일)
-        //이메일 오류 활성화
-        //return
-        //if(비밀번호 조건 만족, 두 비밀번호가 일치)
-        //비밀번호 오류 활성화
-        //return
-        SplashOnAndOff(5, 4);
-    }
-    public void TwoTouchBack() => SplashOnAndOff(3, 4);
-    public void LoadTouchRegister() => SplashOnAndOff(4, 3);
-    public void LoadTouchLogin() => SplashOnAndOff(6, 3);
-    public void OneTouchStart() => SplashOnAndOff(3, 2);
-    public void TermTouchYes() => SplashOnAndOff(2, 1);
-    public void TermTouchNo() => Application.Quit();
-
-    
-
-    
-    private void PopUpOnOff(GameObject PopUp)
-    {
-        if (PopUp.activeSelf) PopUp.SetActive(false);
-        else PopUp.SetActive(true);
-    }
-    private void ChangeImage(GameObject gameObject,Image image)
-    {
-        Image temp = gameObject.transform.GetComponent<Image>();
-        temp = image;
-    }
-    private void UIOff(GameObject UI) => UI.SetActive(false);
-    private void UIOn(GameObject UI) => UI.SetActive(true);
-    */
-    /// <summary>
-    /// 
-    /// </summary>
 
     IEnumerator Splash_term_on()
     {
