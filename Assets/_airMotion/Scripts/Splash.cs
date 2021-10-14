@@ -9,14 +9,22 @@ using UnityEngine.EventSystems;
 public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´Â ½ºÅ©¸³Æ®
 {
     private WaitForSeconds wait;
+
     private bool unit;
     private bool firstLogin;
+    private string registePassword;
+
+    private bool[] RegisterInput;
+    private bool[] RegisterDetailInput;
+
     private float? height,heightFT;
-    /// <summary>
-    /// 
-    /// </summary>
+    private bool sex;//true == male
+
+    /// @@@@
+
     private UIManager UM;    
     public Sprite checkBox;
+    public GameObject[] checkBoxes;
     [Header ("Warning Object")]
     public GameObject[] login_3_warn;
     public GameObject[] register_4_warn;
@@ -25,11 +33,26 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
     public GameObject phoneButton;
     public Sprite redButton_password;
     public Sprite redButton_phone;
+    [Header("Register")]
+    public GameObject RegisterButton;
+    public GameObject RegisterButtonDetail;
+    public Sprite redButtom_register;
+    public Sprite grayButton_register;
+    
+    
     
     void Start()
     {
         InitValue();
         StartCoroutine(Splash_term_on());
+    }
+    private void Update()
+    {
+        if (CheckRegisterNext()) UM.ChangeImage(redButtom_register, RegisterButton);
+        else UM.ChangeImage(grayButton_register, RegisterButton);
+
+        if (CheckRegisterDetailNext()) UM.ChangeImage(redButtom_register, RegisterButtonDetail);
+        else UM.ChangeImage(grayButton_register, RegisterButtonDetail);
     }
     public void MoveMain() => UM.PageMove(2);
     public void MoveLogin() => UM.PageMove(3);
@@ -43,7 +66,50 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
     public void CheckBox() => UM.CheckBox();
     public void MoveHome() => SceneManager.LoadScene("home");
 
-
+    public bool CheckRegisterNext()
+    {
+        foreach(GameObject warn in register_4_warn)
+        {
+            if (warn.activeSelf) return false;
+        }
+        foreach (GameObject checkBox in checkBoxes)
+        {
+            if (!checkBox.GetComponent<Toggle>().isOn) return false;
+        }
+        return true;
+    }
+    public bool CheckRegisterDetailNext()
+    {
+        foreach (bool warn in RegisterDetailInput)
+        {
+            if (!warn) return false;
+        }
+        return true;
+    }
+    public bool CheckCanLogin()
+    {
+        foreach (GameObject warn in login_3_warn)
+        {
+            if (warn.activeSelf) return false;
+        }
+        return true;
+    }
+    public void CheckCertify(Text text)
+    {
+        if (UM.IsValidPhone(text.text))
+        {
+            MoveAfterCertify();
+        }
+    }
+    public void CheckLogin()//·Î±×ÀÎ¹öÆ°
+    {
+        if (CheckCanLogin()) MoveHome();
+    }
+    public void CheckPssswordFind(Text text)
+    {
+        if (UM.IsValidPhone(text.text)) UM.PageMove(3);
+    }
+    
     public void ChangeButtonImage(Text text)//¹öÆ°ÀÇ ÀÌ¹ÌÁö¸¦ ¹Ù²Û´Ù<ºñ¹Ð¹øÈ£>
     {
         if(UM.IsValidEmail(text.text))
@@ -60,28 +126,66 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
     }
     public void EndEmailEdit(Text text)//·Î±×ÀÎ ÀÌ¸ÞÀÏ ÀÔ·Â
     {
-        if (UM.EndEditInput(text, 1)) login_3_warn[0].SetActive(false);
+        if (UM.EndEditInput(text)) login_3_warn[0].SetActive(false);
         else login_3_warn[0].SetActive(true);
     }
-    public void EndPasswordEdit(Text text)//·Î±×ÀÎ ºñ¹Ð¹øÈ£ ÀÔ·Â
+    public void EndPasswordEdit(InputField text)//·Î±×ÀÎ ºñ¹Ð¹øÈ£ ÀÔ·Â
     {
-        if (UM.EndEditInput(text, 2)) login_3_warn[1].SetActive(false);
+        if (UM.IsValidPassword(text.text)) login_3_warn[1].SetActive(false);
         else login_3_warn[1].SetActive(true);
+    }
+    public void EndRegisterDetailName(Text text)
+    {
+        if (!(text.text == "")) RegisterDetailInput[0] = true;
+    }
+    public void EndRegisterDetailHeight(Text text)
+    {
+        if (!(text.text == "")) RegisterDetailInput[1] = true;
+    }
+    public void EndRegisterDetailHandy(Text text)
+    {
+        if (!(text.text == "")) RegisterDetailInput[2] = true;
     }
     public void EndEmialRegister(Text text)
     {
-        if (UM.EndEditInput(text, 1)) login_3_warn[0].SetActive(false);
-        else register_4_warn[0].SetActive(true);
+        if (UM.EndEditInput(text))
+        {
+            register_4_warn[0].SetActive(false);
+            RegisterInput[0] = true;
+        }
+        else
+        {
+            register_4_warn[0].SetActive(true);
+            RegisterInput[0] = false;
+        }
+
     }
-    public void EndPasswordRegister(Text text)
+    public void EndPasswordRegister(InputField text)
     {
-        if (UM.EndEditInput(text, 2)) login_3_warn[0].SetActive(false);
-        else register_4_warn[1].SetActive(true);
+        if (UM.IsValidPassword(text.text))
+        {
+            register_4_warn[1].SetActive(false);
+            RegisterInput[1] = true;
+        }
+        else
+        {
+            register_4_warn[1].SetActive(true);
+            RegisterInput[1] = false;
+        }
+        registePassword = text.text;
     }
-    public void EndPasswordRegisterAgain(Text text)
+    public void EndPasswordRegisterAgain(InputField text)
     {
-        if (UM.EndEditInput(text, 2)) login_3_warn[0].SetActive(false);
-        else register_4_warn[2].SetActive(true);
+        if (registePassword == text.text)
+        {
+            register_4_warn[2].SetActive(false);
+            RegisterInput[2] = true;
+        }
+        else
+        {
+            register_4_warn[2].SetActive(true);
+            RegisterInput[2] = false;
+        }
     }
     public void ClickLogin()
     {
@@ -107,10 +211,11 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
     }
     public void RegisterNext()
     {
-        //¸ðµç ÀÌ¿ë ¾à°ü¿¡ µ¿ÀÇ Çß´ÂÁö Ã¼Å©
-        //ÀÌ¸ÞÀÏ Çü½ÄÀÌ ÀÏÄ¡ÇÏ´ÂÁö Ã¼Å©
-        //ºñ¹Ð¹øÈ£ Çü½ÄÀÌ ÀÏÄ¡ÇÏ´ÂÁö Ã¼Å©
-        //ºñ¹Ð¹øÈ£³¢¸® ÀÏÄ¡ÇÏ´ÂÁö Ã¼Å©
+        foreach(bool register in RegisterInput)
+        {
+            if (!register) return;
+        }
+        if (!CheckRegisterNext()) return;
         MoveRegisterDetail();
     }
     public void RegisterDetailNext()
@@ -223,7 +328,9 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
         height = null;
         heightFT = null;
         unit = true;
-        wait = new WaitForSeconds(3f);
+        sex = true;//defult
+        RegisterInput = new bool[3]; RegisterDetailInput = new bool[3];
+         wait = new WaitForSeconds(3f);
         foreach (GameObject _ in login_3_warn) _.SetActive(false);
         foreach (GameObject _ in register_4_warn) _.SetActive(false);
     }

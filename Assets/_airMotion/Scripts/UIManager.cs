@@ -125,23 +125,14 @@ public class UIManager : MonoBehaviour
     {       
         button.GetComponent<Button>().image.overrideSprite = sprite;
     }
-    public bool EndEditInput(Text text, int propose) //1 = 이메일 형식 확인 2 = 비밀번호 형식 확인
+    public bool EndEditInput(Text text) //1 = 이메일 형식 확인 2 = 비밀번호 형식 확인
     {
         string input = text.text;
-        if (propose == 1)
+        if (!IsValidEmail(input))
         {
-            
-            if (!IsValidEmail(input))
-            {
-                return false;
-            }
-            else return true;
+            return false;
         }
-        else if(propose == 2)
-        {
-            //비밀번호 형식과 비교하기
-            return true;
-        }
+        else return true;
         Debug.Log("propose incorrect");
         return true;
     }

@@ -1951,13 +1951,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1435652479}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: PageMove
-        m_Mode: 3
+      - m_Target: {fileID: 677116945}
+        m_TargetAssemblyTypeName: Splash, Assembly-CSharp
+        m_MethodName: CheckPssswordFind
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1482579924}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
           m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3680,7 +3680,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &373071501
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4220,8 +4220,8 @@ MonoBehaviour:
         m_MethodName: EndPasswordEdit
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1121205031}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+          m_ObjectArgument: {fileID: 394763287}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.InputField, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6724,7 +6724,19 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 677116945}
+        m_TargetAssemblyTypeName: Splash, Assembly-CSharp
+        m_MethodName: EndRegisterDetailName
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2117990866}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6996,6 +7008,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkBox: {fileID: 21300000, guid: e8b9edd980d05ba4693aa2e24f8a82b5, type: 3}
+  checkBoxes:
+  - {fileID: 1436409478}
+  - {fileID: 651611332}
+  - {fileID: 130792807}
   login_3_warn:
   - {fileID: 1809816128}
   - {fileID: 2070554276}
@@ -7007,6 +7023,10 @@ MonoBehaviour:
   phoneButton: {fileID: 1024540453}
   redButton_password: {fileID: 21300000, guid: a17dbb044b11ca64a817375ae963028d, type: 3}
   redButton_phone: {fileID: 21300000, guid: d5cfd38b8d40b2445a714737d09f132c, type: 3}
+  RegisterButton: {fileID: 1110318651}
+  RegisterButtonDetail: {fileID: 460343857}
+  redButtom_register: {fileID: 21300000, guid: 58ea3032b9a28d646ac05b7cde05bb88, type: 3}
+  grayButton_register: {fileID: 21300000, guid: 28d901a3acb5ab1409180776f7e7081a, type: 3}
 --- !u!4 &677116946
 Transform:
   m_ObjectHideFlags: 0
@@ -7718,10 +7738,10 @@ RectTransform:
   m_Father: {fileID: 1190198119}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -130}
-  m_SizeDelta: {x: 914, y: 1410}
+  m_SizeDelta: {x: 814, y: 1310}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &757401124
 MonoBehaviour:
@@ -8021,9 +8041,9 @@ RectTransform:
   m_Father: {fileID: 1190198119}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 470, y: 740}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 420, y: 690}
   m_SizeDelta: {x: 45, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &794414190
@@ -8653,7 +8673,19 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 677116945}
+        m_TargetAssemblyTypeName: Splash, Assembly-CSharp
+        m_MethodName: EndRegisterDetailHandy
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1214561679}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -9011,7 +9043,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -146, y: -77}
+  m_AnchoredPosition: {x: -324, y: -81}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &844537472
@@ -9035,7 +9067,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 3fc140a4ea2f90f4c9820f7016581ced, type: 3}
+    m_Font: {fileID: 12800000, guid: 406a72123685c2042a432c105773a8b9, type: 3}
     m_FontSize: 39
     m_FontStyle: 0
     m_BestFit: 0
@@ -9047,7 +9079,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uBE44\uBC00\uBC88\uD638 \uD615\uC2DD\uC5D0 \uB9DE\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4"
+  m_Text: "\uC601\uBB38+\uD2B9\uC218\uBB38\uC790 \uD3EC\uD568 10\uC790\uC774\uC0C1
+    \uC785\uB825\uD558\uC138\uC694."
 --- !u!222 &844537473
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9510,10 +9543,10 @@ RectTransform:
   m_Father: {fileID: 1677170936}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1080, y: 1920}
+  m_SizeDelta: {x: 980, y: 1820}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &930468844
 MonoBehaviour:
@@ -10844,7 +10877,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1024540456}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 677116945}
+        m_TargetAssemblyTypeName: Splash, Assembly-CSharp
+        m_MethodName: CheckCertify
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 52565694}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1024540456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10898,7 +10943,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1026368586
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11975,7 +12020,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -21.5693, y: 46}
+  m_AnchoredPosition: {x: -17, y: 46}
   m_SizeDelta: {x: 525.8615, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1125240600
@@ -12946,10 +12991,10 @@ RectTransform:
   m_Father: {fileID: 1677170936}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -75}
-  m_SizeDelta: {x: 1080, y: 1767}
+  m_SizeDelta: {x: 980, y: 1667}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1186155962
 MonoBehaviour:
@@ -13025,10 +13070,10 @@ RectTransform:
   m_Father: {fileID: 1536067324}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1197042751
 GameObject:
@@ -13123,7 +13168,19 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 677116945}
+        m_TargetAssemblyTypeName: Splash, Assembly-CSharp
+        m_MethodName: EndRegisterDetailHeight
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1111931816}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -14141,10 +14198,10 @@ RectTransform:
   m_Father: {fileID: 1677170936}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -130}
-  m_SizeDelta: {x: 914, y: 1410}
+  m_SizeDelta: {x: 814, y: 1310}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1275619093
 MonoBehaviour:
@@ -14812,10 +14869,10 @@ RectTransform:
   m_Father: {fileID: 1190198119}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 730}
-  m_SizeDelta: {x: 160, y: 65}
+  m_SizeDelta: {x: 60, y: -35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1363101670
 MonoBehaviour:
@@ -14966,10 +15023,10 @@ RectTransform:
   m_Father: {fileID: 1190198119}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1080, y: 1920}
+  m_SizeDelta: {x: 980, y: 1820}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1382118651
 MonoBehaviour:
@@ -15232,10 +15289,10 @@ RectTransform:
   m_Father: {fileID: 1190198119}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 666}
-  m_SizeDelta: {x: 1080, y: 3}
+  m_SizeDelta: {x: 980, y: -97}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1405316106
 MonoBehaviour:
@@ -15664,8 +15721,8 @@ MonoBehaviour:
         m_MethodName: EndPasswordRegisterAgain
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1654925896}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+          m_ObjectArgument: {fileID: 1433124751}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.InputField, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -16573,10 +16630,10 @@ RectTransform:
   m_Father: {fileID: 1825128447}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: -980, y: -1820}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1540611486
 GameObject:
@@ -17093,7 +17150,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 677116945}
         m_TargetAssemblyTypeName: Splash, Assembly-CSharp
-        m_MethodName: MoveHome
+        m_MethodName: CheckLogin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17866,10 +17923,10 @@ RectTransform:
   m_Father: {fileID: 1190198119}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -75}
-  m_SizeDelta: {x: 1080, y: 1767}
+  m_SizeDelta: {x: 980, y: 1667}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1598438518
 MonoBehaviour:
@@ -18546,10 +18603,10 @@ RectTransform:
   m_Father: {fileID: 1536067324}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1680486378
 GameObject:
@@ -19592,8 +19649,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -146, y: -77}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -324, y: -83.51709}
+  m_SizeDelta: {x: 160, y: 43.0343}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1786395497
 MonoBehaviour:
@@ -19616,7 +19673,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 3fc140a4ea2f90f4c9820f7016581ced, type: 3}
+    m_Font: {fileID: 12800000, guid: 406a72123685c2042a432c105773a8b9, type: 3}
     m_FontSize: 39
     m_FontStyle: 0
     m_BestFit: 0
@@ -20488,10 +20545,10 @@ RectTransform:
   m_Father: {fileID: 1677170936}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 666}
-  m_SizeDelta: {x: 1080, y: 3}
+  m_SizeDelta: {x: 980, y: -97}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1858461425
 MonoBehaviour:
@@ -21682,7 +21739,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -146, y: -77}
+  m_AnchoredPosition: {x: -324, y: -78}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2000803320
@@ -21706,7 +21763,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 3fc140a4ea2f90f4c9820f7016581ced, type: 3}
+    m_Font: {fileID: 12800000, guid: 406a72123685c2042a432c105773a8b9, type: 3}
     m_FontSize: 39
     m_FontStyle: 0
     m_BestFit: 0
@@ -21718,7 +21775,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uBE44\uBC00\uBC88\uD638\uAC00 \uC77C\uCE58\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4"
+  m_Text: "\uBE44\uBC00\uBC88\uD638\uAC00 \uB3D9\uC77C\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4."
 --- !u!222 &2000803321
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -22052,11 +22109,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 677116945}
         m_TargetAssemblyTypeName: Splash, Assembly-CSharp
-        m_MethodName: EndPasswordEdit
+        m_MethodName: EndPasswordRegister
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1055467221}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+          m_ObjectArgument: {fileID: 2012582906}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.InputField, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -22231,9 +22288,9 @@ RectTransform:
   m_Father: {fileID: 1677170936}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 470, y: 740}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 420, y: 690}
   m_SizeDelta: {x: 45, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2016532160
@@ -22515,10 +22572,10 @@ RectTransform:
   m_Father: {fileID: 1677170936}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 730}
-  m_SizeDelta: {x: 160, y: 65}
+  m_SizeDelta: {x: 60, y: -35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2064847208
 MonoBehaviour:
@@ -22768,7 +22825,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!1 &2117990864
 GameObject:
   m_ObjectHideFlags: 0
@@ -22962,6 +23019,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 100}
+  m_AnchoredPosition: {x: 0, y: 70}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
