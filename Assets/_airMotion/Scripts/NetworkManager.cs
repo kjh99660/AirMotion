@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-[SerializeField]
-class DataCommon
+[System.Serializable]
+public class DataCommon
 {
     public double CIMA;
     public bool CIMO;
@@ -31,8 +31,8 @@ class DataCommon
     public double CSFr;
     public double CSBr;
 }
-[SerializeField]
-class DataCommunitySave
+[System.Serializable]
+public class DataCommunitySave
 {
     public bool __created__ = true;
     public bool __deleted__ = true;
@@ -59,14 +59,54 @@ class DataCommunitySave
     public string writeDate;
     public string writeNm;
 }
+[System.Serializable]
+public class DataCommonClub
+{   
+    public ClubInf Dr;
+    public ClubInf W3;
+    public ClubInf W5;
+    public ClubInf W7;
+    public ClubInf I4;
+    public ClubInf I5;
+    public ClubInf I6;
+    public ClubInf I7;
+    public ClubInf I8;
+    public ClubInf I9;
+    public ClubInf PW;
+    public ClubInf GW;
+    public ClubInf SW;
+    public ClubInf LW;
+    public ClubInf PT;
+}
+[System.Serializable]
+public class ClubInf
+{
+    public string Name;
+    public string GV;
+    public string AD;
+    public string AH;
+    public string AB;
+    public string BSV;
+    public string SBS;
+    public string SLA;
+    public string SLAA;
+    public string AA;
+    public string SLO;
+    public string MD;
+    public string TD;
+    public string TDM;
+    public string TRM;
+}
+
 public class NetworkManager : MonoBehaviour
 {
     private static NetworkManager instance = null;
     private string jsonResult;
     private int port;
     private bool isOnloading;
-    DataCommon SaveData = new DataCommon();
-    DataCommunitySave SendCommunityData = new DataCommunitySave();
+    DataCommon DataCommon = new DataCommon();
+    DataCommunitySave DataCommunitySave = new DataCommunitySave();
+    DataCommonClub DataCommonClub = new DataCommonClub();
 
     public static NetworkManager Instance
     {
@@ -94,7 +134,8 @@ public class NetworkManager : MonoBehaviour
                 if(www.isDone)
                 {
                     isOnloading = false;
-                    jsonResult = System.Text.Encoding.UTF8.GetString(www.downloadHandler.data);
+                    jsonResult = System.Text.Encoding.UTF8.GetString(www.downloadHandler.data);                    
+                    Debug.Log(jsonResult);
                     LoadJson(jsonResult);
                 }
             }
@@ -122,15 +163,19 @@ public class NetworkManager : MonoBehaviour
             }
         }
     }
+    //test
     private void LoadJson(string jsonResult)
-    {       
-        var LoadData = JsonUtility.FromJson<DataCommon>(jsonResult);
-        //SaveData.CIMA = LoadData.CIMA;
-        //SaveData.CIMO = LoadData.CIMO;
+    {
+        //var LoadData = JsonUtility.FromJson<DataCommon>(jsonResult);
+        DataCommonClub LoadData = JsonUtility.FromJson<DataCommonClub>(jsonResult);
+        Debug.Log(LoadData.Dr.Name);
+        DataCommonClub.Dr = LoadData.Dr;
+        Debug.Log(DataCommonClub.Dr);
+
         //SaveData.CIMSfa = LoadData.CIMSfa;
-        //Debug.Log("CIMSfa"+SaveData.CIMSfa);
 
     }
+    //test
     private string MakeJson(object Data)//이미 데이터가 저장된 객체를 전달해야한다
     {
         string save = JsonUtility.ToJson(Data, prettyPrint: true);
@@ -152,13 +197,19 @@ public class NetworkManager : MonoBehaviour
     private void Reference()
     {
         isOnloading = true;
-        StartCoroutine(LoadData("/common/json/calibration.ajax"));
+        //test
+        
     }
     private void Update()
     {
+        //test
         if(Input.GetKeyDown(KeyCode.A))
         {            
-            StartCoroutine(SendData(("/system/community/board/save.ajax"), MakeJson(SendCommunityData)));
+            StartCoroutine(SendData(("/system/community/board/save.ajax"), MakeJson(DataCommunitySave)));
+        }
+        if(Input.GetKeyDown(KeyCode.W))
+        {
+            StartCoroutine(LoadData("/common/json/clubdata.ajax"));
         }
     }
 }
