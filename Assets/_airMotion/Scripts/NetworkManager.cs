@@ -4,32 +4,9 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 [System.Serializable]
-public class DataCommon
+public class DataCommunitySend
 {
-    public double CIMA;
-    public bool CIMO;
-    public bool CIMSfa;
-    public bool CIMSpa;
-    public bool CIMSfn;
-    public bool CIMSpn;
-    public double CFASp;
-    public double CPASp;
-    public double CFASa;
-    public double CPASa;
-    public double CFASn;
-    public double CPASn;
-    public double CHSV;
-    public double CBSV;
-    public double CBFV;
-    public double CBPV;
-    public double CDf;
-    public double CPGV;
-    public double CDFf;
-    public double CDFp;
-    public double CDFr;
-    public bool CSFf;
-    public double CSFr;
-    public double CSBr;
+
 }
 [System.Serializable]
 public class DataCommunitySave
@@ -58,6 +35,34 @@ public class DataCommunitySave
     public string updatedBy;
     public string writeDate;
     public string writeNm;
+}
+[System.Serializable]
+public class DataCommon
+{
+    public double CIMA;
+    public bool CIMO;
+    public bool CIMSfa;
+    public bool CIMSpa;
+    public bool CIMSfn;
+    public bool CIMSpn;
+    public double CFASp;
+    public double CPASp;
+    public double CFASa;
+    public double CPASa;
+    public double CFASn;
+    public double CPASn;
+    public double CHSV;
+    public double CBSV;
+    public double CBFV;
+    public double CBPV;
+    public double CDf;
+    public double CPGV;
+    public double CDFf;
+    public double CDFp;
+    public double CDFr;
+    public bool CSFf;
+    public double CSFr;
+    public double CSBr;
 }
 [System.Serializable]
 public class DataCommonClub
@@ -97,16 +102,103 @@ public class ClubInf
     public string TDM;
     public string TRM;
 }
+[System.Serializable]
+public class DataCommonresult//35
+{
+    public string TotalDistance;
+    public string Carry;
+    public string ClubSpeed;
+    public string BallSpeed;
+    public string Smash;
+    public string LaunchAngle;
+    public string LaunchDirection;
+    public string ShotType;
+    public string BackSpin;
+    public string SideSpin;
+    public string SpinRate;
+    public string SpinAxis;
+    public string AttackAngle;
+    public string DynamicLoft;
+    public string HeightAPEX;
+    public string DeviationDist;
+    public string CurveDist;
+    public string LandingAngle;
+    public string Roll;
+    public string FlighTime;
+    public string FaceToPath;
+    public string FaceAnglel;
+    public string ClubPath;
+    public string ImpactPositon;
+    public string Tempo;
+    public string ClubFacePosition;
+    public string ClubFaceRotation;
+    public string SpotLocation;
+    public string ShaftPivot;
+    public string ZoneSpeedRate;
+    public string FollowRate;
+    public string Add1;
+    public string Add2;
+    public string TargetSuccess;
+    public string Others;
+}
+[System.Serializable]
+public class DataCommonSetting
+{
+    public double ClubID;
+    public double DeviceVerticalAngle;
+    public double DeviceHorizontalAngle;
+    public double DeviceDistance;
+    public string DevicePassword;
+    public string DeviceName;
+    public string DeviceName_Putter;
+    public bool GPutterConnection;
+    public double SessionTime;
+    public double ShotDataNo;
+    public double VideoDataNo;
+    public double PuttingSuccessRateDev;
+    public double PuttingDistanceDevH;
+    public double PuttingDistanceDevM;
+    public double PuttingDistanceDevL;
+    public double PuttingDirectionDevH;
+    public double PuttingDirectionDevM;
+    public double PuttingDirectionDevL;
+    public double GreenSpeedMax;
+    public double GreenSpeedInterval;
+    public string GreenSpeedUnit;
+    public bool LandingAreaOption;
+    public bool PreviousShotOption;
+    public bool PreviousShotNumber;
+    public bool VideoPlayOption;
+    public bool TargetPracticeOption;
+    public string InitialMode;
+    public string InitialModeTracking;
+    //"DataBlockNo":{"Item":"Setting","dataType":"Double","Min":"1","Max":"30","Unit":"ea","Default":"12","Desc":"데이터블럭갯수"},
+    //"ShotPosition":{"Item":"Setting","dataType":"String","Min":"1","Max":"3","Unit":"","Default":"1","Desc":"샷위치"},
+    //"UnitDistance":{"Item":"Setting","dataType":"String","Min":"1","Max":"2","Unit":"","Default":"2","Desc":"거리단위"},
+    //"UnitSpeed":{"Item":"Setting","dataType":"String","Min":"1","Max":"2","Unit":"","Default":"2","Desc":"속도단위"},
+    //"Handle":{"Item":"Setting","dataType":"String","Min":"1","Max":"2","Unit":"","Default":"1","Desc":"손잡이"},
+    //"CameraSetting":{"Item":"Setting","dataType":"Double","Min":"","Max":"","Unit":"","Default":"FALSE","Desc":"카메라ON설정"},
+    //"VideoPlayTime":{"Item":"Setting","dataType":"Double","Min":"2.0","Max":"6.0","Unit":"m","Default":"3.0","Desc":"트리거영상길이"},
+    //"VideoTriggerTime":{"Item":"Setting","dataType":"Double","Min":"0.8","Max":"3.0","Unit":"m","Default":"1.5","Desc":"트리거임팩트길이"},
+    //"TtsOption":{"Item":"Setting","dataType":"Boolean","Min":"","Max":"","Unit":"","Default":"TRUE","Desc":"TTS옵션"},
+    //"VoiceSettings":{"Item":"Setting","dataType":"String","Min":"1","Max":"30","Unit":"m","Default":"1","Desc":"음성설정"},
+    //"VideoServerURL":{"Item":"Setting","dataType":"String","Min":"","Max":"","Unit":"","Default":"flexcdn.golfzon.com","Desc":"영상전송서버URL"},
+    //"QaServerURL":{"Item":"Setting","dataType":"String","Min":"","Max":"","Unit":"","Default":"qaflex.golfzon.com","Desc":"테스트서버URL"},
+    //"QaServerIP":{"Item":"Setting","dataType":"String","Min":"","Max":"","Unit":"","Default":"129.0.2","Desc":"테스트서버IP"},
+    //"QaServerPort":{"Item":"Setting","dataType":"String","Min":"","Max":"","Unit":"","Default":"9090","Desc":"테스트서버포트"},
+    //"RealServerURL":{"Item":"Setting","dataType":"String","Min":"","Max":"","Unit":"","Default":"flex.golfzon.com","Desc":"상용서버URL"},
+    //"RealServerIP":{"Item":"Setting","dataType":"String","Min":"","Max":"","Unit":"","Default":"129.0.1","Desc":"상용서버IP"},
+    //"RealServerPort":{"Item":"Setting","dataType":"String","Min":"","Max":"","Unit":"","Default":"9090","Desc":"상용서버포트"}}
+}
+
 
 public class NetworkManager : MonoBehaviour
 {
     private static NetworkManager instance = null;
     private string jsonResult;
-    private int port;
     private bool isOnloading;
-    DataCommon DataCommon = new DataCommon();
     DataCommunitySave DataCommunitySave = new DataCommunitySave();
-    DataCommonClub DataCommonClub = new DataCommonClub();
+
 
     public static NetworkManager Instance
     {
@@ -136,7 +228,7 @@ public class NetworkManager : MonoBehaviour
                     isOnloading = false;
                     jsonResult = System.Text.Encoding.UTF8.GetString(www.downloadHandler.data);                    
                     Debug.Log(jsonResult);
-                    LoadJson(jsonResult);
+                    //LoadJson(jsonResult);
                 }
             }
         }
@@ -167,10 +259,10 @@ public class NetworkManager : MonoBehaviour
     private void LoadJson(string jsonResult)
     {
         //var LoadData = JsonUtility.FromJson<DataCommon>(jsonResult);
-        DataCommonClub LoadData = JsonUtility.FromJson<DataCommonClub>(jsonResult);
-        Debug.Log(LoadData.Dr.Name);
-        DataCommonClub.Dr = LoadData.Dr;
-        Debug.Log(DataCommonClub.Dr);
+        //DataCommonClub LoadData = JsonUtility.FromJson<DataCommonClub>(jsonResult);
+        var LoadData = JsonUtility.FromJson<DataCommunitySend>(jsonResult);
+        //DataCommonClub.Dr = LoadData.Dr;
+        //Debug.Log(DataCommonClub.Dr);
 
         //SaveData.CIMSfa = LoadData.CIMSfa;
 
@@ -209,7 +301,15 @@ public class NetworkManager : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.W))
         {
-            StartCoroutine(LoadData("/common/json/clubdata.ajax"));
+            StartCoroutine(LoadData("/system/community/board/list.ajax"));
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            StartCoroutine(LoadData("/common/json/result.ajax"));
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            StartCoroutine(LoadData("/common/json/setting.ajax"));
         }
     }
 }
