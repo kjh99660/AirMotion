@@ -84,7 +84,7 @@ public class DataCommonClub
     public ClubInf PT;
 }
 [System.Serializable]
-public class ClubInf
+public class ClubInf//need to DataCommonClub
 {
     public string Name;
     public string GV;

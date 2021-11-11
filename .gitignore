@@ -58,6 +58,9 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# Logs
+*.log
+
 Assets/_airMotion/UIs/BEFORE/BEST/인기영상_내영상순위_순위에 올랐을경우_팝업/이찍찍이님의  9월 베스트 영상순위는 23위 입니다.  조금더 영상을 알리시고 순위를 올려보세요!  금월 월간베스트는 전월 20일 부터  금월20일까지 촬영된 공유 영상중 금월 베스트영상에 자동 참여 됩니다.  내 영상 공유등을 통해  월간 베스트영상에 선정되시고  무료 라운딩 기회를 얻으시기 바랍니다..png.meta
 airMotion_u.sln
 .vsconfig
