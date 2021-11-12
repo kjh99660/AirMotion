@@ -13,6 +13,7 @@ public class Panorama : MonoBehaviour
     private int FrameSpeed;
     private Color red;
     private Color white;
+    
     private void OnEnable()
     {
         InitValue();
@@ -92,7 +93,7 @@ public class Panorama : MonoBehaviour
         //파노라마를 만드는 내용
         MovePanoramaHorizonDown();
     }
-    public void CreatePanorama()
+    public void CreatePanorama()//동영상을 이미지로 만들기
     {
         PickImage(1920);
         //파노라마 조건을 세팅하고 파노라마로 넘어가는 내용
@@ -145,11 +146,11 @@ public class Panorama : MonoBehaviour
 
                 material.mainTexture = texture;
 
-                Destroy(quad, 5f);
+                //Destroy(quad, 5f);
 
                 // If a procedural texture is not destroyed manually, 
                 // it will only be freed after a scene change
-                Destroy(texture, 5f);
+                //Destroy(texture, 5f);
             }
         });
 

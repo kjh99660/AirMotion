@@ -14,7 +14,8 @@ public class More : MonoBehaviour
     [Space(16)]
     public GameObject[] Toggle_height;
     public GameObject[] PasswordChange;
-
+    [Header("Profile")]
+    public GameObject profileImage;//프로파일 이미지 나중에 데이터에서 한꺼번에 가져와야함
     private UIManager UM;
     private GlobalCourutine GC;
 
@@ -44,6 +45,39 @@ public class More : MonoBehaviour
             PasswordConfirm.GetComponent<Button>().interactable = false;
             PasswordConfirm.GetComponent<Image>().sprite = ConfirmSprite[0];
         }
+    }
+    public void OpenGallery()
+    {
+        Texture2D texture = null;//이미지
+        Rect rect;
+
+        //카메라 갤러리 호출
+        //이미지 경로 가져오기
+        NativeGallery.Permission permission = NativeGallery.GetImageFromGallery((path) =>
+        {
+            Debug.Log("Image path: " + path);
+            if (path != null)
+            {
+                // Create Texture from selected image
+                texture = NativeGallery.LoadImageAtPath(path, 1920);
+                if (texture == null)
+                {
+                    Debug.Log("Couldn't load texture from " + path);
+                    return;
+                }
+            }
+            // 텍스쳐에 등록하기
+            if (System.IO.File.Exists(path))
+            {
+                byte[] byteTexture = System.IO.File.ReadAllBytes(path);
+                if (byteTexture.Length > 0)
+                {
+                    texture.LoadImage(byteTexture);
+                }
+            }
+        });
+        rect = new Rect(0, 0, texture.width, texture.height);
+        profileImage.GetComponent<Image>().sprite = Sprite.Create(texture, rect, new Vector2(0f, 0f));
     }
     public void CheckIsPhoneNumber(Text text)
     {

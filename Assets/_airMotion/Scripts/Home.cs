@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI.Extensions;
 using UnityEngine.UI.Extensions.Examples;
+using System.IO;
 
 public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
 {
@@ -24,6 +25,7 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
     public GameObject[] TeaAndLockerInput;//락커번호
     [Header("Detail Vedio")]
     public GameObject[] DownloaadToggle;
+    public GameObject DownloadProgress;
 
     private bool selectedCourse, selectedDay;
     private bool firstVisit;
@@ -75,11 +77,27 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
     }
     public void ConfirmDownload()
     {
+        //화질 설정++
         //다운로드 확인 버튼
         PopUp_downprograss();
+        StartCoroutine(Downloadmp4("https://serviceapi.nmv.naver.com/flash/convertIframeTag.nhn?vid=4BBE18E8F2D2464955564FF2495E26E95246&outKey=V122d015a484d26399975b6b9314e5c31107b9b0156f3c7464641b6b9314e5c31107b&width=544&height=306"));
         //다운로드 진행하는 함수 실행해야함 -> 다운로드가 끝나면 다운로드 완료 이미지로 교환해야함
         IsDownloaded = true;
         UM.CancelPopUp();
+    }
+    IEnumerator Downloadmp4(string URL)
+    {
+        WWW www = new WWW(URL);
+        while(!www.isDone)
+        {
+            DownloadProgress.GetComponent<Image>().fillAmount = www.progress;
+            Debug.Log(www.progress);
+            yield return null;
+        }
+        UM.CancelPopUp(9);
+        //string savePath = Application.persistentDataPath + "/" +URL + ".mp4";
+        Debug.Log(Application.persistentDataPath);
+        File.WriteAllBytes(Application.persistentDataPath, www.bytes);
     }
     public void CancelDownload()
     {
