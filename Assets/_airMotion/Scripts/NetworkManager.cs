@@ -1,204 +1,117 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-[System.Serializable]
-public class DataCommunitySend
+[Serializable]
+public class CameraData
 {
-
+    public string gc_no; //ID of club
+    public string course_no; //course number
+    public int camera_no; //camera number
+    public string t_time; //tea time _ yyyyMMddHHmm
+    public string user_no; //check in number
+    public string caddie_no; //캐디번호 or 카트번호
+    public string phone; //number
 }
-[System.Serializable]
-public class DataCommunitySave
+[Serializable]
+public class CheckGPS
 {
-    public bool __created__ = true;
-    public bool __deleted__ = true;
-    public bool __modified__ = true;
-    public string brdId;
-    public string brdType;
-    public string ccCode;
-    public string contentData;
-    public string createdAt;
-    public string createdBy;
-    public string dataStatus;
-    public string eventImg;
-    public string id;
-    public string[] imgList;
-    public string isView;
-    public string noticeType;
-    public string postingdate;
-    public int readCount;
-    public string remark;
-    public int rn;
-    public string tittle;
-    public string updatedAt;
-    public string updatedBy;
-    public string writeDate;
-    public string writeNm;
+    public string gc_no; //GPS number
+    public string course_no;
+    public int hole_no;
+    public int distance;
 }
-[System.Serializable]
-public class DataCommon
+[Serializable]
+public class Spot
 {
-    public double CIMA;
-    public bool CIMO;
-    public bool CIMSfa;
-    public bool CIMSpa;
-    public bool CIMSfn;
-    public bool CIMSpn;
-    public double CFASp;
-    public double CPASp;
-    public double CFASa;
-    public double CPASa;
-    public double CFASn;
-    public double CPASn;
-    public double CHSV;
-    public double CBSV;
-    public double CBFV;
-    public double CBPV;
-    public double CDf;
-    public double CPGV;
-    public double CDFf;
-    public double CDFp;
-    public double CDFr;
-    public bool CSFf;
-    public double CSFr;
-    public double CSBr;
+    public string spot_id; //uniqueItems: true
+    public string club_id;
+    public string course_id;
+    public int hole_num;
+    public string group_id;
+    public DateTime reg_date;
+    public DateTime upd_date;
 }
-[System.Serializable]
-public class DataCommonClub
-{   
-    public ClubInf Dr;
-    public ClubInf W3;
-    public ClubInf W5;
-    public ClubInf W7;
-    public ClubInf I4;
-    public ClubInf I5;
-    public ClubInf I6;
-    public ClubInf I7;
-    public ClubInf I8;
-    public ClubInf I9;
-    public ClubInf PW;
-    public ClubInf GW;
-    public ClubInf SW;
-    public ClubInf LW;
-    public ClubInf PT;
-}
-[System.Serializable]
-public class ClubInf//need to DataCommonClub
+[Serializable]
+public class Video
 {
-    public string Name;
-    public string GV;
-    public string AD;
-    public string AH;
-    public string AB;
-    public string BSV;
-    public string SBS;
-    public string SLA;
-    public string SLAA;
-    public string AA;
-    public string SLO;
-    public string MD;
-    public string TD;
-    public string TDM;
-    public string TRM;
+    public string video_id; //uniqueItems: true
+    public string video_type;
+    public string video_fps;
+    public string video_width;
+    public string video_height;
+    public string file_size;
+    public string org_size;
+    public string url;
+    public string thumnail;
+    public string thumnails;
+    public string nasmo_url;
+    public string nasmo_img_url;
+    public string state;
+    public string club_id;
+    public string course_id;
+    public string hole_num;
+    public string user_no;
+    public string t_time;
+    public string spot_id;
+    public DateTime reg_date; //registe
+    public DateTime upd_date; //update
 }
-[System.Serializable]
-public class DataCommonresult//35
+[Serializable]
+public class Code
 {
-    public string TotalDistance;
-    public string Carry;
-    public string ClubSpeed;
-    public string BallSpeed;
-    public string Smash;
-    public string LaunchAngle;
-    public string LaunchDirection;
-    public string ShotType;
-    public string BackSpin;
-    public string SideSpin;
-    public string SpinRate;
-    public string SpinAxis;
-    public string AttackAngle;
-    public string DynamicLoft;
-    public string HeightAPEX;
-    public string DeviationDist;
-    public string CurveDist;
-    public string LandingAngle;
-    public string Roll;
-    public string FlighTime;
-    public string FaceToPath;
-    public string FaceAnglel;
-    public string ClubPath;
-    public string ImpactPositon;
-    public string Tempo;
-    public string ClubFacePosition;
-    public string ClubFaceRotation;
-    public string SpotLocation;
-    public string ShaftPivot;
-    public string ZoneSpeedRate;
-    public string FollowRate;
-    public string Add1;
-    public string Add2;
-    public string TargetSuccess;
-    public string Others;
+    public string code_id; //uniqueItems: true
+    public Dictionary<string, string> data; //자바 map 형식
+    public DateTime reg_date;
+    public DateTime upd_date;
 }
-[System.Serializable]
-public class DataCommonSetting
+[Serializable]
+public class Locker
 {
-    public double ClubID;
-    public double DeviceVerticalAngle;
-    public double DeviceHorizontalAngle;
-    public double DeviceDistance;
-    public string DevicePassword;
-    public string DeviceName;
-    public string DeviceName_Putter;
-    public bool GPutterConnection;
-    public double SessionTime;
-    public double ShotDataNo;
-    public double VideoDataNo;
-    public double PuttingSuccessRateDev;
-    public double PuttingDistanceDevH;
-    public double PuttingDistanceDevM;
-    public double PuttingDistanceDevL;
-    public double PuttingDirectionDevH;
-    public double PuttingDirectionDevM;
-    public double PuttingDirectionDevL;
-    public double GreenSpeedMax;
-    public double GreenSpeedInterval;
-    public string GreenSpeedUnit;
-    public bool LandingAreaOption;
-    public bool PreviousShotOption;
-    public bool PreviousShotNumber;
-    public bool VideoPlayOption;
-    public bool TargetPracticeOption;
-    public string InitialMode;
-    public string InitialModeTracking;
-    //"DataBlockNo":{"Item":"Setting","dataType":"Double","Min":"1","Max":"30","Unit":"ea","Default":"12","Desc":"데이터블럭갯수"},
-    //"ShotPosition":{"Item":"Setting","dataType":"String","Min":"1","Max":"3","Unit":"","Default":"1","Desc":"샷위치"},
-    //"UnitDistance":{"Item":"Setting","dataType":"String","Min":"1","Max":"2","Unit":"","Default":"2","Desc":"거리단위"},
-    //"UnitSpeed":{"Item":"Setting","dataType":"String","Min":"1","Max":"2","Unit":"","Default":"2","Desc":"속도단위"},
-    //"Handle":{"Item":"Setting","dataType":"String","Min":"1","Max":"2","Unit":"","Default":"1","Desc":"손잡이"},
-    //"CameraSetting":{"Item":"Setting","dataType":"Double","Min":"","Max":"","Unit":"","Default":"FALSE","Desc":"카메라ON설정"},
-    //"VideoPlayTime":{"Item":"Setting","dataType":"Double","Min":"2.0","Max":"6.0","Unit":"m","Default":"3.0","Desc":"트리거영상길이"},
-    //"VideoTriggerTime":{"Item":"Setting","dataType":"Double","Min":"0.8","Max":"3.0","Unit":"m","Default":"1.5","Desc":"트리거임팩트길이"},
-    //"TtsOption":{"Item":"Setting","dataType":"Boolean","Min":"","Max":"","Unit":"","Default":"TRUE","Desc":"TTS옵션"},
-    //"VoiceSettings":{"Item":"Setting","dataType":"String","Min":"1","Max":"30","Unit":"m","Default":"1","Desc":"음성설정"},
-    //"VideoServerURL":{"Item":"Setting","dataType":"String","Min":"","Max":"","Unit":"","Default":"flexcdn.golfzon.com","Desc":"영상전송서버URL"},
-    //"QaServerURL":{"Item":"Setting","dataType":"String","Min":"","Max":"","Unit":"","Default":"qaflex.golfzon.com","Desc":"테스트서버URL"},
-    //"QaServerIP":{"Item":"Setting","dataType":"String","Min":"","Max":"","Unit":"","Default":"129.0.2","Desc":"테스트서버IP"},
-    //"QaServerPort":{"Item":"Setting","dataType":"String","Min":"","Max":"","Unit":"","Default":"9090","Desc":"테스트서버포트"},
-    //"RealServerURL":{"Item":"Setting","dataType":"String","Min":"","Max":"","Unit":"","Default":"flex.golfzon.com","Desc":"상용서버URL"},
-    //"RealServerIP":{"Item":"Setting","dataType":"String","Min":"","Max":"","Unit":"","Default":"129.0.1","Desc":"상용서버IP"},
-    //"RealServerPort":{"Item":"Setting","dataType":"String","Min":"","Max":"","Unit":"","Default":"9090","Desc":"상용서버포트"}}
+    public string club_id;
+    public string visit_date;
+    public string loocker_no;
+    public string cert_no;
+    public string phone;
 }
-
+[Serializable]
+public class IDs
+{
+    //data
+}
+[Serializable]
+public class Result
+{
+    public string result;
+    public string message;
+    public Dictionary<string, string> data;
+}
+[Serializable]
+public class Serialization<T>
+{
+    [SerializeField]List<T> target;
+    public List<T> ToList() { return target; }
+    public Serialization(List<T> target)
+    {
+        this.target = target;
+    }
+}
 
 public class NetworkManager : MonoBehaviour
 {
     private static NetworkManager instance = null;
     private string jsonResult;
-    private bool isOnloading;
-    DataCommunitySave DataCommunitySave = new DataCommunitySave();
-
+    public List<Result> result = new List<Result>();
+    public IDs ids = new IDs();
+    public Locker locker = new Locker();
+    public Code code = new Code();
+    [SerializeField]
+    public List<Video> video = new List<Video>();
+    public Spot spot = new Spot();
+    public CheckGPS checkGPS = new CheckGPS();
+    public CameraData cameraData = new CameraData();
 
     public static NetworkManager Instance
     {
@@ -211,9 +124,16 @@ public class NetworkManager : MonoBehaviour
             return instance;
         }
     }
-    IEnumerator LoadData(string URL)
+    //비디오 관련 메서드
+    public void GetBestVideoYear(int year)
     {
-        string GetDataUrl = "http://211.33.44.93:8091" + URL;
+
+    }
+
+    //url 주소를 입력하면 정보를 받아오는 코루틴
+    IEnumerator LoadData(string URL, int Type)
+    {
+        string GetDataUrl = "dev.airmotiongolf.com:3337" + URL;
         using (UnityWebRequest www = UnityWebRequest.Get(GetDataUrl))
         {
             yield return www.SendWebRequest();
@@ -225,9 +145,21 @@ public class NetworkManager : MonoBehaviour
             {
                 if(www.isDone)
                 {
-                    isOnloading = false;
                     jsonResult = System.Text.Encoding.UTF8.GetString(www.downloadHandler.data);                    
                     Debug.Log(jsonResult);
+                    switch (Type)
+                    {
+                        case 1://CameraData
+                            cameraData = JsonUtility.FromJson<CameraData>(jsonResult);
+                            Debug.Log(cameraData.course_no);
+                            break;
+                        case 4://Video
+                            video = JsonUtility.FromJson<Serialization<Video>>(jsonResult).ToList();//JsonUtility.FromJson<List<Video>>(jsonResult);
+                            Debug.Log(video);
+                            Debug.Log(video[0].file_size);
+                            break;
+                    }
+                    
                     //LoadJson(jsonResult);
                 }
             }
@@ -260,7 +192,7 @@ public class NetworkManager : MonoBehaviour
     {
         //var LoadData = JsonUtility.FromJson<DataCommon>(jsonResult);
         //DataCommonClub LoadData = JsonUtility.FromJson<DataCommonClub>(jsonResult);
-        var LoadData = JsonUtility.FromJson<DataCommunitySend>(jsonResult);
+        //var LoadData = JsonUtility.FromJson<DataCommunitySend>(jsonResult);
         //DataCommonClub.Dr = LoadData.Dr;
         //Debug.Log(DataCommonClub.Dr);
 
@@ -288,28 +220,25 @@ public class NetworkManager : MonoBehaviour
     }
     private void Reference()
     {
-        isOnloading = true;
         //test
         
     }
     private void Update()
     {
         //test
-        if(Input.GetKeyDown(KeyCode.A))
-        {            
-            StartCoroutine(SendData(("/system/community/board/save.ajax"), MakeJson(DataCommunitySave)));
-        }
         if(Input.GetKeyDown(KeyCode.W))
         {
-            StartCoroutine(LoadData("/system/community/board/list.ajax"));
+            StartCoroutine(LoadData("/video/best/yearly/2019",4));
+            //.Log(video.club_id);
+            //Debug.Log(video.course_id);
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            StartCoroutine(LoadData("/common/json/result.ajax"));
+            //StartCoroutine(LoadData("/common/json/result.ajax"));
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
-            StartCoroutine(LoadData("/common/json/setting.ajax"));
+            //StartCoroutine(LoadData("/common/json/setting.ajax"));
         }
     }
 }
