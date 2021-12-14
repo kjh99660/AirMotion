@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 
 //로그인 관련 API
 [Serializable]
-public class Login //맴버 로그인 관련 정보
+public class Login //맴버 로그인 관련 정보 + 회원 정보 조회
 {
     public int status;
     public string error;
@@ -94,9 +94,10 @@ public class LoginDetail //로그인 관련 세부 정보
     public bool __modified__;
 }
 
+
 //회원 가입 관련 API
 [Serializable]
-public class SignIn //회원가입 관련 정보
+public class SignIn //회원가입 관련 정보 + 자동 로그인 설정 + 이용약관 변경 동의 + 푸쉬 수신 동의
 {
     public bool __created__;
     public bool __deleted__;
@@ -167,6 +168,7 @@ public class SignIn //회원가입 관련 정보
     public string useYn;                    //사용_여부
 }
 
+
 //이용약관 조회 관련 API
 [Serializable]
 public class Policy //이용약관 조회
@@ -183,6 +185,8 @@ public class PolicyData //이용약관 내용
     public string policyTitle;
     public string policyContent;
 }
+
+
 //OS 별 버전 체크하기
 [Serializable]
 public class VersionCheck //OS별 버전 체크하기
@@ -204,6 +208,7 @@ public class OS //OS 세부 정보
     public string varFile;
     public string verReleaseDt;
 }
+
 //팝업 목록 조회하기
 [Serializable]
 public class PopUp //팝업 목록 조회하기
@@ -216,22 +221,198 @@ public class PopUp //팝업 목록 조회하기
     public int errorCode;
 }
 
+
+//배너 관련 조회
 [Serializable]
-public class Serialization<T>
+public class Banner //배너 목록 조회
 {
-    [SerializeField]List<T> target;
-    public List<T> ToList() { return target; }
-    public Serialization(List<T> target)
-    {
-        this.target = target;
-    }
+    public PagingList paging;
+    public Page page;
+    public CntMap cnt_map;
+    public List<BannerList> list;
+
+    
 }
+[Serializable]
+public class PagingList //배너 페이지 리스트
+{
+    public List<PageList> pagingList;  
+}
+[Serializable]
+public class PageList //배너 페이지 리스트 세부 정보
+{
+    public string lastImage;
+    public bool firstPage;
+    public bool lastPage;
+    public bool nextPage;
+    public string beforeImage;
+    public bool beforePage;
+    public string firstImage;
+    public string nextImage;
+}
+[Serializable]
+public class Page //배너 전체 페이지 정보
+{
+    public int pageCount;
+    public int totCount;
+    public int pageNo;
+    public int listCount;
+}
+[Serializable]
+public class CntMap //배너 페이지 전체 정보
+{
+    public int pageNo;
+    public int pageSize;
+}
+[Serializable]
+public class BannerList //배너 게시물 정보
+{
+    public int banNo;
+    public string updatedBy;
+    public string banUrl;
+    public string isView;
+    public string channel;
+    public string targetType;
+    public string title;
+    public string banPoc;
+    public long createdAt;
+    public string fileNm;
+    public string createdBy;
+    public string useYn;
+    public int sortNum;
+    public int rn;
+    public long updatedAt;
+}
+
+
+//공통 사항 조회 기능 - 언어 패치
+[Serializable]
+public class Language //공통 언어 정보 - 추후 추가 가능
+{
+    public int status;
+    public string error;
+    public string message;
+    public string redirect;
+    public List<LanguageKind> data;      
+}
+[Serializable]
+public class LanguageKind //언어 세부 정보
+{
+    public string commCode;
+    public string commCodeNm;
+    public string groupNm;
+    public int sortNum;
+    public string groupCd;
+}
+
+
+//공지 사항 관련 기능
+[Serializable]
+public class Notice //공지사항 받기
+{
+    public List<PageList> paging;
+    public Page page;
+    public CntMap cnt_map;
+    public List<NoticeList> list;
+}
+[Serializable]
+public class NoticeList //공지사항 리스트
+{
+    public string noticeWriteNm;
+    public string updatedBy;
+    public string isView;
+    public string noticeDeviceCd;
+    public string noticeType;
+    public int noticeId;
+    public string noticeTitle;
+    public int ccCode;
+    public string delYn;
+    public string noticeBrdTypeCd;
+    public long createdAt;
+    public string createdBy;
+    public string noticeName;
+    public string noticeMainIsView;
+    public int rn;
+    public string noticeLangCd;
+    public string status;
+}
+[Serializable]
+public class NoticeSave //공지사항 저장
+{
+    public bool __created__;
+    public bool __deleted__;
+    public bool __modified__;
+    public int ccCode;
+    public string createdBy;
+    public string dataStatus;
+    public string delYn;
+    public int id;
+    public string isView;
+    public string noticeBrdTypeCd;
+    public string noticeDeviceCd;
+    public string noticeEnContent;
+    public string noticeEnTitle;
+    public string noticeEventImgAttcId;
+    public int noticeId;
+    public string noticeJpContent;
+    public string noticeJpTitle;
+    public string noticeKrContent;
+    public string noticeKrTitle;
+    public string noticeLangCd;
+    public string noticeMainIsView;
+    public string noticePostingDate;
+    public string noticeRegDt;
+    public string noticeRemark;
+    public string noticeTitle;
+    public string noticeType;
+    public string noticeWriteBy;
+    public string noticeWriteDate;
+    public string noticeWriteNm;
+    public string noticeWritePs;
+    public int readCount;
+    public int sortNum;
+    public string updatedBy;
+    public string useYn;
+}
+
+
+//비밀번호 찾기 및 비밀번호 변경 관련 기능
+[Serializable]
+public class PasswordChange //비밀번호 변경 + 비밀번호 찾기
+{
+    public long timestamp;
+    public int status;
+    public string error;
+    public string message;
+    public string path;
+    public int errorCode;
+}
+[Serializable]
+public class PasswordFind //비밀번호 찾기 세부 정보
+{
+    public long timestamp;
+    public int status;
+    public string error;
+    public string message;
+    public string path;
+    public int errorCode;
+}
+
+
+
+/// <summary>
+/// 위쪽은 json 파일 파싱에 필요한 자료형 클래스들 아래는 통신과 파싱을 위한 메서드들이 있다
+/// </summary>
 
 public class NetworkManager : MonoBehaviour
 {
     private static NetworkManager instance = null;
     public Login Login = new Login();
 
+
+    /// <summary>
+    /// 
+    /// </summary>
     public static NetworkManager Instance
     {
         get
@@ -243,6 +424,7 @@ public class NetworkManager : MonoBehaviour
             return instance;
         }
     }
+
     private void Awake()
     {
         if (instance == null)
@@ -254,14 +436,14 @@ public class NetworkManager : MonoBehaviour
 
         Reference();
     }
+
     private void Reference()
     {
 
 
     }
-
-    //url 주소를 입력하면 정보를 받아오는 코루틴
-    private IEnumerator LoadData(string URL, int Type)
+ 
+    private IEnumerator LoadData(string URL, int Type)//url 주소를 입력하면 정보를 받아오는 코루틴
     {
         string jsonResult = "";
         string GetDataUrl = "http://211.33.44.93:8091" + URL;
@@ -289,7 +471,8 @@ public class NetworkManager : MonoBehaviour
         }
         yield return jsonResult;
     }
-    IEnumerator SendData(string URL, string json)
+
+    IEnumerator SendData(string URL, string json)//json 관련 정보를 보내는 코루틴
     {
         string GetDataUrl = "http://211.33.44.93:8091" + URL;
         using (UnityWebRequest www = UnityWebRequest.Post(GetDataUrl, json))
@@ -310,26 +493,20 @@ public class NetworkManager : MonoBehaviour
             }
         }
     }
-    private string MakeJson(object Data)//이미 데이터가 저장된 객체를 전달해야한다
+
+    private string MakeJson(object Data)//제이슨 형태의 자료형을 제이슨 형태의 스트링으로 만들어주는 메서드
     {
         string save = JsonUtility.ToJson(Data, prettyPrint: true);
         Debug.Log(save);
         return save;
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.W))
-        {
-            GetLoginData("kdh4021200@naver.com", "kjh99660");
-        }
-    }
-
-    public void GetLoginData(string ID, string password)
+    public void GetLoginData(string ID, string password)//로그인 데이터를 가져오는 메서드
     {
         string path = "/gzfx/login/login.ajax?memberId=" + ID + "&memberPs=" + password;
         StartCoroutine(LoadData(path, 0));
     }
+
     public void SignIn()
     {
         string path = "/gzfx/member/member/join.ajax";
@@ -337,5 +514,12 @@ public class NetworkManager : MonoBehaviour
         //로그인 대이터를 넣는 내용 >> 로그인 대이터가 있는 곳으로 메서드를 옮겨야 한다
         StartCoroutine(SendData(path, MakeJson(signIn)));
         
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.W))//테스트
+        {
+            GetLoginData("kdh4021200@naver.com", "kjh99660");
+        }
     }
 }

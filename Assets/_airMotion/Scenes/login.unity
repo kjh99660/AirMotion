@@ -11016,7 +11016,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1026368586
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18296,7 +18296,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1632164355
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18655,7 +18655,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1677170936
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19105,35 +19105,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081a2ac42d8121248812d9e31ba7ce54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  result: []
-  locker:
-    club_id: 
-    visit_date: 
-    loocker_no: 
-    cert_no: 
-    phone: 
-  code:
-    code_id: 
-  video: []
-  spot:
-    spot_id: 
-    club_id: 
-    course_id: 
-    hole_num: 0
-    group_id: 
-  checkGPS:
-    gc_no: 
-    course_no: 
-    hole_no: 0
-    distance: 0
-  cameraData:
-    gc_no: 
-    course_no: 
-    camera_no: 0
-    t_time: 
-    user_no: 
-    caddie_no: 
-    phone: 
+  Login:
+    status: 0
+    error: 
+    message: 
+    redirect: 
+    data: []
 --- !u!4 &1692228107
 Transform:
   m_ObjectHideFlags: 0
