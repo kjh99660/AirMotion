@@ -10,37 +10,62 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
 {
     private WaitForSeconds wait;
     private NetworkManager NM;
+    private UIManager UM;
 
-    private bool unit;
-    private bool firstLogin;
-    private string registePassword;
+    public Sprite checkBox;
+    public GameObject[] checkBoxes;
 
     private bool[] RegisterInput;
     private bool[] RegisterDetailInput;
 
-    private float? height, heightFT;
-    private bool sex;//true == male
+    [Header ("UserInformaition")]
+    private bool unit;              //true => cm false => ft
+    private int firstLogin;        //0 => Ã³À½¾Æ´Ô 1 => Ã³À½
+    private string registePassword; //µî·Ï ºñ¹Ð¹øÈ£
+    private string registerID;      //µî·Ï ¾ÆÀÌµð
+    private string userName;        //À¯Àú ÀÌ¸§
+    private float? height, heightFT;//Å°
+    private bool sex;               //¼ºº° true == male
+    private float handycap;         //ÇÚµðÄ¸
+    private string phoneNumber;     //ÇÚµåÆù ¹øÈ£
 
-
-
-    private UIManager UM;
-    public Sprite checkBox;
-    public GameObject[] checkBoxes;
     [Header("Warning Object")]
     public GameObject[] login_3_warn;
     public GameObject[] register_4_warn;
+
     [Space(8)]
     public GameObject passwordButton;
     public GameObject phoneButton;
     public Sprite redButton_password;
     public Sprite redButton_phone;
+
     [Header("Register")]
     public GameObject RegisterButton;
     public GameObject RegisterButtonDetail;
     public Sprite redButtom_register;
     public Sprite grayButton_register;
 
+    [Header("Policy")]
+    public GameObject policyTittle;
+    public GameObject policyContent;
+    
+    [Header("Information")]
+    public GameObject informationTittle;
+    public GameObject informationContent;
 
+    [Header("Login")]
+    public InputField ID;
+    public InputField PW;
+
+    IEnumerator Splash_term_on() //½ÃÀÛ ¾Ö´Ï¸ÞÀÌ¼Ç
+    {
+        UM.PageMove(0);
+        yield return wait;
+        if (firstLogin == 1) UM.PageMove(1);
+        else UM.PageMove(2);
+        PlayerPrefs.SetInt("FirstEnter", 0);
+        PlayerPrefs.Save();
+    }
 
     void Start()
     {
@@ -49,46 +74,37 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
     }
     private void Update()
     {
-        if (CheckRegisterNext()) UM.ChangeImage(redButtom_register, RegisterButton);
-        else UM.ChangeImage(grayButton_register, RegisterButton);
-
-        if (CheckRegisterDetailNext()) UM.ChangeImage(redButtom_register, RegisterButtonDetail);
-        else UM.ChangeImage(grayButton_register, RegisterButtonDetail);
+        if (CheckRegisterNext())// register_4
+        {
+            UM.ChangeImage(redButtom_register, RegisterButton);
+            RegisterButton.GetComponent<Button>().interactable = true;
+        }
+        else
+        {
+            UM.ChangeImage(grayButton_register, RegisterButton);
+            RegisterButton.GetComponent<Button>().interactable = false;
+        }
+        if (CheckRegisterDetailNext())// register_detail_5
+        {
+            UM.ChangeImage(redButtom_register, RegisterButtonDetail);
+            RegisterButtonDetail.GetComponent<Button>().interactable = true;
+        }
+        else
+        {
+            UM.ChangeImage(grayButton_register, RegisterButtonDetail);
+            RegisterButtonDetail.GetComponent<Button>().interactable = false;
+        }
     }
 
-    // #´Ü¼ø È­¸é ÀÌµ¿ °ü·Ã ¸Þ¼­µå
-    public void MoveMain() => UM.PageMove(2);
+    // #´Ü¼ø È­¸é ÀÌµ¿ °ü·Ã ¸Þ¼­µå   
     public void MoveLogin() => UM.PageMove(3);
     public void MoveRegister() => UM.PageMove(4);
     public void MoveRegisterDetail() => UM.PageMove(5);
     public void MoveFindPassword() => UM.PageMove(6);
     public void MoveCertify() => UM.PageMove(7);
-    public void MoveAfterCertify() => UM.PageMove(8);
-    public void PopUp_information() => UM.PopUp(1);
+    public void MoveAfterCertify() => UM.PageMove(8);  
     public void CheckBox() => UM.CheckBox();
     public void MoveHome() => SceneManager.LoadScene("home");
-
-    public bool CheckRegisterNext()
-    {
-        foreach (GameObject warn in register_4_warn)
-        {
-            if (warn.activeSelf) return false;
-        }
-        foreach (GameObject checkBox in checkBoxes)
-        {
-            if (!checkBox.GetComponent<Toggle>().isOn) return false;
-        }
-        return true;
-    }
-
-    public bool CheckRegisterDetailNext()
-    {
-        foreach (bool warn in RegisterDetailInput)
-        {
-            if (!warn) return false;
-        }
-        return true;
-    }
 
 
 
@@ -98,9 +114,6 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
     {
         if (CheckCanLogin())
         {
-            InputField ID = transform.Find("INPUT_mail").GetChild(0).GetComponent<InputField>();
-            InputField PW = transform.Find("INPUT_password").GetChild(0).GetComponent<InputField>();
-
             NM.GetLoginData(ID.text, PW.text);
 
             if (NM.Login.message.Equals("SUCCESS"))
@@ -109,6 +122,8 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
             }
             else
             {
+                Debug.Log("·Î±×ÀÎ ¿À·ù");
+                Debug.Log(ID.text + " " + PW.text);
                 //¾ÆÀÌµð³ª ºñ¹Ð¹øÈ£¸¦ ´Ù½Ã È®ÀÎ ÇØÁÖ¼¼¿ä
             }
         }
@@ -156,6 +171,7 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
             register_4_warn[0].SetActive(true);
             RegisterInput[0] = false;
         }
+        registerID = text.text;
     }
 
     public void EndPasswordRegister(InputField text)//È¸¿ø°¡ÀÔ¿¡¼­ ºñ¹Ð¹øÈ£°¡ ¿Ã¹Ù¸¥ Çü½ÄÀÎÁö È®ÀÎ
@@ -187,102 +203,111 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
         }
     }
 
-    public void PopUp_service()
+    public void PopUp_service()//¼­¹ö½º ÀÌ¿ë¾à°üÀ» ÆË¾÷ÇÏ´Â ³»¿ë
     {
+        StartCoroutine(PopUpService());              
+    }
+    private IEnumerator PopUpService()
+    {
+        NM.GetPolicyData("A");
+
+        while(!NM.isLoaded)
+        {
+            yield return null;
+        }
         
-         UM.PopUp(0);
+        policyTittle.GetComponent<Text>().text = NetworkManager.Instance.Policy.data.policyTitle;
+        policyContent.GetComponent<Text>().text = NetworkManager.Instance.Policy.data.policyContent;
+
+        UM.PopUp(0);
     }
 
+    public void PopUp_information()//¼­ºñ½º °³ÀÎÁ¤º¸ Ã³¸® ¹æÄ§ ÆË¾÷
+    {
+        StartCoroutine(PopUpInformation());        
+    }
+    private IEnumerator PopUpInformation()
+    {
+        NM.GetPolicyData("B");
 
+        while (!NM.isLoaded)
+        {
+            yield return null;
+        }
 
+        informationTittle.GetComponent<Text>().text = NetworkManager.Instance.Policy.data.policyTitle;
+        informationContent.GetComponent<Text>().text = NetworkManager.Instance.Policy.data.policyContent;
 
+        UM.PopUp(1);
+    }
 
-
+    public bool CheckRegisterNext()//È¸¿ø°¡ÀÔ È­¸é¿¡¼­ ´ÙÀ½À¸·Î ³Ñ¾î°¥ ¼ö ÀÖ´ÂÁö Ã¼Å©
+    {
+        foreach (GameObject warn in register_4_warn)
+        {
+            if (warn.activeSelf) return false;
+        }
+        foreach (GameObject checkBox in checkBoxes)
+        {
+            if (!checkBox.GetComponent<Toggle>().isOn) return false;
+        }
+        foreach(bool value in RegisterInput)
+        {
+            if (value == false) return false;
+        }
+        return true;
+    }
 
 
 
 
     // #È¸¿ø°¡ÀÔ ¼¼ºÎ Á¤º¸ - 5
-
-
-
-
-    // #ºñ¹Ð¹øÈ£ Ã£±â È­¸é - 6
-    public void CheckCertify(Text text)//Á¤»óÀûÀÎ ÇÚµåÆù ¹øÈ£ Çü½ÄÀÎÁö È®ÀÎ
+    public bool CheckRegisterDetailNext()//È¸¿ø°¡ÀÔ ¼¼ºÎ Á¤º¸¿¡¼­ ´ÙÀ½À¸·Î ³Ñ¾î°¡´Â Á¶°Ç Ã¼Å©
     {
-        if (UM.IsValidPhone(text.text))
+        foreach (bool warn in RegisterDetailInput)
         {
-            MoveAfterCertify();
+            if (!warn) return false;
         }
+        return true;
     }
 
-    public void ChangeButtonImage(Text text)//¹öÆ°ÀÇ ÀÌ¹ÌÁö¸¦ ¹Ù²Û´Ù<ºñ¹Ð¹øÈ£>
+    public void EndRegisterDetailName(Text text)//´Ð³×ÀÓ µî·Ï
     {
-        if(UM.IsValidEmail(text.text))
+        if (!(text.text == ""))
         {
-            UM.ChangeImage(redButton_password, passwordButton);
+            userName = text.text;
+            RegisterDetailInput[0] = true;
         }
+        else RegisterDetailInput[0] = false;
     }
-    public void ChangeButtonImage_phone(Text text)//¹öÆ°ÀÇ ÀÌ¹ÌÁö¸¦ ¹Ù²Û´Ù<ÇîµåÆù>
+
+    public void EndRegisterDetailHeight(Text text)//Å° µî·Ï
     {
-        if (UM.IsValidPhone(text.text))
+        if (!(text.text == ""))
         {
-            UM.ChangeImage(redButton_phone, phoneButton);
+            if (unit) height = float.Parse(text.text);
+            else heightFT = float.Parse(text.text);
+            if (height != null || heightFT != null)RegisterDetailInput[1] = true;
         }
+        else RegisterDetailInput[1] = false;
     }
-    
-    public void EndRegisterDetailName(Text text)
+
+    public void EndRegisterDetailHandy(Text text)//ÇÚµðÄ¸ µî·Ï
     {
-        if (!(text.text == "")) RegisterDetailInput[0] = true;
-    }
-    public void EndRegisterDetailHeight(Text text)
-    {
-        if (!(text.text == "")) RegisterDetailInput[1] = true;
-    }
-    public void EndRegisterDetailHandy(Text text)
-    {
-        if (!(text.text == "")) RegisterDetailInput[2] = true;
-    }
-    
-    public void ClickLogin()
-    {
-        string userEmal = "kdh4021200@naver.com";
-        Debug.Log(UM.IsValidEmail(userEmal));
-        //ÀÌ¸ÞÀÏ ÀÔ·Â Çü½Ä ÀÏÄ¡
-        if (!UM.IsValidEmail(userEmal))
+        if (!(text.text == ""))
         {
-            //¿¡·¯ ¶ç¿ì±â
-        }       
-        else
-        {
-            //ºñ¹Ð¹øÈ£¿Í ÀÌ¸ÞÀÏ ÀÏÄ¡ => ¼­¹ö·Î º¸³½ µÚ µÑÀÌ ÀÏÄ¡ÇÏ´ÂÁö È®ÀÎ
-            //·Î±×ÀÎ ÀÌÈÄ È­¸éÀ¸·Î ÀÌµ¿
-            //if(ºñ¹Ð¹øÈ£¿Í ÀÌ¸ÞÀÏÀÌ ÀÏÄ¡)            
+            handycap = float.Parse(text.text);
+            RegisterDetailInput[2] = true;
         }
+        else RegisterDetailInput[2] = false;
     }
-    public void ClickPasswordConfirm()
+
+    public void ChangeSex()//¼ºº° Åä±Û ½Ã ½ÇÇàµÇ´Â ³»¿ë
     {
-        //ÀÌ¸ÞÀÏ Çü½ÄÀÎÁö È®ÀÎ + °¡ÀÔµÈ ÀÌ¸ÞÀÏÀÎÁö È®ÀÎ ÈÄ
-        //¾Æ¸¶ ÆË¾÷ ¶ç¿ì´Â °É·Î ³ª¿Ã ¿¹Á¤
-        MoveLogin();
+        if (EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn) sex = true;
+        else sex = false;
     }
-    public void RegisterNext()
-    {
-        foreach(bool register in RegisterInput)
-        {
-            if (!register) return;
-        }
-        if (!CheckRegisterNext()) return;
-        MoveRegisterDetail();
-    }
-    public void RegisterDetailNext()
-    {
-        //´Ð³×ÀÓÀÌ Áßº¹ÀÎÁö È®ÀÎÇÏ±â
-        //Å°°¡ ÀÔ·ÂµÇ¾ú´ÂÁö È®ÀÎÇÏ±â
-        //ÇÚµðÄ¸ÀÌ ÀÔ·ÂµÇ¾ú´ÂÁö È®ÀÎÇÏ±â
-        MoveCertify();
-    }
-    
+
     public void ChangeHeight(InputField text) //ft ¿Í cm ±³È¯ ¹öÆ° //true => cm false => ft
     {
         float temp = 0f;
@@ -300,13 +325,12 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
         }
         if (!float.TryParse(text.text, out temp))//¼ýÀÚ°¡ ¾Æ´Ñ °ªÀ» ÀÔ·ÂÇßÀ» °æ¿ì
         {
-            Debug.Log(text.text);
             height = null;
             heightFT = null;
             unit = !unit;
             return;
         }
-        temp = float.Parse(text.text);       
+        temp = float.Parse(text.text);
         if (height != heightFT)//ÀÌ¹Ì ÀÔ·ÂÇÑ ¼ýÀÚ°¡ Á¸ÀçÇÏ´Â °æ¿ì
         {
             if ((System.Math.Abs((double)(height - temp)) > 1f && unit) || (System.Math.Abs((double)heightFT - temp) > 0.1f && !unit))
@@ -318,9 +342,6 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
                     heightFT = temp;
                     text.text = string.Format("{0:F1}", heightFT);
                     unit = !unit;
-                    Debug.Log("»õ·Î ÀÔ·Â:");
-                    Debug.Log(height);
-                    Debug.Log(heightFT);
                     return;
                 }
                 else//ft
@@ -330,18 +351,11 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
                     height = temp;
                     text.text = string.Format("{0:F1}", height);
                     unit = !unit;
-                    Debug.Log("»õ·Î ÀÔ·Â:");
-                    Debug.Log(height);
-                    Debug.Log(heightFT);
                     return;
                 }
             }
             if (unit) text.text = string.Format("{0:F1}", heightFT);
             else text.text = string.Format("{0:F1}", height);
-            Debug.Log("´Ü¼ø º¯È¯:");
-            Debug.Log(height);
-            Debug.Log(heightFT);
-
             unit = !unit;
             return;
         }
@@ -353,9 +367,6 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
                 temp /= 30.48f;
                 heightFT = temp;
                 text.text = string.Format("{0:F1}", temp);
-                Debug.Log("Ã³À½ ÀÔ·Â:");
-                Debug.Log(height);
-                Debug.Log(heightFT);
             }
             else
             {
@@ -363,33 +374,132 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
                 temp *= 30.48f;
                 height = temp;
                 text.text = string.Format("{0:F1}", temp);
-                Debug.Log("Ã³À½ ÀÔ·Â:");
-                Debug.Log(height);
-                Debug.Log(heightFT);
             }
             unit = !unit;
         }
-        
     }
 
-    IEnumerator Splash_term_on() //½ÃÀÛ ¾Ö´Ï¸ÞÀÌ¼Ç
+
+
+
+    // #ºñ¹Ð¹øÈ£ Ã£±â È­¸é - 6
+    public void ChangeButtonImage(Text text)//¹öÆ°ÀÇ ÀÌ¹ÌÁö¸¦ ¹Ù²Û´Ù<ºñ¹Ð¹øÈ£>
     {
-        UM.PageMove(0);
-        yield return wait;
-        UM.PageMove(1);
+        if(UM.IsValidEmail(text.text))
+        {
+            UM.ChangeImage(redButton_password, passwordButton);
+        }
     }
+
+
+
+
+    // #ÇÚµåÆù ÀÎÁõ - 7
+    public void ChangeButtonImage_phone(Text text)//¹öÆ°ÀÇ ÀÌ¹ÌÁö¸¦ ¹Ù²Û´Ù<ÇîµåÆù>
+    {
+        
+        if (UM.IsValidPhone(text.text))
+        {
+            string temp;
+            temp = text.text;
+            temp = temp.Trim();
+            temp.Replace("-", "");
+            phoneNumber = temp;
+            UM.ChangeImage(redButton_phone, phoneButton);
+        }
+    }
+
+    public void CheckCertify(Text text)//Á¤»óÀûÀÎ ÇÚµåÆù ¹øÈ£ Çü½ÄÀÎÁö È®ÀÎ
+    {
+        //ÇÚµåÆù ÀÎÁõ ¹øÈ£¸¦ º¸³»´Â ³»¿ë
+        if (UM.IsValidPhone(text.text))
+        {
+            MoveAfterCertify();
+        }
+    }
+
+
+
+
+    // #ÇÚµåÆù ¸ÞÀÏ ¹ß¼Û ÈÄ È­¸é - 8
+    public void MoveMain()
+    {
+        NM.SignIn.memberFirstName = userName;
+        NM.SignIn.memberName = userName;
+        NM.SignIn.memberBirth = "20211216";
+        NM.SignIn.memberEmailAddr = registerID;
+        NM.SignIn.memberId = registerID;
+        NM.SignIn.memberHandDrctCd = "RIGHT";
+        NM.SignIn.memberHandicapCd = handycap.ToString();
+        NM.SignIn.memberPs = registePassword;
+        NM.SignIn.memberHpNo = phoneNumber;
+        NM.SignIn.memberUsePolicyYn = "Y";
+        NM.SignIn.memberPsnInfoClctUseYn = "Y";
+        NM.SignIn.memberLocationUsePolicyYn = "Y";
+        NM.SignIn.memberMarketingReceptYn = "Y";
+
+        NM.SignInSend();
+        UM.PageMove(2);
+    }
+
+
+
     private void InitValue()
     {
         NM = NetworkManager.Instance;
         UM = UIManager.Instance;
-        firstLogin = true;
+        wait = new WaitForSeconds(3f);
+
+        //À¯Àú Á¤º¸ ÃÊ±âÈ­
+        firstLogin = PlayerPrefs.GetInt("FirstEnter", 1);
         height = null;
         heightFT = null;
         unit = true;
-        sex = true;//defult
-        RegisterInput = new bool[3]; RegisterDetailInput = new bool[3];
-         wait = new WaitForSeconds(3f);
+        sex = true;
+        registerID = null;
+        registePassword = null;
+
+        RegisterInput = new bool[3]; 
+        RegisterDetailInput = new bool[3];
+
+        //È­¸é ÃÊ±âÈ­
         foreach (GameObject _ in login_3_warn) _.SetActive(false);
         foreach (GameObject _ in register_4_warn) _.SetActive(false);
     }
+
+    //??
+    public void ClickLogin()
+    {
+        string userEmal = registerID;
+        Debug.Log(UM.IsValidEmail(userEmal));
+        //ÀÌ¸ÞÀÏ ÀÔ·Â Çü½Ä ÀÏÄ¡
+        if (!UM.IsValidEmail(userEmal))
+        {
+            //¿¡·¯ ¶ç¿ì±â
+        }
+        else
+        {
+            //ºñ¹Ð¹øÈ£¿Í ÀÌ¸ÞÀÏ ÀÏÄ¡ => ¼­¹ö·Î º¸³½ µÚ µÑÀÌ ÀÏÄ¡ÇÏ´ÂÁö È®ÀÎ
+            //·Î±×ÀÎ ÀÌÈÄ È­¸éÀ¸·Î ÀÌµ¿
+            //if(ºñ¹Ð¹øÈ£¿Í ÀÌ¸ÞÀÏÀÌ ÀÏÄ¡)            
+        }
+    }
+    public void ClickPasswordConfirm()
+    {
+        //ÀÌ¸ÞÀÏ Çü½ÄÀÎÁö È®ÀÎ + °¡ÀÔµÈ ÀÌ¸ÞÀÏÀÎÁö È®ÀÎ ÈÄ
+        //¾Æ¸¶ ÆË¾÷ ¶ç¿ì´Â °É·Î ³ª¿Ã ¿¹Á¤
+        MoveLogin();
+    }
+    //Not Use
+    /*
+   public void RegisterNext()
+   {
+       foreach(bool register in RegisterInput)
+       {
+           if (!register) return;
+       }
+       if (!CheckRegisterNext()) return;
+       MoveRegisterDetail();
+   }
+   */
 }

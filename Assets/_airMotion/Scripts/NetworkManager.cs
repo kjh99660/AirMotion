@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ public class Login //맴버 로그인 관련 정보 + 회원 정보 조회
     public string error;
     public string message;
     public string redirect;
-    public List<LoginDetail> data;
+    public LoginDetail[] data;
 }
 [Serializable]
 public class LoginDetail //로그인 관련 세부 정보
@@ -177,7 +178,7 @@ public class Policy //이용약관 조회
     public string error;
     public string message;
     public string redirect;
-    public List<PolicyData> data;
+    public PolicyData data;
 }
 [Serializable]
 public class PolicyData //이용약관 내용
@@ -407,9 +408,15 @@ public class PasswordFind //비밀번호 찾기 세부 정보
 public class NetworkManager : MonoBehaviour
 {
     private static NetworkManager instance = null;
+
+    public bool isLoaded;
+    public string jsonResult = "";
+
+    public Policy Policy = new Policy();
     public Login Login = new Login();
+    public SignIn SignIn = new SignIn();
 
-
+    public ArrayList signInAnswer;
     /// <summary>
     /// 
     /// </summary>
@@ -439,13 +446,13 @@ public class NetworkManager : MonoBehaviour
 
     private void Reference()
     {
-
-
+        isLoaded = false;
+        signInAnswer = new ArrayList();
     }
  
     private IEnumerator LoadData(string URL, int Type)//url 주소를 입력하면 정보를 받아오는 코루틴
     {
-        string jsonResult = "";
+        isLoaded = false;
         string GetDataUrl = "http://211.33.44.93:8091" + URL;
         using (UnityWebRequest www = UnityWebRequest.Get(GetDataUrl))
         {
@@ -465,14 +472,19 @@ public class NetworkManager : MonoBehaviour
                         case 0://Login
                             Login = JsonUtility.FromJson<Login>(jsonResult);
                             break;
+                        case 1://Policy Data
+                            Policy = JsonUtility.FromJson<Policy>(jsonResult);
+                            break;
+
                     }
                 }
             }
         }
+        isLoaded = true;
         yield return jsonResult;
     }
 
-    IEnumerator SendData(string URL, string json)//json 관련 정보를 보내는 코루틴
+    IEnumerator SendData(string URL, string json, int mode)//json 관련 정보를 보내는 코루틴
     {
         string GetDataUrl = "http://211.33.44.93:8091" + URL;
         using (UnityWebRequest www = UnityWebRequest.Post(GetDataUrl, json))
@@ -489,7 +501,18 @@ public class NetworkManager : MonoBehaviour
             }
             else
             {
-                Debug.Log(www.downloadHandler.text);
+                JObject decoded = JObject.Parse(www.downloadHandler.text);
+                Debug.Log(decoded);
+                switch (mode)
+                {
+                    case 0://SignIn
+                        signInAnswer.Add(decoded["status"]);
+                        signInAnswer.Add(decoded["error"]);
+                        signInAnswer.Add(decoded["message"]);
+                        signInAnswer.Add(decoded["redirect"]);
+                        signInAnswer.Add(decoded["data"]);                       
+                        break;
+                }
             }
         }
     }
@@ -507,14 +530,20 @@ public class NetworkManager : MonoBehaviour
         StartCoroutine(LoadData(path, 0));
     }
 
-    public void SignIn()
+    public void SignInSend()
     {
         string path = "/gzfx/member/member/join.ajax";
-        SignIn signIn = new SignIn();
         //로그인 대이터를 넣는 내용 >> 로그인 대이터가 있는 곳으로 메서드를 옮겨야 한다
-        StartCoroutine(SendData(path, MakeJson(signIn)));
+        StartCoroutine(SendData(path, MakeJson(SignIn), 0));
         
     }
+
+    public void GetPolicyData(string kind)//이용약관을 가져오는 메서드 약관유형코드(A:이용약관 B:개인정보보호 C:위치정보약관 D:마케팅수신동의)
+    {        
+        string path = "/gzfx/service/policy/policyContent.ajax?policyTypeCd=" + kind;
+        StartCoroutine(LoadData(path, 1));        
+    }
+    
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))//테스트

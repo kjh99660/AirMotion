@@ -1389,7 +1389,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 116241284}
   m_OnClick:
     m_PersistentCalls:
@@ -3753,7 +3753,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &373071501
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4207,7 +4207,7 @@ GameObject:
   - component: {fileID: 394763288}
   - component: {fileID: 394763287}
   m_Layer: 0
-  m_Name: InputField
+  m_Name: InputField_password
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4516,8 +4516,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -312, y: 287}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -225.5, y: 287}
+  m_SizeDelta: {x: 333, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &423232290
 MonoBehaviour:
@@ -7100,6 +7100,12 @@ MonoBehaviour:
   RegisterButtonDetail: {fileID: 460343857}
   redButtom_register: {fileID: 21300000, guid: 58ea3032b9a28d646ac05b7cde05bb88, type: 3}
   grayButton_register: {fileID: 21300000, guid: 28d901a3acb5ab1409180776f7e7081a, type: 3}
+  policyTittle: {fileID: 2064847206}
+  policyContent: {fileID: 1275619091}
+  informationTittle: {fileID: 1363101668}
+  informationContent: {fileID: 757401122}
+  ID: {fileID: 1585535907}
+  PW: {fileID: 394763287}
 --- !u!4 &677116946
 Transform:
   m_ObjectHideFlags: 0
@@ -11016,7 +11022,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1026368586
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13668,8 +13674,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 311, y: 337}
-  m_SizeDelta: {x: 160, y: 20}
+  m_AnchoredPosition: {x: 311, y: 320.21}
+  m_SizeDelta: {x: 160, y: 53.579}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1209312281
 MonoBehaviour:
@@ -17561,7 +17567,7 @@ GameObject:
   - component: {fileID: 1585535908}
   - component: {fileID: 1585535907}
   m_Layer: 0
-  m_Name: InputField
+  m_Name: InputField_login
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18655,7 +18661,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1677170936
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19105,12 +19111,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081a2ac42d8121248812d9e31ba7ce54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLoaded: 0
+  jsonResult: 
+  Policy:
+    status: 0
+    error: 
+    message: 
+    redirect: 
+    data:
+      policyTitle: 
+      policyContent: 
   Login:
     status: 0
     error: 
     message: 
     redirect: 
     data: []
+  SignIn:
+    __created__: 0
+    __deleted__: 0
+    __modified__: 0
+    createdAt: 
+    createdBy: 
+    dataStatus: 
+    memberAdd1SerialNo: 
+    memberAgeeCd: 
+    memberAutoLoginYn: 
+    memberBirth: 
+    memberChangePolicyYn: 
+    memberDevicePutterConntYn: 
+    memberDeviceRadarConntYn: 
+    memberDeviceWatchConntYn: 
+    memberEmailAddr: 
+    memberEmailCertNo: 
+    memberEmailCertValidDate: 
+    memberFirstName: 
+    memberGenderCd: 
+    memberGpSerialNo: 
+    memberGrSerialNo: 
+    memberHandDrctCd: 
+    memberHandiCd: 
+    memberHandicapCd: 
+    memberHpNo: 
+    memberHumanDate: 
+    memberId: 
+    memberIp: 
+    memberJoinDate: 
+    memberJoinPathNm: 
+    memberLastConnectDate: 
+    memberLastName: 
+    memberLocationUsePolicyYn: 
+    memberLoginTokenNo: 
+    memberLoginTokenValidDate: 
+    memberMarketingReceptYn: 
+    memberMenuGrpCd: 
+    memberName: 
+    memberOutDate: 
+    memberPs: 
+    memberPsUpdateDate: 
+    memberPsnInfoClctUseYn: 
+    memberPuchYnCd: 
+    memberPushMarketingYn: 
+    memberPushReceptYn: 
+    memberRegDeviceCd: 
+    memberRegOsCd: 
+    memberRegionCd: 
+    memberRemark: 
+    memberShotDataMemo: 
+    memberSocialLoginCertDate: 
+    memberSocialLoginCertNo: 
+    memberSocialLoginDivCd: 
+    memberStateCd: 
+    memberUsePolicyYn: 
+    mgmtMemberId: 
+    mgmtMemberRegDate: 
+    updatedAt: 
+    updatedBy: 
+    useYn: 
 --- !u!4 &1692228107
 Transform:
   m_ObjectHideFlags: 0
@@ -22897,8 +22974,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3, y: 337}
-  m_SizeDelta: {x: 160, y: 20}
+  m_AnchoredPosition: {x: 3, y: 320.21045}
+  m_SizeDelta: {x: 160, y: 53.579}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2088046968
 MonoBehaviour:
@@ -22946,7 +23023,19 @@ MonoBehaviour:
   m_Group: {fileID: 987016359}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 677116945}
+        m_TargetAssemblyTypeName: Splash, Assembly-CSharp
+        m_MethodName: ChangeSex
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &2117990864
 GameObject:
