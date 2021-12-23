@@ -222,6 +222,7 @@ public class More : MonoBehaviour
 
 
     //Not use _ 일단은 사용 안함
+    /*
     public void ClickFAQButton()
     {
         GameObject Button = UM.CurrentSelectedGameObject().transform.parent.gameObject;
@@ -247,7 +248,7 @@ public class More : MonoBehaviour
     {
         //업데이트 버튼
     }
-
+    */
 
 
 

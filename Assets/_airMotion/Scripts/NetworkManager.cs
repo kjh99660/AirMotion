@@ -197,7 +197,7 @@ public class VersionCheck //OS별 버전 체크하기
     public string error;
     public string message;
     public string redirect;
-    public List<OS> data;
+    public OS[] data;
 }
 [Serializable]
 public class OS //OS 세부 정보
@@ -231,14 +231,14 @@ public class Banner //배너 목록 조회
     public PagingList paging;
     public Page page;
     public CntMap cnt_map;
-    public List<BannerList> list;
+    public BannerList[] list;
 
     
 }
 [Serializable]
 public class PagingList //배너 페이지 리스트
 {
-    public List<PageList> pagingList;  
+    public PageList[] pagingList;  
 }
 [Serializable]
 public class PageList //배너 페이지 리스트 세부 정보
@@ -295,7 +295,7 @@ public class Language //공통 언어 정보 - 추후 추가 가능
     public string error;
     public string message;
     public string redirect;
-    public List<LanguageKind> data;      
+    public LanguageKind[] data;      
 }
 [Serializable]
 public class LanguageKind //언어 세부 정보
@@ -315,7 +315,7 @@ public class Notice //공지사항 받기
     public List<PageList> paging;
     public Page page;
     public CntMap cnt_map;
-    public List<NoticeList> list;
+    public NoticeList[] list;
 }
 [Serializable]
 public class NoticeList //공지사항 리스트
@@ -416,6 +416,7 @@ public class NetworkManager : MonoBehaviour
     public Policy Policy = new Policy();
     public Login Login = new Login();
     public SignIn SignIn = new SignIn();
+    public VersionCheck VersionCheck = new VersionCheck();
 
     public ArrayList signInAnswer;
     /// <summary>
@@ -476,6 +477,10 @@ public class NetworkManager : MonoBehaviour
                         case 1://Policy Data
                             Policy = JsonUtility.FromJson<Policy>(jsonResult);
                             break;
+                        case 2://OS version
+                            VersionCheck = JsonUtility.FromJson<VersionCheck>(jsonResult);
+                            break;
+
 
                     }
                 }
@@ -545,11 +550,23 @@ public class NetworkManager : MonoBehaviour
         StartCoroutine(LoadData(path, 1));        
     }
     
+    public void GetOsVersionInformation()//버전OS코드(AND, IOS, WATCH)
+    {
+        string version;
+#if UNITY_ANDROID
+        version = "AND";
+#endif
+#if UNITY_EDITOR
+        version = "AND";
+#endif
+        string path = "/gzfx/operation/vermgmt/appVersion.ajax?verOsCd=" + version;
+        StartCoroutine(LoadData(path, 2));
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))//테스트
         {
-            GetLoginData("kdh4021200@naver.com", "kjh99660");
+            GetOsVersionInformation();
         }
     }
 }

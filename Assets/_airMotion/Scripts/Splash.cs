@@ -155,8 +155,9 @@ public class Splash : MonoBehaviour  //Splash 관련해서 화면 이동 및 UI를 처리하�
 
     public void EndPasswordEdit(InputField text)//로그인 비밀번호 입력
     {
-        if (!UM.IsValidPassword(text.text)) login_3_warn[1].SetActive(false); //test 중 !지워야함
-        else login_3_warn[1].SetActive(true);
+        //if (!UM.IsValidPassword(text.text)) login_3_warn[1].SetActive(false); //test 중 !지워야함
+        //else login_3_warn[1].SetActive(true);
+        login_3_warn[1].SetActive(false);//test
     }
 
     public void CheckPssswordFind(Text text)//비밀번호 찾기 페이지로 이동하기
@@ -340,8 +341,10 @@ public class Splash : MonoBehaviour  //Splash 관련해서 화면 이동 및 UI를 처리하�
             return;
         }
         temp = float.Parse(text.text);
-        if (height != heightFT)//이미 입력한 숫자가 존재하는 경우
+        if (height != heightFT && heightFT != null)//이미 입력한 숫자가 존재하는 경우
         {
+            Debug.Log(height);
+            Debug.Log(heightFT);
             if ((System.Math.Abs((double)(height - temp)) > 1f && unit) || (System.Math.Abs((double)heightFT - temp) > 0.1f && !unit))
             {//이전에 존재하던 숫자와 다른 숫자를 입력했을 경우
                 if (unit)//cm
