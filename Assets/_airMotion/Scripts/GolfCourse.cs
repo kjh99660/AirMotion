@@ -18,13 +18,14 @@ public class GolfCourse : MonoBehaviour
         Debug.Log("GolfCourse OnEnable");
         StartCoroutine(LoadGolfCourse());
     }
-    private void Start()//나중에 날려야함?
+    private void Start()
     {
         InitValue();
         Debug.Log("GolfCourse OnEnable");
         StartCoroutine(LoadGolfCourse());
     }
 
+    //# Golf Main > 0
     public void ToggleTopButtons()//위쪽 UI 클릭할 때 색상 변경 코드
     {
         GameObject Button = EventSystem.current.currentSelectedGameObject.gameObject;
@@ -38,27 +39,32 @@ public class GolfCourse : MonoBehaviour
         //Button.transform.GetChild(0).GetComponent<Text>().color = white;
         
     }
+
     public void ClickSearchVedio()//영상매칭 버튼
     {
         UM.ChildActiveOnOff();
     }
+
     public void ClickDirecctSearch()//수동검색 영상 검색 확인 버튼
     {
         GC.AddCourutine("home", "DirectSearch");
         MoveHome();
     }
-    public void AutoSearch()
+
+    public void AutoSearch()// 자동 검색
     {
         GC.AddCourutine("home", "CheckNewVedio");
         MoveHome();
     }
 
-    IEnumerator LoadGolfCourse()
-    {
-        //서버에서 골프장 목록 받아오는 내용
+    IEnumerator LoadGolfCourse() //서버에서 골프장 목록 받아오는 내용
+    {      
+        //need to more
         yield return new WaitForSeconds(1f);
         MoveMain();
     }
+
+    //단순 화면 전환
     public void MoveMain() => UM.PageMove(0);
     public void MovePanorma() => SceneManager.LoadScene("PANORAMA");
     public void MoveHome() => SceneManager.LoadScene("home");

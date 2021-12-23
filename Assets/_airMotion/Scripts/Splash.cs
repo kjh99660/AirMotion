@@ -69,6 +69,7 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
 
     void Start()
     {
+        Screen.fullScreen = false;
         InitValue();
         StartCoroutine(Splash_term_on()); //½ÃÀÛ ¾Ö´Ï¸ÞÀÌ¼Ç
     }
@@ -112,10 +113,18 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
     //  #Ã¹ ·Î±×ÀÎ È­¸é - 3
     public void CheckLogin()//·Î±×ÀÎ¹öÆ°
     {
+        StartCoroutine(CheckLogin_());
+    }
+    private IEnumerator CheckLogin_()
+    {
         if (CheckCanLogin())
         {
             NM.GetLoginData(ID.text, PW.text);
 
+            while (!NM.isLoaded)
+            {
+                yield return null;
+            }
             if (NM.Login.message.Equals("SUCCESS"))
             {
                 MoveHome();
@@ -123,7 +132,7 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
             else
             {
                 Debug.Log("·Î±×ÀÎ ¿À·ù");
-                Debug.Log(ID.text + " " + PW.text);
+                Debug.Log(NM.Login.message);
                 //¾ÆÀÌµð³ª ºñ¹Ð¹øÈ£¸¦ ´Ù½Ã È®ÀÎ ÇØÁÖ¼¼¿ä
             }
         }
@@ -146,7 +155,7 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
 
     public void EndPasswordEdit(InputField text)//·Î±×ÀÎ ºñ¹Ð¹øÈ£ ÀÔ·Â
     {
-        if (UM.IsValidPassword(text.text)) login_3_warn[1].SetActive(false);
+        if (!UM.IsValidPassword(text.text)) login_3_warn[1].SetActive(false); //test Áß !Áö¿ö¾ßÇÔ
         else login_3_warn[1].SetActive(true);
     }
 
@@ -425,18 +434,20 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
     public void MoveMain()
     {
         NM.SignIn.memberFirstName = userName;
-        NM.SignIn.memberName = userName;
+        NM.SignIn.memberLastName = userName;
         NM.SignIn.memberBirth = "20211216";
         NM.SignIn.memberEmailAddr = registerID;
-        NM.SignIn.memberId = registerID;
+        NM.SignIn.memberName = userName;
+        NM.SignIn.memberHpNo = phoneNumber;
         NM.SignIn.memberHandDrctCd = "RIGHT";
         NM.SignIn.memberHandicapCd = handycap.ToString();
         NM.SignIn.memberPs = registePassword;
-        NM.SignIn.memberHpNo = phoneNumber;
         NM.SignIn.memberUsePolicyYn = "Y";
         NM.SignIn.memberPsnInfoClctUseYn = "Y";
         NM.SignIn.memberLocationUsePolicyYn = "Y";
         NM.SignIn.memberMarketingReceptYn = "Y";
+        if (sex) NM.SignIn.memberGenderCd = "MALE";
+        else NM.SignIn.memberGenderCd = "FEMALE";
 
         NM.SignInSend();
         UM.PageMove(2);
@@ -465,6 +476,8 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
         //È­¸é ÃÊ±âÈ­
         foreach (GameObject _ in login_3_warn) _.SetActive(false);
         foreach (GameObject _ in register_4_warn) _.SetActive(false);
+
+        
     }
 
     //??

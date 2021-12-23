@@ -99,7 +99,7 @@ public class LoginDetail //로그인 관련 세부 정보
 //회원 가입 관련 API
 [Serializable]
 public class SignIn //회원가입 관련 정보 + 자동 로그인 설정 + 이용약관 변경 동의 + 푸쉬 수신 동의
-{
+{    
     public bool __created__;
     public bool __deleted__;
     public bool __modified__;
@@ -167,6 +167,7 @@ public class SignIn //회원가입 관련 정보 + 자동 로그인 설정 + 이용약관 변경 동의
     public string updatedAt;                //2021-12-13T10:56:03.707Z
     public string updatedBy;                //string
     public string useYn;                    //사용_여부
+    
 }
 
 
@@ -506,11 +507,11 @@ public class NetworkManager : MonoBehaviour
                 switch (mode)
                 {
                     case 0://SignIn
-                        signInAnswer.Add(decoded["status"]);
-                        signInAnswer.Add(decoded["error"]);
-                        signInAnswer.Add(decoded["message"]);
-                        signInAnswer.Add(decoded["redirect"]);
-                        signInAnswer.Add(decoded["data"]);                       
+                        signInAnswer.Add(decoded["returnCode"]);
+                        signInAnswer.Add(decoded["returnMsg"]);
+                        signInAnswer.Add(decoded["returnData"]);
+                        signInAnswer.Add(decoded["msg"]);
+                        signInAnswer.Add(decoded["path"]);                       
                         break;
                 }
             }

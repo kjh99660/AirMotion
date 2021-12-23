@@ -8,6 +8,8 @@ public class GlobalCourutine : MonoBehaviour
     private static GlobalCourutine instance = null;
     private static UIManager UM;
     private Dictionary<string, string> CourutineList;
+
+
     public static GlobalCourutine Instance
     {
         get
@@ -21,6 +23,10 @@ public class GlobalCourutine : MonoBehaviour
             return instance;
         }
     }
+
+
+
+
     private void Awake()
     {
         //GameObject game = gameObject.transform.Find("CourutineManager").gameObject;
@@ -40,11 +46,13 @@ public class GlobalCourutine : MonoBehaviour
         }
         InitValue();
     }
+
     public void AddCourutine(string Scene,string Courutine)//스택에 코루틴을 입력하는 함수
     {
         //코루틴이 실행되야하는 씬의 이름과 코루틴의 이름이 들어간다
         CourutineList.Add(Scene, Courutine);
     }
+
     public void CheckCourutine() //스택에 해당하는 코루틴이 있는지 확인하는 함수
     {
         if (CourutineList.Count != 0)
@@ -64,14 +72,14 @@ public class GlobalCourutine : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// /////////
-    /// </summary>
-    private void InitValue()
+
+
+
+    private void InitValue() //초기화
     {
         if (UM == null) UM = UIManager.Instance;
         CourutineList = new Dictionary<string, string>();
-        //초기화
+       
 
     }
 }

@@ -454,6 +454,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7456989028172714859}
+  - component: {fileID: 7045765522295503709}
   m_Layer: 5
   m_Name: video
   m_TagString: Untagged
@@ -488,6 +489,18 @@ RectTransform:
   m_AnchoredPosition: {x: 540, y: -300}
   m_SizeDelta: {x: 500, y: 780}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7045765522295503709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7456989028172714860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdef7fdad4d6e24489d891e22aef45fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7456989028328771030
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,7 +655,7 @@ VideoPlayer:
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 0
   m_WaitForFirstFrame: 1

@@ -170,4 +170,5 @@ public class UIManager : MonoBehaviour
             Page.Value.SetActive(false);
         }
     }
+
 }

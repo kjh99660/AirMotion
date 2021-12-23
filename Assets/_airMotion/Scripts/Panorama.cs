@@ -20,23 +20,78 @@ public class Panorama : MonoBehaviour
         Debug.Log("MyVedio OnEnable");
         MovePanorama();
     }
-    public void BackToMainHorizon()
+
+
+
+
+    //# PANORAMA_0 첫번째 화면
+    public void ToggleFrameSlow()// 토글 느리게
+    {
+        if (UM.CurrentSelectedGameObject().GetComponent<Toggle>().isOn) FrameSpeed = 1;
+    }
+    public void ToggleFrameMiddle()// 토글 보통
+    {
+        if (UM.CurrentSelectedGameObject().GetComponent<Toggle>().isOn) FrameSpeed = 2;
+    }
+    public void ToggleFrameFast()// 토글 빠르게
+    {
+        if (UM.CurrentSelectedGameObject().GetComponent<Toggle>().isOn) FrameSpeed = 3;
+    }
+    public void BackToMainHorizon()//가로 모드에서 메인으로 나가는 버튼
     {
         MovePanorama();
         Screen.autorotateToPortrait = true;
         Screen.autorotateToPortraitUpsideDown = false;
         Screen.autorotateToLandscapeLeft = false;
         Screen.autorotateToLandscapeRight = false;
-        //가로 모드에서 메인으로 나가는 버튼
+        
     }
-    public void ChangeModeToHorizon()
+    public void CreatePanorama()//동영상을 이미지로 만들기
     {
-        MovePanoramaHorizon();
-        //가로로 바꾸는 버튼
+        PickImage(1920);
+        //파노라마 조건을 세팅하고 파노라마로 넘어가는 내용
+        StartCoroutine(LoadPanorama());
+    }
+    IEnumerator LoadPanorama()
+    {
+
+        yield return new WaitForSeconds(1f);
+        MovePanoramaVertical();
+        PopUp_vertical();
+
+    }
+
+
+
+
+    //#1 PANORAMA vertical
+    public void ChangeModeToHorizon()//가로로 바꾸는 버튼
+    {
+        MovePanoramaHorizon();     
         Screen.autorotateToPortrait = false;
         Screen.autorotateToPortraitUpsideDown = false;
         Screen.autorotateToLandscapeLeft = true;
         Screen.autorotateToLandscapeRight = true;
+    }
+
+    public void ConvertPanorama() //파노라마를 만드는 내용 - 변환하기
+    {
+        MovePanoramaVerticalDown();
+    }
+
+    public void MovePanorama() => UM.PageMove(0);//원래 페이지로 돌아가기
+
+
+
+
+    //# PANORAMA horizontal
+    public void ChangeModeToVertical()//가로에서 세로로 바꾸는 내용
+    {
+        MovePanoramaVertical();
+        Screen.autorotateToPortrait = true;
+        Screen.autorotateToPortraitUpsideDown = false;
+        Screen.autorotateToLandscapeLeft = false;
+        Screen.autorotateToLandscapeRight = false;
     }
     public void ChangeModeToHorizonDownload()
     {
@@ -46,14 +101,7 @@ public class Panorama : MonoBehaviour
         Screen.autorotateToLandscapeLeft = true;
         Screen.autorotateToLandscapeRight = true;
     }
-    public void ChangeModeToVertical()
-    {
-        MovePanoramaVertical();
-        Screen.autorotateToPortrait = true;
-        Screen.autorotateToPortraitUpsideDown = false;
-        Screen.autorotateToLandscapeLeft = false;
-        Screen.autorotateToLandscapeRight = false;
-    }
+    
     public void ChangeModeToVerticalDownload()
     {
         MovePanoramaVerticalDown();
@@ -71,34 +119,15 @@ public class Panorama : MonoBehaviour
         }
         else ConvertOptionTeaTime = false;      
     }
-    public void ToggleFrameSlow()
-    {
-        if(UM.CurrentSelectedGameObject().GetComponent<Toggle>().isOn)FrameSpeed = 1;
-    }
-    public void ToggleFrameMiddle()
-    {
-        if (UM.CurrentSelectedGameObject().GetComponent<Toggle>().isOn) FrameSpeed = 2;
-    }
-    public void ToggleFrameFast()
-    {
-        if (UM.CurrentSelectedGameObject().GetComponent<Toggle>().isOn) FrameSpeed = 3;
-    }
-    public void ConvertPanorama()
-    {
-        //파노라마를 만드는 내용
-        MovePanoramaVerticalDown();
-    }
+    
+   
+    public void MovePanoramaVerticalDown() => UM.PageMove(3);
     public void ConvertPanoramaHorizon()
     {
         //파노라마를 만드는 내용
         MovePanoramaHorizonDown();
     }
-    public void CreatePanorama()//동영상을 이미지로 만들기
-    {
-        PickImage(1920);
-        //파노라마 조건을 세팅하고 파노라마로 넘어가는 내용
-        StartCoroutine(LoadPanorama());
-    }
+   
     public void DownloadPanorama()
     {
         StartCoroutine(DownloadPanorama_());
@@ -111,15 +140,8 @@ public class Panorama : MonoBehaviour
         GC.AddCourutine("home", "BackToVedio");
         MoveHome();
     }
-    IEnumerator LoadPanorama()
-    {
-        
-        yield return new WaitForSeconds(1f);
-        MovePanoramaVertical();
-        PopUp_vertical();
-        
-    }
-    private void PickImage(int maxSize)
+    
+    private void PickImage(int maxSize) //갤러리에서 이미지를 가저오기
     {
         NativeGallery.Permission permission = NativeGallery.GetImageFromGallery((path) =>
         {
@@ -156,21 +178,24 @@ public class Panorama : MonoBehaviour
 
         Debug.Log("Permission result: " + permission);
     }
-    public void MovePanorama() => UM.PageMove(0);
+    
     public void MovePanoramaVertical() => UM.PageMove(1);
     public void MovePanoramaHorizon() => UM.PageMove(2);
-    public void MovePanoramaVerticalDown() => UM.PageMove(3);
+    
     public void MovePanoramaHorizonDown() => UM.PageMove(4);
     public void MoveSnapShot() => UM.PageMove(5);
     public void MoveSnapShotVertical() => UM.PageMove(6);
+   
+    private void PopUp_vertical() => UM.PopUp(0);
+    private void PopUp_horizental() => UM.PopUp(1);
+    private void PopUpConvert() => UM.PopUp(2);
+
+    //단순 씬 이동
     public void MovePANORAMA() => SceneManager.LoadScene("PANORAMA");
     public void MoveHome() => SceneManager.LoadScene("home");
     public void MoveBest() => SceneManager.LoadScene("best");
     public void MoveMore() => SceneManager.LoadScene("more");
     public void MoveGolfCourse() => SceneManager.LoadScene("golfCourse");
-    private void PopUp_vertical() => UM.PopUp(0);
-    private void PopUp_horizental() => UM.PopUp(1);
-    private void PopUpConvert() => UM.PopUp(2);
 
     private void InitValue()
     {

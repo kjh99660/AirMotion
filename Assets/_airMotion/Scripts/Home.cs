@@ -12,19 +12,29 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
 {
     private UIManager UM;
     private GlobalCourutine GC;
-    public GameObject Calendar;
-    public GameObject Time;
+    public GameObject Calendar; //달력 외부 플러그인
+    public GameObject Time; //스크롤링 외부 플러그인
+
+    [Header ("Sort Zero Page")]
     public GameObject[] TopButtons;
-    [Space(8)]
+
+    [Header("Sort Third Page")]
     public GameObject[] TopButtonsMain;
-    [Space(16)]
+
+    [Header("Button Active Images")]
     public Sprite redButton_top;
     public Sprite whiteButton_top;
-    [Space(16)]
-    public GameObject[] DirectSearchText; //영상 직접 검색 텍스트 - 4
-    public GameObject[] TeaAndLockerInput;//락커번호
+
+    [Header ("First and Second Page Text")]//영상 직접 검색 텍스트 - 4
+    public GameObject[] DirectSearchText;
+
+    [Header ("TeaTime and Locker Toggle")]//락커번호
+    public GameObject[] TeaAndLockerInput;
+
     [Header("Detail Vedio")]
     public GameObject[] DownloaadToggle;
+
+    [Header("DownloadProgress")]
     public GameObject DownloadProgress;
 
     private bool selectedCourse, selectedDay;
@@ -42,9 +52,162 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
         InitValue();
         Debug.Log("Home OnEnable");
     }
+
+
+
+    // #Home_main_0 and #Home_main_3
+    public void TouchVedio()//동영상을 터치 했을 때 실행되는 메서드
+    {       
+        GameObject Vedio = UM.CurrentSelectedGameObject();
+        //나중에 동영상 프리펩에 있는 스크립트로 대체 후 실행하는 방법으로 진행
+        MoveVedio();
+    }
+
+    public void SortFront()
+    {
+        //정면 tag 영상만 골라서 정렬하는 내용
+    }
+
+    public void SortSide()
+    {
+        //측면 태그된 영상만 골라서 정렬하는 내용
+    }
+
+    public void SortNew()//최근순으로 정렬하는 내용
+    {
+        
+    }
+
+    public void SortPopular()//인기순으로 정렬하는 내용
+    {
+        
+    }
+
+    public void SortLike()//좋아요순으로 정려하는 내용
+    {
+        
+    }
+
+    public void ClickAutoSearch()//자동 영상 검색
+    {
+        StartCoroutine(CheckNewVedio());
+    }
+
+    public void ClickPassiveSearch()//수동 영상 검색
+    {
+        MoveDirectSearch();
+    }
+
+    public void ClickSearchVedio()//영상 매칭 버튼
+    {
+        UM.ChildActiveOnOff();
+    }
+
+    public void ClickTopButton()//0번에서 영상 정렬 버튼
+    {
+        GameObject Button = EventSystem.current.currentSelectedGameObject.gameObject;
+        foreach (GameObject _ in TopButtons)
+        {
+            UM.ChangeImage(whiteButton_top, _);
+            _.transform.GetChild(0).GetComponent<Text>().color = red;
+        }
+        UM.ChangeImage(redButton_top, Button);
+        Button.transform.GetChild(0).GetComponent<Text>().color = white;
+        //if(Button.name == ~~)
+    }
+
+    public void ClickTopButtonMain()//3번에서 영상 정렬 버튼
+    {
+        GameObject Button = EventSystem.current.currentSelectedGameObject.gameObject;
+        foreach (GameObject _ in TopButtonsMain)
+        {
+            UM.ChangeImage(whiteButton_top, _);
+            _.transform.GetChild(0).GetComponent<Text>().color = red;
+        }
+        UM.ChangeImage(redButton_top, Button);
+        Button.transform.GetChild(0).GetComponent<Text>().color = white;
+        //if(Button.name == ~~)
+    }
+
+
+
+
+    // #Home_search_1 and #Home_search_2
+    public void ToggleGolfCourse()//골프장 선택 토글
+    {
+        GameObject select = UM.CurrentSelectedGameObject();
+        if (select.GetComponent<Toggle>().isOn)
+        {
+            Text temp = select.transform.GetChild(1).GetComponent<Text>();
+            for (int i = 0; i < 2; i++)
+            {
+                Text view = DirectSearchText[2 * i].GetComponent<Text>();
+                Color color = new Color(view.color.r, view.color.g, view.color.b, 1f);
+                view.text = temp.text;
+                view.color = color;
+            }
+        }
+    }
+
+    public void ToggleCheckIsTeaTime()//티타입 토글
+    {
+        GameObject select = TeaAndLockerInput[0].transform.parent.gameObject;
+        if (select.GetComponent<Toggle>().isOn)
+        {
+            select.transform.GetChild(2).gameObject.SetActive(true);
+            TeaAndLockerInput[1].SetActive(false);
+            TeaAndLockerInput[0].SetActive(true);
+        }
+    }
+
+    public void ToggleCheckIsLocker()//락커 토글
+    {
+        GameObject select = TeaAndLockerInput[1].transform.parent.gameObject;
+        if (select.GetComponent<Toggle>().isOn)
+        {
+            select.transform.GetChild(2).gameObject.SetActive(true);
+            TeaAndLockerInput[1].SetActive(true);
+            TeaAndLockerInput[0].SetActive(false);    
+        }
+    }
+
+    public void ConfirmSearchVedio()//수동검색 영상 검색 확인 버튼
+    {
+        //검색중 애니메이션 재생
+        //content 오브젝트에 조회결과를 추가
+    }
+
+    public void ConfirmRoundDay()//라운드 일자 선택
+    {
+        Calendar.GetComponent<ScrollingCalendar>().ShowDate();
+        UM.CancelPopUp();
+        selectedDay = true;
+    }
+
+    public void ConfirmTeaTime()//티타임 선택
+    {
+        Time.GetComponent<ScrollingTime>().ShowTime();
+        UM.CancelPopUp();
+    }
+
+    public void PopUpConfirmNewVedio()//새로 찾은 동영상을 추가
+    {
+        //새로 찾은 동영상을 추가하는 코드
+    }
+
+    public void PopUpConfirmGolfCourse()//골프장 선택 완료 버튼
+    {
+        UM.CancelPopUp();
+        selectedCourse = true;
+    }
+
+
+
+
+    // #Home_vedio_4 and Home_vedio_5
     public void VedioDownload()
     {
-        if(!IsDownloaded)
+        if (!IsDownloaded)
         {
             if (IsPremium)
             {
@@ -60,35 +223,39 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
             PopUp_savedelete();
             //다운로드 삭제
         }
-        
+
 
         //영상에서 다운로드 버튼 눌렀을 때
         //다시 누르면 비디오 삭제
     }
+
     public void DeleteDownloadCancel()
     {
         UM.CancelPopUp();
     }
-    public void DeleteDownloadConfirm()
+
+    public void DeleteDownloadConfirm()//저장한 영상을 삭제
     {
-        //저장한 영상을 삭제하는 내용
+        
         IsDownloaded = false;
         UM.CancelPopUp();
     }
-    public void ConfirmDownload()
+
+    public void ConfirmDownload()//다운로드 확인 버튼 주소는 아무 영상
     {
         //화질 설정++
-        //다운로드 확인 버튼
+        
         PopUp_downprograss();
         StartCoroutine(Downloadmp4("https://serviceapi.nmv.naver.com/flash/convertIframeTag.nhn?vid=4BBE18E8F2D2464955564FF2495E26E95246&outKey=V122d015a484d26399975b6b9314e5c31107b9b0156f3c7464641b6b9314e5c31107b&width=544&height=306"));
         //다운로드 진행하는 함수 실행해야함 -> 다운로드가 끝나면 다운로드 완료 이미지로 교환해야함
         IsDownloaded = true;
         UM.CancelPopUp();
     }
+
     IEnumerator Downloadmp4(string URL)
     {
         WWW www = new WWW(URL);
-        while(!www.isDone)
+        while (!www.isDone)
         {
             DownloadProgress.GetComponent<Image>().fillAmount = www.progress;
             Debug.Log(www.progress);
@@ -99,6 +266,7 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
         Debug.Log(Application.persistentDataPath);
         File.WriteAllBytes(Application.persistentDataPath, www.bytes);
     }
+
     public void CancelDownload()
     {
         PopUp_downcancel();
@@ -106,7 +274,8 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
         IsDownloaded = false;
         UM.CancelPopUp();
     }
-    public void ToggleVedioDownload_normal()
+
+    public void ToggleVedioDownload_normal()//일반 회원일 경우 비디오 다운로드
     {
         GameObject gameObject = UM.CurrentSelectedGameObject();
         if (gameObject.GetComponent<Toggle>().isOn)
@@ -120,11 +289,12 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
             gameObject.transform.GetChild(1).GetComponent<Text>().color = black;
         }
     }
-    public void ToggleVedioDownload()
+
+    public void ToggleVedioDownload()//비디오 다운로드 품질 토글
     {
         GameObject gameObject = UM.CurrentSelectedGameObject();
         if (gameObject.name == "Toggle_720")
-        {            
+        {
             DownloaadToggle[0].GetComponent<Text>().color = red;
             DownloaadToggle[1].GetComponent<Text>().color = red;
             DownloaadToggle[2].GetComponent<Text>().color = black;
@@ -140,18 +310,21 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
             Download720 = false;
         }
     }
-    public void ConfirmOpenVedio()
+
+    public void ConfirmOpenVedio()//동영상 공개 여부
     {
         //동영상 공개 여부를 서버로 전달
         UM.CancelPopUp();
     }
+
     public void CancelOpenVedio()
     {
         UM.CancelPopUp();
     }
+
     public void VedioOpenVedio()//영상 공개 버튼
     {
-        if(IsVedioOpen)
+        if (IsVedioOpen)
         {
             //버튼 이미지 변경
             //영상 공개 해제
@@ -164,17 +337,19 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
         //영상에서 영상 공개 버튼을 눌렀을 때
         //다시 누르면 비디오 공개 취소
     }
-    public void PanoramaStopWatchingPopup()
+
+    public void PanoramaStopWatchingPopup()//파노라마 팝업 그만보기
     {
         PanoramaExplain = false;
         MovePanorama();
     }
-    public void PanoramaConfirm()
+
+    public void PanoramaConfirm()//파노라마로 넘어가기
     {
         MovePanorama();
     }
 
-    public void VedioPanorama()
+    public void VedioPanorama()//파노라마 팝업 띄우기
     {
         if (!HasPanorama)
         {
@@ -182,10 +357,11 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
             else MovePanorama();
         }
         else PopUp_deletePANORAMA();
-        
+
         //영상에서 파노라마 버튼을 눌렀을 때
     }
-    public void SnapShotStopWatchingPopUp()
+
+    public void SnapShotStopWatchingPopUp()//스냅샷으로 넘어가기
     {
         SnapPhotoExplain = false;
         MovePanorama();//나중에 바꿔야함
@@ -198,158 +374,37 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
             else MovePanorama();//스냅포토로 변경해야함
         }
         else PopUP_deleteSNAPSHOT();
-        
+
 
         //영상에서 스냅 포토버튼을 눌렀을 때
     }
-    public void VedioShare()
+
+    public void VedioShare()//영상에서 공유하기 버튼을 눌렀을 때
     {
         PopUp_share();
-        //영상에서 공유하기 버튼을 눌렀을 때
+        
     }
-    public void VedioMore()
+    public void VedioMore()//영상에서 더보기 버튼을 눌렀을 때(동영상 플레이어에 포함)
     {
-        //영상에서 더보기 버튼을 눌렀을 때(동영상 플레이어에 포함)
+        
     }
-    public void DeleteVedio()
+    public void DeleteVedio()//더보기에서 영상 삭제 버튼을 눌렀을 때
     {
-        //더보기에서 영상 삭제 버튼을 눌렀을 때
+        
     }
 
-    /// <summary>
-    /// 영상과 메인 창 메서드 구분 선
-    /// </summary>
-    /// 
-    public void TouchVedio()
-    {
-        //동영상을 터치 했을 때 실행되는 메서드
-        GameObject Vedio = UM.CurrentSelectedGameObject();
-        //나중에 동영상 프리펩에 있는 스크립트로 대체 후 실행하는 방법으로 진행
-        MoveVedio();
-    }
-    public void SortFront()
-    {
-        //정면 tag 영상만 골라서 정렬하는 내용
-    }
-    public void SortSide()
-    {
-        //측면 태그된 영상만 골라서 정렬하는 내용
-    }
-    public void SortNew()
-    {
-        //최근순으로 정렬하는 내용
-    }
-    public void SortPopular()
-    {
-        //인기순으로 정렬하는 내용
-    }
-    public void SortLike()
-    {
-        //좋아요순으로 정려하는 내용
-    }
-    public void ToggleGolfCourse()//골프장 선택 토글
-    {
-        GameObject select = UM.CurrentSelectedGameObject();
-        if(select.GetComponent<Toggle>().isOn)
-        {
-            Text temp = select.transform.GetChild(1).GetComponent<Text>();
-            for (int i = 0; i < 2; i++)
-            {
-                Text view = DirectSearchText[2 * i].GetComponent<Text>();
-                Color color = new Color(view.color.r, view.color.g, view.color.b, 1f);
-                view.text = temp.text;
-                view.color = color;
-            }
-        }    
-    }
-    public void ToggleCheckIsTeaTime()//티타입 토글
-    {
-        GameObject select = TeaAndLockerInput[0].transform.parent.gameObject;
-        if (select.GetComponent<Toggle>().isOn)
-        {
-            select.transform.GetChild(2).gameObject.SetActive(true);
-            TeaAndLockerInput[1].SetActive(false);
-            TeaAndLockerInput[0].SetActive(true);
-        }
-    }
-    public void ToggleCheckIsLocker()//락커 토글
-    {
-        GameObject select = TeaAndLockerInput[1].transform.parent.gameObject;
-        if (select.GetComponent<Toggle>().isOn)
-        {
-            select.transform.GetChild(2).gameObject.SetActive(true);
-            TeaAndLockerInput[1].SetActive(true);
-            TeaAndLockerInput[0].SetActive(false);
-        }
-    }
-    public void ConfirmSearchVedio()//수동검색 영상 검색 확인 버튼
-    {
-        //검색중 애니메이션 재생
-        //content 오브젝트에 조회결과를 추가
-    }
-    public void ConfirmRoundDay()//라운드 일자 선택
-    {
-        Calendar.GetComponent<ScrollingCalendar>().ShowDate();
-        UM.CancelPopUp();
-        selectedDay = true;
-    }
-    public void ConfirmTeaTime()//티타임 선택
-    {
-        Time.GetComponent<ScrollingTime>().ShowTime();
-        UM.CancelPopUp();
-    }
-    public void PopUpConfirmNewVedio()
-    {
-        //새로 찾은 동영상을 추가하는 코드
-    }
-    public void PopUpConfirmGolfCourse()
-    {        
-        UM.CancelPopUp();
-        selectedCourse = true;
-    }
-    public void ClickAutoSearch()
-    {
-        StartCoroutine(CheckNewVedio());
-    }
-    public void ClickPassiveSearch()
-    {
-        MoveDirectSearch();
-    }
-    public void ClickSearchVedio()
-    {
-        UM.ChildActiveOnOff();
-    }
-    public void ClickTopButton()
-    {
-        GameObject Button = EventSystem.current.currentSelectedGameObject.gameObject;      
-        foreach(GameObject _ in TopButtons)
-        {
-            UM.ChangeImage(whiteButton_top, _);
-            _.transform.GetChild(0).GetComponent<Text>().color = red;
-        }
-        UM.ChangeImage(redButton_top, Button);
-        Button.transform.GetChild(0).GetComponent<Text>().color = white;
-        //if(Button.name == ~~)
-    }
-    public void ClickTopButtonMain()
-    {
-        GameObject Button = EventSystem.current.currentSelectedGameObject.gameObject;
-        foreach (GameObject _ in TopButtonsMain)
-        {
-            UM.ChangeImage(whiteButton_top, _);
-            _.transform.GetChild(0).GetComponent<Text>().color = red;
-        }
-        UM.ChangeImage(redButton_top, Button);
-        Button.transform.GetChild(0).GetComponent<Text>().color = white;
-        //if(Button.name == ~~)
-    }
+
+
+
+
+
+    //# 단순 이동 관련
     public void MoveHomeOrMain()
     {
         Debug.Log("HasVedio:" + HasVedio);
         if (HasVedio) MoveMain();
         else MoveHome();
     }
-
     private void MoveBest() => SceneManager.LoadScene("best");
     private void MoveGolfCourse() => SceneManager.LoadScene("golfCourse");
     private void MoveMore() => SceneManager.LoadScene("more");
@@ -385,26 +440,13 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
     public void MoveVedio() => UM.PageMove(4);
     public void MoveVdeioAfter() => UM.PageMove(5);
 
-    private bool CheckInput()
-    {
-        if (selectedCourse && selectedDay) return true;
-        return false;
-    }
-
-    public void Update()
-    {
-        if(CheckInput())
-        {
-            MoveDirectSearchDetail();
-            selectedCourse = false;
-            selectedDay = false;
-        }
-    }
+   
     public IEnumerator Download()
     {
         yield return new WaitForSeconds(1f);
         UM.CancelPopUp(10);
     }
+
     //GlobalCourutine 이 실행하는 코루틴 - 1
     public IEnumerator DirectSearch()
     {
@@ -412,12 +454,14 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
         MoveDirectSearch();
         yield return null;
     }
+
     //GlobalCourutine 이 실행하는 코루틴 - 2
     public IEnumerator BackToVedio()
     {
         //이전에 선택했던 영상을 골라서 다시 들어가는 코루틴
         yield return null;
     }
+
     IEnumerator CheckNewVedio()
     {     
         yield return new WaitForSeconds(1f);
@@ -438,6 +482,23 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
         }
         if(gameObject.transform.Find("GlobalCourutine") != null)GC.CheckCourutine();
     }
+
+    private bool CheckInput()
+    {
+        if (selectedCourse && selectedDay) return true;
+        return false;
+    }
+
+    public void Update()
+    {
+        if (CheckInput())
+        {
+            MoveDirectSearchDetail();
+            selectedCourse = false;
+            selectedDay = false;
+        }
+    }
+
     private void InitValue()
     {
         if (UM == null) UM = UIManager.Instance;

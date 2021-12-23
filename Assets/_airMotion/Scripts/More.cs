@@ -33,20 +33,70 @@ public class More : MonoBehaviour
         Debug.Log("More OnEnable");
         StartCoroutine(LoadMore());
     }
-    void Update()
+
+    IEnumerator LoadMore()//더보기 페이지 로딩 코루틴
     {
-        if(canChangePassword)
+        yield return new WaitForSeconds(1f);
+        MoveMain();
+    }
+   
+
+    //# More 1 and More 0
+    public void ClickNotice() //공지사항
+    {
+        MoveNotice();
+    }
+
+    public void ClickPay() //결제 관리
+    {
+        if (IsPaied) MovePaied();
+        else MoveNotPaied();
+    }
+
+    public void ToggleButton()//알림 토글
+    {
+        foreach (GameObject gameObject in Toggle)
         {
-            PasswordConfirm.GetComponent<Image>().sprite = ConfirmSprite[1];
-            PasswordConfirm.GetComponent<Button>().interactable = true;
-        }
-        else
-        {
-            PasswordConfirm.GetComponent<Button>().interactable = false;
-            PasswordConfirm.GetComponent<Image>().sprite = ConfirmSprite[0];
+            if (gameObject.activeSelf) gameObject.SetActive(false);
+            else gameObject.SetActive(true);
+            PushAlram = !PushAlram;
         }
     }
-    public void OpenGallery()
+
+    public void ClickSearchVedio()//영상매칭 버튼
+    {
+        UM.ChildActiveOnOff();
+    }
+
+    public void ClickDirecctSearch()//수동검색 영상 검색 확인 버튼
+    {
+
+        GC.AddCourutine("home", "DirectSearch");
+        MoveHome();
+    }
+
+    public void AutoSearch()//자동 검색
+    {
+        GC.AddCourutine("home", "CheckNewVedio");
+        MoveHome();
+    }
+
+    public void ClickProfile()//프로필 누르기
+    {
+        //개인 정보 받아와서 넣기
+        MoveProfile();
+    }
+
+    public void ClickNoticeDetail() //공지
+    {
+        //공지의 내용을 받는 내용
+        MoveNoticeDetail();
+    }
+
+
+
+    //# More_profile_2
+    public void OpenGallery()//프로필 사진 불러오기
     {
         Texture2D texture = null;//이미지
         Rect rect;
@@ -79,19 +129,72 @@ public class More : MonoBehaviour
         rect = new Rect(0, 0, texture.width, texture.height);
         profileImage.GetComponent<Image>().sprite = Sprite.Create(texture, rect, new Vector2(0f, 0f));
     }
-    public void CheckIsPhoneNumber(Text text)
+
+    public void Profile_ClickResign() //계정 삭제하기
+    {
+        if (IsPremium) PopUp_NoSubscribe();
+        else PopUp_membership();
+    }
+
+    public void Profile_ChangePassword() //비밀번호 변경
+    {
+        MovePassword();
+    }
+
+    public void Profile_Logout() //로그 아웃
+    {
+        //로그 아웃
+    }
+
+    public void Profile_Phone()//핸드폰 번호 변경 페이지로 이동
+    {
+        MovePhone();
+    }
+
+    public void Profile_back()//메인으로 돌아가기
+    {
+        //저장하기
+        MoveFirstpage();
+    }
+
+    public void Profile_height(InputField text)//프로필 키 토글 버튼
+    {
+        Toggleheight();
+        ChangeHeight(text);
+    }
+
+    public void Toggleheight()//프로필 키 토글 버튼_
+    {
+        foreach (GameObject _ in Toggle_height)
+        {
+            if (_.activeSelf) _.SetActive(false);
+            else _.SetActive(true);
+            Debug.Log(_.name + " :" + _.activeSelf);
+        }
+    }
+
+
+
+
+    //# More_phone_3 and More_phone_4
+    public void CheckIsPhoneNumber(Text text)//버튼 빨간색으로 바꾸기
     {
         if (UM.IsValidPhone(text.text))
         {
             //버튼 빨간색으로 바꾸기
-        }
-        
+        }       
     }
-    public void ClickConfirmPhoneNumber()
+
+    public void ClickConfirmPhoneNumber()//인증 번호 보내는 내용
     {
         //인증 번호 보내는 내용
         MovePhone_2();
     }
+
+
+
+
+    //# More_password_5 
     public void CheckPasswrod()
     {
         foreach (GameObject _ in PasswordChange)
@@ -113,6 +216,12 @@ public class More : MonoBehaviour
         //바뀐 비밀번호를 처리하는 내용
         ClickProfile();
     }
+
+
+
+
+
+    //Not use _ 일단은 사용 안함
     public void ClickFAQButton()
     {
         GameObject Button = UM.CurrentSelectedGameObject().transform.parent.gameObject;
@@ -130,112 +239,24 @@ public class More : MonoBehaviour
             }
         }
     }
-    public void ClickProfile()
-    {
-        //개인 정보 받아와서 넣기
-        MoveProfile();
-    }
-    public void Profile_ClickResign()
-    {
-        if (IsPremium) PopUp_NoSubscribe();
-        else PopUp_membership();
-    }
-    public void Profile_ChangePassword()
-    {
-        MovePassword();
-    }
-    public void Profile_Logout()
-    {
-        //로그 아웃
-    }
-    public void Profile_Phone()
-    {
-        MovePhone();
-    }
-    public void Profile_back()
-    {
-        //저장하기
-        MoveFirstpage();
-    }
-    public void Profile_height(InputField text)
-    {
-        Toggleheight();
-        ChangeHeight(text);
-    }
-    public void Toggleheight()
-    {
-        foreach(GameObject _ in Toggle_height)
-        {
-            if (_.activeSelf) _.SetActive(false);
-            else _.SetActive(true);
-            Debug.Log(_.name + " :" + _.activeSelf);
-        }
-    }
-    public void ClickNoticeDetail()
-    {
-        //공지의 내용을 받는 내용
-        MoveNoticeDetail();
-    }
-    public void MoveFirstpage()
-    {
-        if (IsPremium) MoveMainPremium();
-        else MoveMain();
-    }
-    public void ClickServiceDetail()
-    {
-        MoveTerm();
-        //서비스 이용 약관
-    }
-    public void ClickInformationProcess()
-    {
-        //개인정보 처리 방침
-    }
     public void ClickFAQ()
     {
         MoveFAQ();
-    }
-    public void ClickNotice()
-    {
-        MoveNotice();
-    }
-    public void ClickPay()
-    {
-        if (IsPaied) MovePaied();
-        else MoveNotPaied();
-    }
-    public void ToggleButton()
-    {
-        foreach(GameObject gameObject in Toggle)
-        {
-            if (gameObject.activeSelf) gameObject.SetActive(false);
-            else gameObject.SetActive(true);
-            PushAlram = !PushAlram;
-        }
     }
     public void CheckUpdate()
     {
         //업데이트 버튼
     }
-    public void ClickSearchVedio()//영상매칭 버튼
+
+
+
+
+    //# 단순 이동
+    public void MoveFirstpage()
     {
-        UM.ChildActiveOnOff();
-    }
-    public void ClickDirecctSearch()//수동검색 영상 검색 확인 버튼
-    {
-        
-        GC.AddCourutine("home", "DirectSearch");
-        MoveHome();
-    }
-    public void AutoSearch()
-    {
-        GC.AddCourutine("home", "CheckNewVedio");
-        MoveHome();
-    }
-    IEnumerator LoadMore()
-    {
-        yield return new WaitForSeconds(1f);
-        MoveMain();
-    }
+        if (IsPremium) MoveMainPremium();
+        else MoveMain();
+    }   
     private void MoveMain() => UM.PageMove(0);
     private void MoveMainPremium() => UM.PageMove(1);
     private void MoveProfile() => UM.PageMove(2);
@@ -274,7 +295,6 @@ public class More : MonoBehaviour
         }
         if (!float.TryParse(text.text, out temp))//숫자가 아닌 값을 입력했을 경우
         {
-            Debug.Log(text.text);
             height = null;
             heightFT = null;
             unit = !unit;
@@ -326,6 +346,20 @@ public class More : MonoBehaviour
                 text.text = string.Format("{0:F1}", temp);
             }
             unit = !unit;
+        }
+    }
+
+    void Update()
+    {
+        if (canChangePassword)//페스워드 이미지 색 토글
+        {
+            PasswordConfirm.GetComponent<Image>().sprite = ConfirmSprite[1];
+            PasswordConfirm.GetComponent<Button>().interactable = true;
+        }
+        else
+        {
+            PasswordConfirm.GetComponent<Button>().interactable = false;
+            PasswordConfirm.GetComponent<Image>().sprite = ConfirmSprite[0];
         }
     }
 
