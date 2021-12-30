@@ -34,7 +34,6 @@ public class UIManager : MonoBehaviour
     {
         if (instance == null)
         {
-            Debug.Log("make UIManager");
             instance = this;
         }
         /*
@@ -72,8 +71,7 @@ public class UIManager : MonoBehaviour
         }
     }
     public void PageMove(int PageNumber)//페이지 이동
-    {
-        Debug.Log("PageMove: " + PageNumber);
+    {       
         foreach(KeyValuePair<int, GameObject> Page in LoginWindows)
         {
             Page.Value.SetActive(false);
@@ -138,7 +136,6 @@ public class UIManager : MonoBehaviour
 
     private void Reference()
     {
-        Debug.Log("ref UI");
         black = new Color(0f, 0f, 0f, 0f);
         white = new Color(1f, 1f, 1f, 1f);
         LoginWindows = new Dictionary<int, GameObject>();

@@ -501,6 +501,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdef7fdad4d6e24489d891e22aef45fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  videoPlayer: {fileID: 7456989029218056804}
+  title_t: {fileID: 8595983881080696524}
+  viewCount_t: {fileID: 8210885767841703222}
+  date_t: {fileID: 7271449469805054107}
+  download_t: {fileID: 4580834280152534032}
+  like_t: {fileID: 9007247171109352244}
+  button: {fileID: 5744082398293386764}
+  renderTextures:
+  - {fileID: 8400000, guid: 8c9b2702448e35b49b96ed7d2daf4f1b, type: 2}
+  - {fileID: 8400000, guid: ac703ac1a8490304684f3f9c14216734, type: 2}
+  - {fileID: 8400000, guid: 64c06f9d923921b41a8ff2b2876b3974, type: 2}
+  - {fileID: 8400000, guid: 1195ffc8d9dec584ab75467fee63ba16, type: 2}
 --- !u!1 &7456989028328771030
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,7 +656,7 @@ VideoPlayer:
   m_TargetMaterialProperty: _MainTex
   m_RenderMode: 2
   m_AspectRatio: 1
-  m_DataSource: 0
+  m_DataSource: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:
@@ -653,7 +665,7 @@ VideoPlayer:
   - 1
   m_Url: 
   m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
+  m_DirectAudioMutes: 01
   m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 0
   m_SkipOnDrop: 1

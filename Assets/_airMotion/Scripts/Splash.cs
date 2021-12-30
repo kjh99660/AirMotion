@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
-
+using EasyMobile;
 
 public class Splash : MonoBehaviour  //Splash 관련해서 화면 이동 및 UI를 처리하는 스크립트
 {
@@ -481,7 +481,8 @@ public class Splash : MonoBehaviour  //Splash 관련해서 화면 이동 및 UI를 처리하�
         foreach (GameObject _ in login_3_warn) _.SetActive(false);
         foreach (GameObject _ in register_4_warn) _.SetActive(false);
 
-        
+        //구독 초기화
+        if (!RuntimeManager.IsInitialized()) RuntimeManager.Init();
     }
 
     //??

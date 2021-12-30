@@ -15,6 +15,9 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
     private GlobalCourutine GC;
     public GameObject Calendar; //달력 외부 플러그인
     public GameObject Time; //스크롤링 외부 플러그인
+    [Header("Main Has Video")]
+    public GameObject Content;
+    public GameObject VideoPrefabs;
 
     [Header ("Sort Zero Page")]
     public GameObject[] TopButtons;
@@ -59,13 +62,50 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
 
 
     // #Home_main_0 and #Home_main_3
+    IEnumerator CheckNewVedio()//영상을 검색하는 내용 만약 영상이 이미 있으면 3번 페이지로 이동
+    {
+        NetworkManager.Instance.GetVedioData("20211210", "20211220", "3");
+
+        yield return new WaitUntil(() => NetworkManager.Instance.isLoaded == true);
+        yield return new WaitForSeconds(1f);
+
+
+        if (MakeVideos()) HasVedio = true;
+        else HasVedio = false;
+
+        MoveHomeOrMain();
+
+        if (firstVisit)
+        {
+            //loading animation
+            if (newVedio) PopUp_vediolist();
+            else PopUp_noVedio();
+        }
+        if (gameObject.transform.Find("GlobalCourutine") != null) GC.CheckCourutine();
+    }
+
+    private bool MakeVideos()//비디오를 초기화
+    {
+        var temp = NetworkManager.Instance.Video.data;
+        if (temp.Length == 0) return false;
+
+        for (int i = 0; i < temp.Length; i++)
+        {
+            var inf = temp[i];
+            GameObject Video = Instantiate(VideoPrefabs);
+            Video.GetComponent<VideoSomenail>().Init(inf.VideoOthers, inf.Time, inf.VideoKey, i);
+            Video.transform.parent = Content.transform;
+        }
+        return true;
+    }
+    /*
     public void TouchVedio()//동영상을 터치 했을 때 실행되는 메서드
     {       
         GameObject Vedio = UM.CurrentSelectedGameObject();
         //나중에 동영상 프리펩에 있는 스크립트로 대체 후 실행하는 방법으로 진행
         MoveVedio();
     }
-
+    */
     public void SortFront()
     {
         //정면 tag 영상만 골라서 정렬하는 내용
@@ -474,26 +514,7 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
         yield return null;
     }
 
-    IEnumerator CheckNewVedio()
-    {     
-        yield return new WaitForSeconds(1f);
-        //영상을 검색하는 내용
-        //만약 영상이 이미 있으면 3번 페이지로 이동
-        if (HasVedio) MoveMain();
-        else MoveHome();
-
-        if (firstVisit)
-        {
-            //loading animation
-            if (newVedio)
-            {
-                PopUp_vediolist();
-
-            }
-            else PopUp_noVedio();
-        }
-        if(gameObject.transform.Find("GlobalCourutine") != null)GC.CheckCourutine();
-    }
+    
 
     private bool CheckInput()
     {

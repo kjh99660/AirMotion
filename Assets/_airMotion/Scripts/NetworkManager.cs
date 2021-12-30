@@ -419,6 +419,33 @@ public class PasswordFind //비밀번호 찾기 세부 정보
     public string path;
     public int errorCode;
 }
+[Serializable]
+public class Video //비디오 데이터
+{
+    public int status;
+    public string error;
+    public string message;
+    public string redirect;
+    public VideoData[] data;
+}
+[Serializable]
+public class VideoData //비디오 세부 데이터
+{
+    public string VideoOthers;
+    public string DeviceID;
+    public string Size;
+    public string FPS;
+    public string Local;
+    public string Upload;
+    public string ShotKey;
+    public string Time;
+    public string ClubID;
+    public string Type;
+    public string UserID;
+    public string TriggerTime;
+    public string TotalTime;
+    public string VideoKey;
+}
 
 
 
@@ -438,6 +465,8 @@ public class NetworkManager : MonoBehaviour
     public Login MemberInformaion = new Login();
     public SignIn SignIn = new SignIn();
     public VersionCheck VersionCheck = new VersionCheck();
+    public Notice Notice = new Notice();
+    public Video Video = new Video();
 
     public ArrayList signInAnswer;
     /// <summary>
@@ -504,7 +533,14 @@ public class NetworkManager : MonoBehaviour
                         case 3://Get Member imformation
                             MemberInformaion = JsonUtility.FromJson<Login>(jsonResult);
                             break;
+                        case 4://Get Notice
+                            Notice = JsonUtility.FromJson<Notice>(jsonResult);
+                            break;
+                        case 5://Get Video
+                            Video = JsonUtility.FromJson<Video>(jsonResult);
+                            break;
 
+                            
 
 
                     }
@@ -553,6 +589,16 @@ public class NetworkManager : MonoBehaviour
         string save = JsonUtility.ToJson(Data, prettyPrint: true);
         Debug.Log(save);
         return save;
+    }
+    public void GetVedioData(string start, string end, string ID)//비디오
+    {
+        string path = "/gzfx/service/shotdata/getShotVideoDataList.ajax?endDate=" + end + "&memberId=" + ID + "&startDate=" + start;
+        StartCoroutine(LoadData(path, 5));
+    }
+    public void GetNoticeData(int pageNumber, int pageSize)//공지사항
+    {
+        string path = "/gzfx/service/community/community_tech_list.ajax?pageNo=" + pageNumber + "&pageSize=" + pageSize;
+        StartCoroutine(LoadData(path, 4));
     }
     public void GetUserData(string memberID)//현재 회원가입 시 memberID가 들어가지 않아 조회할 수 없음..
     {

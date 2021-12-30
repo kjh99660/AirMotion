@@ -290,12 +290,26 @@ MonoBehaviour:
   mInAppPurchaseSettings:
     mAutoInit: 1
     mTargetAndroidStore: 0
-    mSimulateAppleAskToBuy: 0
-    mInterceptApplePromotionalPurchases: 0
+    mSimulateAppleAskToBuy: 1
+    mInterceptApplePromotionalPurchases: 1
     mEnableAmazonSandboxTesting: 0
-    mValidateAppleReceipt: 1
-    mValidateGooglePlayReceipt: 1
-    mProducts: []
+    mValidateAppleReceipt: 0
+    mValidateGooglePlayReceipt: 0
+    mProducts:
+    - _name: Premium12
+      _type: 2
+      _id: 12
+      _price: 36000
+      _description: test_price
+      _storeSpecificIds: []
+      _isEditingAdvanced: 1
+    - _name: Premium1
+      _type: 2
+      _id: 1
+      _price: 3000
+      _description: test_price
+      _storeSpecificIds: []
+      _isEditingAdvanced: 1
   mNotificationSettings:
     mAutoInit: 1
     mAutoInitDelay: 0
@@ -399,4 +413,4 @@ MonoBehaviour:
   mIsNotificationModuleEnable: 0
   mIsSharingModuleEnable: 1
   mActiveModuleIndex: 3
-  mIsSelectingModule: 0
+  mIsSelectingModule: 1

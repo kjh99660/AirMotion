@@ -139,7 +139,7 @@ namespace EasyMobile.Demo
             }
         }
 
-        public void SelectProduct()
+        public void SelectProduct()//@
         {
             var products = EM_Settings.InAppPurchasing.Products;
 
@@ -161,7 +161,7 @@ namespace EasyMobile.Demo
             scrollableList.ItemSelected += OnItemSelected;
         }
 
-        public void Purchase()
+        public void Purchase()//@
         {
             if (selectedProduct != null)
             {

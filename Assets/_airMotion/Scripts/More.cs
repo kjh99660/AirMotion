@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using EasyMobile;
 
 public class More : MonoBehaviour
 {
@@ -42,9 +43,48 @@ public class More : MonoBehaviour
    
 
     //# More 1 and More 0
+    public void PurChaseYear()
+    {
+        if(!InAppPurchasing.IsInitialized())
+        {
+            Debug.Log("구독 초기화 안됨");
+            RuntimeManager.Init();
+        }
+        InAppPurchasing.PurchaseWithId("12");
+    }
+    public void PurChaseMonth()
+    {
+        if (!InAppPurchasing.IsInitialized())
+        {
+            Debug.Log("구독 초기화 안됨");
+            RuntimeManager.Init();
+        }
+        InAppPurchasing.PurchaseWithId("1");
+    }
     public void ClickNotice() //공지사항
     {
+        StartCoroutine(ClickNotice_());       
         MoveNotice();
+    }
+    private IEnumerator ClickNotice_()//공지사항
+    {
+        NetworkManager.Instance.GetNoticeData(1, 100);
+        while(NetworkManager.Instance.Notice == null)
+        {
+            Debug.Log("Downloading...");
+            yield return null;
+        }
+        NoticeSomenail();
+    }
+    public void NoticeSomenail() //공지사항 썸네일 만들기
+    {
+
+    }
+
+    public void ClickNoticeDetail() //공지세부 내용 클릭
+    {
+        //공지의 내용을 받는 내용
+        MoveNoticeDetail();
     }
 
     public void ClickPay() //결제 관리
@@ -87,11 +127,6 @@ public class More : MonoBehaviour
         MoveProfile();
     }
 
-    public void ClickNoticeDetail() //공지
-    {
-        //공지의 내용을 받는 내용
-        MoveNoticeDetail();
-    }
 
 
 
