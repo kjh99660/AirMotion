@@ -86,7 +86,6 @@ public class UIManager : MonoBehaviour
     }
     public void PopUp(int PopUpNumber)//ÆË¾÷
     {
-        Debug.Log(LoginPopUps[PopUpNumber]);
         LoginPopUps[PopUpNumber].SetActive(true);
     }
     public void CancelPopUp(int PopUpNumber)//ÆË¾÷À» ²ö´Ù

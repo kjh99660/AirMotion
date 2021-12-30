@@ -127,6 +127,7 @@ public class Splash : MonoBehaviour  //Splash 관련해서 화면 이동 및 UI를 처리하�
             }
             if (NM.Login.message.Equals("SUCCESS"))
             {
+               
                 MoveHome();
             }
             else
@@ -440,8 +441,8 @@ public class Splash : MonoBehaviour  //Splash 관련해서 화면 이동 및 UI를 처리하�
         NM.SignIn.memberLastName = userName;
         NM.SignIn.memberBirth = "20211216";
         NM.SignIn.memberEmailAddr = registerID;
-        NM.SignIn.memberName = userName;
-        NM.SignIn.memberHpNo = phoneNumber;
+        //NM.SignIn.memberName = userName;
+        //NM.SignIn.memberHpNo = phoneNumber;
         NM.SignIn.memberHandDrctCd = "RIGHT";
         NM.SignIn.memberHandicapCd = handycap.ToString();
         NM.SignIn.memberPs = registePassword;

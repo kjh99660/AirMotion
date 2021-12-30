@@ -2389,49 +2389,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 252328997}
   m_CullTransparentMesh: 1
---- !u!1 &262752530
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 262752532}
-  - component: {fileID: 262752531}
-  m_Layer: 0
-  m_Name: DataManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &262752531
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 262752530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 339b71db44aa23348873af532eacc4ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &262752532
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 262752530}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &264683460
 GameObject:
   m_ObjectHideFlags: 0
@@ -2460,7 +2417,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &274633124
 GameObject:
@@ -19506,67 +19463,31 @@ MonoBehaviour:
     message: 
     redirect: 
     data: []
+  MemberInformaion:
+    status: 0
+    error: 
+    message: 
+    redirect: 
+    data: []
   SignIn:
-    __created__: 0
-    __deleted__: 0
-    __modified__: 0
-    createdAt: 
-    createdBy: 
-    dataStatus: 
-    memberAdd1SerialNo: 
-    memberAgeeCd: 
-    memberAutoLoginYn: 
-    memberBirth: 
-    memberChangePolicyYn: 
-    memberDevicePutterConntYn: 
-    memberDeviceRadarConntYn: 
-    memberDeviceWatchConntYn: 
-    memberEmailAddr: 
-    memberEmailCertNo: 
-    memberEmailCertValidDate: 
     memberFirstName: 
-    memberGenderCd: 
-    memberGpSerialNo: 
-    memberGrSerialNo: 
-    memberHandDrctCd: 
-    memberHandiCd: 
-    memberHandicapCd: 
-    memberHpNo: 
-    memberHumanDate: 
-    memberId: 
-    memberIp: 
-    memberJoinDate: 
-    memberJoinPathNm: 
-    memberLastConnectDate: 
     memberLastName: 
-    memberLocationUsePolicyYn: 
-    memberLoginTokenNo: 
-    memberLoginTokenValidDate: 
-    memberMarketingReceptYn: 
-    memberMenuGrpCd: 
-    memberName: 
-    memberOutDate: 
+    memberBirth: 
+    memberEmailAddr: 
+    memberHandDrctCd: 
+    memberHandicapCd: 
     memberPs: 
-    memberPsUpdateDate: 
-    memberPsnInfoClctUseYn: 
-    memberPuchYnCd: 
-    memberPushMarketingYn: 
-    memberPushReceptYn: 
-    memberRegDeviceCd: 
-    memberRegOsCd: 
-    memberRegionCd: 
-    memberRemark: 
-    memberShotDataMemo: 
-    memberSocialLoginCertDate: 
-    memberSocialLoginCertNo: 
-    memberSocialLoginDivCd: 
-    memberStateCd: 
     memberUsePolicyYn: 
-    mgmtMemberId: 
-    mgmtMemberRegDate: 
-    updatedAt: 
-    updatedBy: 
-    useYn: 
+    memberPsnInfoClctUseYn: 
+    memberLocationUsePolicyYn: 
+    memberMarketingReceptYn: 
+    memberGenderCd: 
+  VersionCheck:
+    status: 0
+    error: 
+    message: 
+    redirect: 
+    data: []
 --- !u!4 &1692228107
 Transform:
   m_ObjectHideFlags: 0

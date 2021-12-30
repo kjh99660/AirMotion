@@ -99,7 +99,8 @@ public class LoginDetail //로그인 관련 세부 정보
 //회원 가입 관련 API
 [Serializable]
 public class SignIn //회원가입 관련 정보 + 자동 로그인 설정 + 이용약관 변경 동의 + 푸쉬 수신 동의
-{    
+{
+    /*
     public bool __created__;
     public bool __deleted__;
     public bool __modified__;
@@ -167,7 +168,26 @@ public class SignIn //회원가입 관련 정보 + 자동 로그인 설정 + 이용약관 변경 동의
     public string updatedAt;                //2021-12-13T10:56:03.707Z
     public string updatedBy;                //string
     public string useYn;                    //사용_여부
-    
+    */
+    public string memberFirstName;
+    public string memberLastName;
+    public string memberBirth;//": "20211231",
+    public string memberEmailAddr;//": "aaa1 @naver.com",
+    public string memberHandDrctCd;//": "RIGHT","LEFT"
+    public string memberHandicapCd;//"://HANDICAP1
+                                   //HANDICAP5
+                                   //HANDICAP10
+                                   //HANDICAP15
+                                   //HANDICAP20
+                                   //HANDICAP21
+
+    public string memberPs;//": "12345678",
+    public string memberUsePolicyYn;//": "",
+    public string memberPsnInfoClctUseYn;//": "Y",
+    public string memberLocationUsePolicyYn;//": "Y",
+    public string memberMarketingReceptYn;//": “Y”
+    public string memberGenderCd;// //MALE
+                                 //FEMALE
 }
 
 
@@ -415,6 +435,7 @@ public class NetworkManager : MonoBehaviour
 
     public Policy Policy = new Policy();
     public Login Login = new Login();
+    public Login MemberInformaion = new Login();
     public SignIn SignIn = new SignIn();
     public VersionCheck VersionCheck = new VersionCheck();
 
@@ -480,6 +501,10 @@ public class NetworkManager : MonoBehaviour
                         case 2://OS version
                             VersionCheck = JsonUtility.FromJson<VersionCheck>(jsonResult);
                             break;
+                        case 3://Get Member imformation
+                            MemberInformaion = JsonUtility.FromJson<Login>(jsonResult);
+                            break;
+
 
 
                     }
@@ -529,6 +554,11 @@ public class NetworkManager : MonoBehaviour
         Debug.Log(save);
         return save;
     }
+    public void GetUserData(string memberID)//현재 회원가입 시 memberID가 들어가지 않아 조회할 수 없음..
+    {
+        string path = "/gzfx/member/member/memberInfo.ajax?memberId=" + memberID;
+        StartCoroutine(LoadData(path, 3));
+    }
 
     public void GetLoginData(string ID, string password)//로그인 데이터를 가져오는 메서드
     {
@@ -536,12 +566,10 @@ public class NetworkManager : MonoBehaviour
         StartCoroutine(LoadData(path, 0));
     }
 
-    public void SignInSend()
+    public void SignInSend()//회원가입
     {
         string path = "/gzfx/member/member/join.ajax";
-        //로그인 대이터를 넣는 내용 >> 로그인 대이터가 있는 곳으로 메서드를 옮겨야 한다
         StartCoroutine(SendData(path, MakeJson(SignIn), 0));
-        
     }
 
     public void GetPolicyData(string kind)//이용약관을 가져오는 메서드 약관유형코드(A:이용약관 B:개인정보보호 C:위치정보약관 D:마케팅수신동의)

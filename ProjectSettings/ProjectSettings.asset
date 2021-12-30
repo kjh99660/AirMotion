@@ -235,7 +235,7 @@ PlayerSettings:
   clonedFromGUID: c0afd0d1d80e3634a9dac47e8a0426ea
   templatePackageId: com.unity.template.3d@5.0.4
   templateDefaultScene: Assets/Scenes/SampleScene.unity
-  useCustomMainManifest: 0
+  useCustomMainManifest: 1
   useCustomLauncherManifest: 0
   useCustomMainGradleTemplate: 0
   useCustomLauncherGradleManifest: 0
@@ -689,7 +689,22 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    1: EASY_MOBILE;EASY_MOBILE_PRO
+    4: EASY_MOBILE;EASY_MOBILE_PRO
+    7: EASY_MOBILE;EASY_MOBILE_PRO
+    13: EASY_MOBILE;EASY_MOBILE_PRO
+    14: EASY_MOBILE;EASY_MOBILE_PRO
+    19: EASY_MOBILE;EASY_MOBILE_PRO
+    21: EASY_MOBILE;EASY_MOBILE_PRO
+    25: EASY_MOBILE;EASY_MOBILE_PRO
+    27: EASY_MOBILE;EASY_MOBILE_PRO
+    28: EASY_MOBILE;EASY_MOBILE_PRO
+    29: EASY_MOBILE;EASY_MOBILE_PRO
+    30: EASY_MOBILE;EASY_MOBILE_PRO
+    31: EASY_MOBILE;EASY_MOBILE_PRO
+    32: EASY_MOBILE;EASY_MOBILE_PRO
+    33: EASY_MOBILE;EASY_MOBILE_PRO
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
@@ -764,7 +779,14 @@ PlayerSettings:
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
   cloudServicesEnabled:
+    Analytics: 0
+    Build: 0
+    Collab: 0
+    Game Performance: 0
+    Purchasing: 0
+    UDP: 0
     UNet: 1
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -778,11 +800,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 
+  cloudProjectId: 32d3ba3b-51ca-4fe7-bb57-f1d7cd6c85cd
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: airMotion_u
+  organizationId: cow-dragon
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   virtualTexturingSupportEnabled: 0

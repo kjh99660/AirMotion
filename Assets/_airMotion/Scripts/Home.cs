@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI.Extensions;
 using UnityEngine.UI.Extensions.Examples;
 using System.IO;
+using EasyMobile;
 
 public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
 {
@@ -46,6 +47,8 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
     private Color red;
     private Color white;
     private Color black;
+    private int downloadNumber;
+    private string urlNowUse;
 
     private void OnEnable()
     {
@@ -246,7 +249,7 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
         //화질 설정++
         
         PopUp_downprograss();
-        StartCoroutine(Downloadmp4("https://serviceapi.nmv.naver.com/flash/convertIframeTag.nhn?vid=4BBE18E8F2D2464955564FF2495E26E95246&outKey=V122d015a484d26399975b6b9314e5c31107b9b0156f3c7464641b6b9314e5c31107b&width=544&height=306"));
+        StartCoroutine(Downloadmp4("https://s3.ap-northeast-2.amazonaws.com/metaverse.file/meta/no1.mp4"));
         //다운로드 진행하는 함수 실행해야함 -> 다운로드가 끝나면 다운로드 완료 이미지로 교환해야함
         IsDownloaded = true;
         UM.CancelPopUp();
@@ -262,9 +265,10 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
             yield return null;
         }
         UM.CancelPopUp(9);
-        //string savePath = Application.persistentDataPath + "/" +URL + ".mp4";
-        Debug.Log(Application.persistentDataPath);
-        File.WriteAllBytes(Application.persistentDataPath, www.bytes);
+        string savePath = Application.persistentDataPath + "/" + downloadNumber + ".mp4";
+        downloadNumber++;
+        Debug.Log(savePath);
+        File.WriteAllBytes(savePath, www.bytes);
     }
 
     public void CancelDownload()
@@ -313,6 +317,7 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
 
     public void ConfirmOpenVedio()//동영상 공개 여부
     {
+
         //동영상 공개 여부를 서버로 전달
         UM.CancelPopUp();
     }
@@ -381,9 +386,16 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
 
     public void VedioShare()//영상에서 공유하기 버튼을 눌렀을 때
     {
-        PopUp_share();
-        
+        //PopUp_share();
+        ShareToSNS("https://s3.ap-northeast-2.amazonaws.com/metaverse.file/meta/no1.mp4");
     }
+    public void ShareToSNS(string text)
+    {
+        string Url = text;
+        Sharing.ShareURL(Url, "AirMotion Vedio");
+        //new NativeShare().SetText(Url).Share();     
+    }
+
     public void VedioMore()//영상에서 더보기 버튼을 눌렀을 때(동영상 플레이어에 포함)
     {
         
@@ -516,6 +528,7 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
 
         StartCoroutine(CheckNewVedio());
         white = new Color(1f, 1f, 1f, 1f); red = new Color(1f, 0.1921569f, 0.2941177f, 1f); ColorUtility.TryParseHtmlString("#1B1B1B", out black);
+        downloadNumber = 0;
         //그 날 첫번째 방문이면 -> 영상 검색 -> 0/x
 
     }
