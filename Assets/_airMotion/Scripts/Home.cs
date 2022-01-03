@@ -74,13 +74,9 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
         else HasVedio = false;
 
         MoveHomeOrMain();
-
-        if (firstVisit)
-        {
-            //loading animation
-            if (newVedio) PopUp_vediolist();
-            else PopUp_noVedio();
-        }
+        //loading animation
+        if (!HasVedio) PopUp_noVedio();
+        if (newVedio) PopUp_vediolist();
         if (gameObject.transform.Find("GlobalCourutine") != null) GC.CheckCourutine();
     }
 
@@ -98,14 +94,7 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
         }
         return true;
     }
-    /*
-    public void TouchVedio()//동영상을 터치 했을 때 실행되는 메서드
-    {       
-        GameObject Vedio = UM.CurrentSelectedGameObject();
-        //나중에 동영상 프리펩에 있는 스크립트로 대체 후 실행하는 방법으로 진행
-        MoveVedio();
-    }
-    */
+
     public void SortFront()
     {
         //정면 tag 영상만 골라서 정렬하는 내용

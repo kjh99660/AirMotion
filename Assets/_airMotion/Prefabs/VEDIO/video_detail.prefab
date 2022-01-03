@@ -55,6 +55,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eee9f44a51f159d41a44beacdac1ddc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VideoPrefabs: {fileID: 7456989028172714860, guid: 6082969a30344d0448e0bf10168db236, type: 3}
+  Content: {fileID: 0}
   video: {fileID: 3496683447496499282}
   button: {fileID: 4824613839108974840}
   t_tag: {fileID: 7388746052840691767}

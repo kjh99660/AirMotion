@@ -1,19 +1,31 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
+using OpenCvSharp;
+using System.IO;
 
 public class Panorama : MonoBehaviour
 {
     private UIManager UM;
     private GlobalCourutine GC;
+
+    [Header ("Convert Values")]
+    public VideoPlayer PanoramaVideo;
+    public RawImage Image;
+
+    [Header("Player Slider")]
+    public Slider slider;
+    private bool ImageLoaded;
     private bool ConvertOptionTeaTime;
-    private int FrameSpeed;
+    private float FrameSpeed;
     private Color red;
     private Color white;
-    
+
     private void OnEnable()
     {
         InitValue();
@@ -27,16 +39,19 @@ public class Panorama : MonoBehaviour
     //# PANORAMA_0 첫번째 화면
     public void ToggleFrameSlow()// 토글 느리게
     {
-        if (UM.CurrentSelectedGameObject().GetComponent<Toggle>().isOn) FrameSpeed = 1;
+        FrameSpeed = 1.0f;
     }
+
     public void ToggleFrameMiddle()// 토글 보통
     {
-        if (UM.CurrentSelectedGameObject().GetComponent<Toggle>().isOn) FrameSpeed = 2;
+        FrameSpeed = 0.6f;
     }
+
     public void ToggleFrameFast()// 토글 빠르게
     {
-        if (UM.CurrentSelectedGameObject().GetComponent<Toggle>().isOn) FrameSpeed = 3;
+        FrameSpeed = 0.3f;
     }
+
     public void BackToMainHorizon()//가로 모드에서 메인으로 나가는 버튼
     {
         MovePanorama();
@@ -46,19 +61,27 @@ public class Panorama : MonoBehaviour
         Screen.autorotateToLandscapeRight = false;
         
     }
+
     public void CreatePanorama()//동영상을 이미지로 만들기
-    {
-        PickImage(1920);
-        //파노라마 조건을 세팅하고 파노라마로 넘어가는 내용
-        StartCoroutine(LoadPanorama());
+    {                
+        StartCoroutine(LoadPanorama(ConvertOptionTeaTime, FrameSpeed));
     }
-    IEnumerator LoadPanorama()
+
+    IEnumerator LoadPanorama(bool option, float frame)
     {
-
+        PickVideo(1920);
+        PanoramaVideo.Prepare();
+        while (!PanoramaVideo.isPrepared) yield return null;
+        PanoramaVideo.time = 0;
+        slider.maxValue = (float)PanoramaVideo.length;
+        
         yield return new WaitForSeconds(1f);
-        MovePanoramaVertical();
-        PopUp_vertical();
 
+        if(ImageLoaded)
+        {
+            MovePanoramaVertical();
+            PopUp_vertical();
+        }
     }
 
 
@@ -76,10 +99,56 @@ public class Panorama : MonoBehaviour
 
     public void ConvertPanorama() //파노라마를 만드는 내용 - 변환하기
     {
+        StartCoroutine(MakePanorama(slider.value));
         MovePanoramaVerticalDown();
     }
 
+    public void SetVideoPos() //영상 시간을 조절하는 UI
+    {
+        PanoramaVideo.time = slider.value;
+        PanoramaVideo.Play();
+        PanoramaVideo.Pause();
+    }
+
+    public IEnumerator MakePanorama(float startTime)
+    {
+        double time = startTime;
+        PanoramaVideo.Prepare();
+        while (!PanoramaVideo.isPrepared)
+        {
+            yield return null;
+        }
+        for (int i = 0; i < 6; i++)//이미지 캡쳐
+        {
+            if (i != 0) time += FrameSpeed;
+            PanoramaVideo.time = time;
+            PanoramaVideo.Play();
+            yield return new WaitUntil(() => Math.Abs(PanoramaVideo.time - time) < (FrameSpeed / 2));
+            PanoramaVideo.Pause();
+
+            RenderTexture newRenderTexure = new RenderTexture(Image.texture.width, Image.texture.height, 0);
+            Graphics.Blit(Image.texture, newRenderTexure);
+
+            Texture2D texture2D = new Texture2D(Image.texture.width, Image.texture.height, TextureFormat.RGB24, false);
+            texture2D.ReadPixels(new UnityEngine.Rect(0, 0, Image.texture.width, Image.texture.height), 0, 0);
+            texture2D.Apply();
+            byte[] texurePNG = texture2D.EncodeToPNG();
+            string path = Application.persistentDataPath + "/" + i + "Panorama.png";
+            File.WriteAllBytes(path, texurePNG);
+
+            Debug.Log("time: " + time + " FrameSpeed: " + FrameSpeed);
+        }
+
+        Mat[] mat = new Mat[6];
+        for (int i = 0; i < 6; i++)
+        {
+            Cv2.ImRead(Application.persistentDataPath + "/" + i + "Panorama.png", ImreadModes.Unchanged);
+        }
+        //Cv2.HConcat(mat, dst);
+    }
+
     public void MovePanorama() => UM.PageMove(0);//원래 페이지로 돌아가기
+
 
 
 
@@ -93,6 +162,7 @@ public class Panorama : MonoBehaviour
         Screen.autorotateToLandscapeLeft = false;
         Screen.autorotateToLandscapeRight = false;
     }
+
     public void ChangeModeToHorizonDownload()
     {
         MovePanoramaHorizonDown();
@@ -110,6 +180,7 @@ public class Panorama : MonoBehaviour
         Screen.autorotateToLandscapeLeft = false;
         Screen.autorotateToLandscapeRight = false;
     }
+
     public void ToggleConvertOptions()
     {
         GameObject Button = UM.CurrentSelectedGameObject();
@@ -120,7 +191,6 @@ public class Panorama : MonoBehaviour
         else ConvertOptionTeaTime = false;      
     }
     
-   
     public void MovePanoramaVerticalDown() => UM.PageMove(3);
     public void ConvertPanoramaHorizon()
     {
@@ -141,42 +211,26 @@ public class Panorama : MonoBehaviour
         MoveHome();
     }
     
-    private void PickImage(int maxSize) //갤러리에서 이미지를 가저오기
+    private void PickVideo(int maxSize) //갤러리에서 영상을 가저오기
     {
-        NativeGallery.Permission permission = NativeGallery.GetImageFromGallery((path) =>
+        NativeGallery.Permission permission = NativeGallery.GetVideoFromGallery((path) =>
         {
-            Debug.Log("Image path: " + path);
+            Debug.Log("Video path: " + path);
             if (path != null)
             {
-                // Create Texture from selected image
-                Texture2D texture = NativeGallery.LoadImageAtPath(path, maxSize);
-                if (texture == null)
-                {
-                    Debug.Log("Couldn't load texture from " + path);
-                    return;
-                }
-
-                // Assign texture to a temporary quad and destroy it after 5 seconds
-                GameObject quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
-                quad.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 2.5f;
-                quad.transform.forward = Camera.main.transform.forward;
-                quad.transform.localScale = new Vector3(1f, texture.height / (float)texture.width, 1f);
-
-                Material material = quad.GetComponent<Renderer>().material;
-                if (!material.shader.isSupported) // happens when Standard shader is not included in the build
-                    material.shader = Shader.Find("Legacy Shaders/Diffuse");
-
-                material.mainTexture = texture;
-
-                //Destroy(quad, 5f);
-
-                // If a procedural texture is not destroyed manually, 
-                // it will only be freed after a scene change
-                //Destroy(texture, 5f);
+                // Play the selected video
+                PanoramaVideo.url = "file://" + path;
+                ImageLoaded = true;
             }
-        });
+            else
+            {
+                ImageLoaded = false;
+                return;
+            }
+        }, "Select a video");
 
         Debug.Log("Permission result: " + permission);
+        
     }
     
     public void MovePanoramaVertical() => UM.PageMove(1);
@@ -202,7 +256,8 @@ public class Panorama : MonoBehaviour
         if (GC == null) GC = GlobalCourutine.Instance;
         if (UM == null) UM = UIManager.Instance;
         UM.ResetUIManager();
-        ConvertOptionTeaTime = true;
+        ConvertOptionTeaTime = true;       
+        FrameSpeed = 1.0f;
         white = new Color(1f, 1f, 1f, 1f);
         red = new Color(1f, 0.1921569f, 0.2941177f, 1f);
     }

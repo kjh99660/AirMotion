@@ -100,7 +100,6 @@ public class LoginDetail //로그인 관련 세부 정보
 [Serializable]
 public class SignIn //회원가입 관련 정보 + 자동 로그인 설정 + 이용약관 변경 동의 + 푸쉬 수신 동의
 {
-    /*
     public bool __created__;
     public bool __deleted__;
     public bool __modified__;
@@ -168,26 +167,7 @@ public class SignIn //회원가입 관련 정보 + 자동 로그인 설정 + 이용약관 변경 동의
     public string updatedAt;                //2021-12-13T10:56:03.707Z
     public string updatedBy;                //string
     public string useYn;                    //사용_여부
-    */
-    public string memberFirstName;
-    public string memberLastName;
-    public string memberBirth;//": "20211231",
-    public string memberEmailAddr;//": "aaa1 @naver.com",
-    public string memberHandDrctCd;//": "RIGHT","LEFT"
-    public string memberHandicapCd;//"://HANDICAP1
-                                   //HANDICAP5
-                                   //HANDICAP10
-                                   //HANDICAP15
-                                   //HANDICAP20
-                                   //HANDICAP21
 
-    public string memberPs;//": "12345678",
-    public string memberUsePolicyYn;//": "",
-    public string memberPsnInfoClctUseYn;//": "Y",
-    public string memberLocationUsePolicyYn;//": "Y",
-    public string memberMarketingReceptYn;//": “Y”
-    public string memberGenderCd;// //MALE
-                                 //FEMALE
 }
 
 
@@ -467,6 +447,7 @@ public class NetworkManager : MonoBehaviour
     public VersionCheck VersionCheck = new VersionCheck();
     public Notice Notice = new Notice();
     public Video Video = new Video();
+    public Banner Banner = new Banner();
 
     public ArrayList signInAnswer;
     /// <summary>
@@ -539,6 +520,9 @@ public class NetworkManager : MonoBehaviour
                         case 5://Get Video
                             Video = JsonUtility.FromJson<Video>(jsonResult);
                             break;
+                        case 6://Get PopUp List
+                            Banner = JsonUtility.FromJson<Banner>(jsonResult);
+                            break;
 
                             
 
@@ -589,6 +573,11 @@ public class NetworkManager : MonoBehaviour
         string save = JsonUtility.ToJson(Data, prettyPrint: true);
         Debug.Log(save);
         return save;
+    }
+    public void GetPopUpList(string mainParams, int pageNo, int pageSize)//팝업 목록 조회
+    {
+        string path = "/gzfx/operation/popup/list.ajax?mainParams=" + mainParams + "&pageNo=" + pageNo + "&pageSize=" + pageSize;
+        StartCoroutine(LoadData(path, 6));
     }
     public void GetVedioData(string start, string end, string ID)//비디오
     {
