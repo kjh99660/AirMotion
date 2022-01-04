@@ -25,6 +25,7 @@ public class Panorama : MonoBehaviour
     private float FrameSpeed;
     private Color red;
     private Color white;
+    private OutputArray dst;
 
     private void OnEnable()
     {
@@ -129,22 +130,18 @@ public class Panorama : MonoBehaviour
             RenderTexture newRenderTexure = new RenderTexture(Image.texture.width, Image.texture.height, 0);
             Graphics.Blit(Image.texture, newRenderTexure);
 
-            Texture2D texture2D = new Texture2D(Image.texture.width, Image.texture.height, TextureFormat.RGB24, false);
-            texture2D.ReadPixels(new UnityEngine.Rect(0, 0, Image.texture.width, Image.texture.height), 0, 0);
+            Texture2D texture2D = new Texture2D(1073, 1812, TextureFormat.RGB24, false);
+
+            texture2D.ReadPixels(new UnityEngine.Rect(Image.uvRect.x, Image.uvRect.y, 1073, 1812), 0, 0);//여기를 수정하면 이미지가 찍히는 사이즈를 바꿀 수 있음
+            Debug.Log(Image.uvRect.x);
+            Debug.Log(Image.uvRect.y);
             texture2D.Apply();
             byte[] texurePNG = texture2D.EncodeToPNG();
             string path = Application.persistentDataPath + "/" + i + "Panorama.png";
+            path = path.Replace("/", "\\\\");
             File.WriteAllBytes(path, texurePNG);
-
-            Debug.Log("time: " + time + " FrameSpeed: " + FrameSpeed);
         }
 
-        Mat[] mat = new Mat[6];
-        for (int i = 0; i < 6; i++)
-        {
-            Cv2.ImRead(Application.persistentDataPath + "/" + i + "Panorama.png", ImreadModes.Unchanged);
-        }
-        //Cv2.HConcat(mat, dst);
     }
 
     public void MovePanorama() => UM.PageMove(0);//원래 페이지로 돌아가기
