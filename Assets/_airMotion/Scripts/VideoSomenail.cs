@@ -18,11 +18,6 @@ public class VideoSomenail : MonoBehaviour
     public RenderTexture[] renderTextures;
     private string url;
 
-    private void Start()
-    {
-        StartCoroutine(MakeVideoSomenail());
-    }
-
     public void Init(string url, string date, string title, int number)
     {       
         DateTime temp = StrToDate(date);
@@ -35,8 +30,7 @@ public class VideoSomenail : MonoBehaviour
         videoPlayer.targetTexture = renderTextures[number];
         videoPlayer.GetComponent<RawImage>().texture = renderTextures[number];
 
-        //버튼 초기화       
-        button.onClick.AddListener(() => TouchVedio());        
+        StartCoroutine(MakeVideoSomenail());
     }
 
     public DateTime StrToDate(string input)//날짜 포맷 추출
@@ -46,7 +40,7 @@ public class VideoSomenail : MonoBehaviour
         return dateTime;
     }
 
-    private void TouchVedio()//비디오를 터치 시 실행되는 함수
+    public void TouchVedio()//비디오를 터치 시 실행되는 함수
     {
         VideoDetail VideoDetail = GameObject.Find("Canvas").transform.GetChild(4).GetChild(3).GetComponent<VideoDetail>();
         VideoDetail.Init(url);
@@ -58,13 +52,14 @@ public class VideoSomenail : MonoBehaviour
 
     IEnumerator MakeVideoSomenail()//비디오 플레이어 썸네일 생성
     {
+        videoPlayer.Prepare();
         while (!videoPlayer.isPrepared)
         {
-            yield return null;
+            yield return null;            
         }
-        videoPlayer.time = 3;
+        videoPlayer.time = videoPlayer.length / 2;
         videoPlayer.Play();
-        yield return new WaitForEndOfFrame();
+        yield return new WaitUntil(() => videoPlayer.isPlaying);
         videoPlayer.Pause();
     }
 }

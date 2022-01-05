@@ -41,6 +41,14 @@ public class VideoDetail : MonoBehaviour
     public bool MakeVideos()//목록 비디오를 초기화
     {
         Content = GameObject.Find("Canvas").transform.GetChild(4).GetChild(4).GetChild(1).GetChild(0).gameObject;
+        if (Content.transform.childCount != 0)
+        {
+            for(int i = 0; i< Content.transform.childCount; i++)
+            {
+                Destroy(Content.transform.GetChild(i).gameObject);
+            }
+        }
+        
         var temp = NetworkManager.Instance.Video.data;
         if (temp.Length == 0) return false;
 

@@ -7,13 +7,7 @@ using UnityEngine.UI;
 public class SelectImage : MonoBehaviour
 {
     private Vector2 startPos;
-    public RawImage rawImage;
-    //1130 - 800 = 330
-    //365 365 = 730
-    //906 max
-    //127 min
-    //906 - 127 = 780/2
-    //360
+    public GameObject left;
 
     private void Start()
     {
@@ -26,20 +20,29 @@ public class SelectImage : MonoBehaviour
         PointerEventData pointer_data = (PointerEventData)data;
         Vector2 temp = pointer_data.position - startPos;
 
-        Debug.Log(gameObject.transform.position.x);
-
-        if (gameObject.transform.position.x > 900f && temp.x > 0) temp.x = 0;
-        if (gameObject.transform.position.x < 180f && temp.x < 0) temp.x = 0;
-
-        gameObject.transform.position += new Vector3(temp.x/10f, 0, 0);
-        startPos = transform.position;
+        if (Input.mousePosition.x > 900f && temp.x > 0)
+        {
+            gameObject.transform.position = new Vector2(900f, startPos.y);
+            startPos = transform.position;
+            return;
+        }
+        else if (Input.mousePosition.x < 180f && temp.x < 0)
+        {
+            gameObject.transform.position = new Vector2(180f, startPos.y);
+            startPos = transform.position;
+            return;
+        }
+        gameObject.transform.position = new Vector2(Input.mousePosition.x, gameObject.transform.position.y);
+        
     }
 
     public void EndDrag(BaseEventData data)
     {
-        rawImage.uvRect = new Rect(0.33f + ((gameObject.transform.position.x - 540f) / 360f * 0.33f), 0, 0.33f, 1);
+        //360 >> 2160~3240
+        //-360 >> 0~1080
+        GameObject.Find("PanoramaManager").GetComponent<Panorama>().pos = (int)left.transform.position.x * 3;
     }
 
-    
+
 
 }
