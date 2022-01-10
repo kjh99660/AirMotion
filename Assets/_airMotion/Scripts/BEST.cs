@@ -31,7 +31,7 @@ public class BEST : MonoBehaviour
     //#Best_main_0 and Best_main_1 and Best_main_3
     public void ButtonMyVedio()//내영상들 모음으로 가는 내용
     {
-        
+        MoveHome();
     }
 
     public void ButtonMontlyBest()
