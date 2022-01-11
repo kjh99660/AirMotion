@@ -95,6 +95,7 @@ public class Splash : MonoBehaviour  //Splash 관련해서 화면 이동 및 UI를 처리하�
             UM.ChangeImage(grayButton_register, RegisterButtonDetail);
             RegisterButtonDetail.GetComponent<Button>().interactable = false;
         }
+       
     }
 
     // #단순 화면 이동 관련 메서드   
