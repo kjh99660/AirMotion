@@ -56,7 +56,6 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
     private void OnEnable()
     {
         InitValue();
-        Debug.Log("Home OnEnable");
     }
 
 
@@ -64,6 +63,7 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
     // #Home_main_0 and #Home_main_3
     IEnumerator CheckNewVedio()//영상을 검색하는 내용 만약 영상이 이미 있으면 3번 페이지로 이동
     {
+        PopUp_search();
         NetworkManager.Instance.GetVedioData("20211210", "20211220", "3");
 
         yield return new WaitUntil(() => NetworkManager.Instance.isLoaded == true);
@@ -74,10 +74,14 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
         else HasVedio = false;
 
         MoveHomeOrMain();
+
+        yield return new WaitUntil(() => !UM.CheckPopUp());
+
         //loading animation
         if (!HasVedio) PopUp_noVedio();
         if (newVedio) PopUp_vediolist();
         if (gameObject.transform.Find("GlobalCourutine") != null) GC.CheckCourutine();
+
     }
 
     private bool MakeVideos()//비디오를 초기화

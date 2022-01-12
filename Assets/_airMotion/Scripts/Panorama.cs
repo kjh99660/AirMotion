@@ -19,11 +19,13 @@ public class Panorama : MonoBehaviour
     public RawImage Image;
     public int pos;
     public RawImage[] fraction;
+    public RawImage[] fractionHorizon;
 
     [Header("Player Slider")]
     public Slider slider;
+    public Slider sliderVertical;
     private bool ImageLoaded;
-    private bool ConvertOptionTeaTime;
+    private bool ConvertOptionHorizon;
     private float FrameSpeed;
     private Color red;
     private Color white;
@@ -67,7 +69,7 @@ public class Panorama : MonoBehaviour
 
     public void CreatePanorama()//동영상을 이미지로 만들기
     {                
-        StartCoroutine(LoadPanorama(ConvertOptionTeaTime, FrameSpeed));
+        StartCoroutine(LoadPanorama(ConvertOptionHorizon, FrameSpeed));
     }
 
     IEnumerator LoadPanorama(bool option, float frame)
@@ -77,13 +79,18 @@ public class Panorama : MonoBehaviour
         while (!PanoramaVideo.isPrepared) yield return null;
         PanoramaVideo.time = 0;
         slider.maxValue = (float)PanoramaVideo.length;
-        
+        sliderVertical.maxValue = (float)PanoramaVideo.length;
+
         yield return new WaitForSeconds(1f);
 
-        if(ImageLoaded)
+        if(ImageLoaded && option)
         {
             MovePanoramaVertical();
             PopUp_vertical();
+        }
+        if(ImageLoaded && !option)
+        {
+            MovePanoramaHorizon();
         }
     }
 
@@ -103,24 +110,31 @@ public class Panorama : MonoBehaviour
     public void ConvertPanorama() //파노라마를 만드는 내용 - 변환하기
     {
         StartCoroutine(MakePanorama(slider.value));
-        MovePanoramaVerticalDown();
     }
 
     public void SetVideoPos() //영상 시간을 조절하는 UI
     {
         PanoramaVideo.time = slider.value;
+        if(!ConvertOptionHorizon)PanoramaVideo.time = sliderVertical.value;
+
         PanoramaVideo.Play();
         PanoramaVideo.Pause();
     }
 
     public IEnumerator MakePanorama(float startTime)//이미지 캡쳐 후 저장 저장한 이미지로 파노라마 만들기
     {
+        PopUpConvert();
+
         double time = startTime;
+        time -= 4 * FrameSpeed;
+        if (time < 0) time = 0;
+
         PanoramaVideo.Prepare();
         while (!PanoramaVideo.isPrepared)
         {
             yield return null;
         }
+
         for (int i = 0; i < 6; i++)//이미지 캡쳐
         {
             if (i != 0) time += FrameSpeed;
@@ -128,20 +142,40 @@ public class Panorama : MonoBehaviour
             PanoramaVideo.Play();
             yield return new WaitUntil(() => Math.Abs(PanoramaVideo.time - time) < (FrameSpeed / 2));
             PanoramaVideo.Pause();
+            if(ConvertOptionHorizon)
+            {
+                RenderTexture newRenderTexure = new RenderTexture(3240, Image.texture.height, 0);
+                Graphics.Blit(Image.texture, newRenderTexure);
 
-            RenderTexture newRenderTexure = new RenderTexture(3240, Image.texture.height, 0);
-            Graphics.Blit(Image.texture, newRenderTexure);
+                Texture2D texture2D = new Texture2D(1080, Image.texture.height, TextureFormat.RGB24, false);
 
-            Texture2D texture2D = new Texture2D(1080, Image.texture.height, TextureFormat.RGB24, false);
+
+                texture2D.ReadPixels(new UnityEngine.Rect(1080 + pos, 0, 2160 + pos, Image.texture.height), 0, 0);//여기를 수정하면 이미지가 찍히는 사이즈를 바꿀 수 있음
+                texture2D.Apply();
+
+                byte[] texurePNG = texture2D.EncodeToPNG();
+                string path = Application.persistentDataPath + "/" + i + "Panorama.png";
+                File.WriteAllBytes(path, texurePNG);
+                DestroyImmediate(texture2D);
+            }
+            else
+            {
+                RenderTexture newRenderTexure = new RenderTexture(Image.texture.width, Image.texture.height, 0);
+                Graphics.Blit(Image.texture, newRenderTexure);
+
+                Texture2D texture2D = new Texture2D(Image.texture.width, Image.texture.height, TextureFormat.RGB24, false);
+
+                texture2D.ReadPixels(new UnityEngine.Rect(0, 0, Image.texture.width, Image.texture.height), 0, 0);
+                texture2D.Apply();
+
+                byte[] texurePNG = texture2D.EncodeToPNG();
+                string path = Application.persistentDataPath + "/" + i + "Panorama.png";
+                File.WriteAllBytes(path, texurePNG);
+                DestroyImmediate(texture2D);
+            }
             
-            
-            texture2D.ReadPixels(new UnityEngine.Rect(1080 + pos, 0, 2160 + pos, Image.texture.height), 0, 0);//여기를 수정하면 이미지가 찍히는 사이즈를 바꿀 수 있음
-            texture2D.Apply();
 
-            byte[] texurePNG = texture2D.EncodeToPNG();
-            string path = Application.persistentDataPath + "/" + i + "Panorama.png";
-            File.WriteAllBytes(path, texurePNG);
-            DestroyImmediate(texture2D);
+            
         }
 
         for (int i = 0; i < 6; i++)//이미지 만들기
@@ -150,13 +184,19 @@ public class Panorama : MonoBehaviour
             string path = Application.persistentDataPath + "/" + i + "Panorama.png";
 
             byte[] byteTexture = File.ReadAllBytes(path);
-            if(byteTexture.Length > 0)
-            {         
+            if (byteTexture.Length > 0)
+            {
                 texture.LoadImage(byteTexture);
-            }
+            }        
+            if (ConvertOptionHorizon) fraction[i].texture = texture;
+            else fractionHorizon[i].texture = texture;
 
-            fraction[i].texture = texture;
+            
         }
+
+        UM.CancelPopUp(2);
+        if (!ConvertOptionHorizon) MovePanoramaHorizonDown();
+        else MovePanoramaVerticalDown();
     }
 
     public void MovePanorama() => UM.PageMove(0);//원래 페이지로 돌아가기
@@ -166,6 +206,10 @@ public class Panorama : MonoBehaviour
 
 
     //# PANORAMA horizontal
+    public void ConvertPanoramaHorizon() //파노라마를 만드는 내용 - 변환하기
+    {      
+        StartCoroutine(MakePanorama(slider.value));     
+    }
     public void ChangeModeToVertical()//가로에서 세로로 바꾸는 내용
     {
         MovePanoramaVertical();
@@ -195,20 +239,15 @@ public class Panorama : MonoBehaviour
 
     public void ToggleConvertOptions()
     {
-        GameObject Button = UM.CurrentSelectedGameObject();
+        GameObject Button = GameObject.Find("btn_horizontal");
         if (Button.GetComponent<Toggle>().isOn)
         {
-            ConvertOptionTeaTime = true;
+            ConvertOptionHorizon = true;
         }
-        else ConvertOptionTeaTime = false;      
+        else ConvertOptionHorizon = false;      
     }
     
     public void MovePanoramaVerticalDown() => UM.PageMove(3);
-    public void ConvertPanoramaHorizon()
-    {
-        //파노라마를 만드는 내용
-        MovePanoramaHorizonDown();
-    }
    
     public void DownloadPanorama()
     {
@@ -217,8 +256,7 @@ public class Panorama : MonoBehaviour
 
     IEnumerator DownloadPanorama_()
     {
-        StartCoroutine(SaveScreen());
-        PopUpConvert();
+        StartCoroutine(SaveScreen());        
         yield return new WaitForSeconds(1f);
         GC.AddCourutine("home", "BackToVedio");
         MoveHome();
@@ -227,13 +265,24 @@ public class Panorama : MonoBehaviour
     private IEnumerator SaveScreen()
     {
         yield return new WaitForEndOfFrame();
-
-        Texture2D texture = new Texture2D(Screen.width, 360);
-        texture.ReadPixels(new UnityEngine.Rect(0, 780, Screen.width, 360), 0, 0);
-        texture.Apply();
-        byte[] bytes = texture.EncodeToJPG();
-        File.WriteAllBytes(Application.persistentDataPath + "/" + "FinalPanorama.png", bytes);
-        DestroyImmediate(texture);
+        if(ConvertOptionHorizon)
+        {
+            Texture2D texture = new Texture2D(Screen.width, 360);
+            texture.ReadPixels(new UnityEngine.Rect(0, 780, Screen.width, 360), 0, 0);
+            texture.Apply();
+            byte[] bytes = texture.EncodeToJPG();
+            File.WriteAllBytes(Application.persistentDataPath + "/" + "FinalPanorama.png", bytes);
+            DestroyImmediate(texture);
+        }
+        else
+        {
+            Texture2D texture = new Texture2D(424, 1440);
+            texture.ReadPixels(new UnityEngine.Rect(328, 323, 424, 1440), 0, 0);
+            texture.Apply();
+            byte[] bytes = texture.EncodeToJPG();
+            File.WriteAllBytes(Application.persistentDataPath + "/" + "FinalPanorama.png", bytes);
+            DestroyImmediate(texture);
+        }
     }
 
     private void PickVideo(int maxSize) //갤러리에서 영상을 가저오기
@@ -281,7 +330,7 @@ public class Panorama : MonoBehaviour
         if (GC == null) GC = GlobalCourutine.Instance;
         if (UM == null) UM = UIManager.Instance;
         UM.ResetUIManager();
-        ConvertOptionTeaTime = true;       
+        ConvertOptionHorizon = true;       
         FrameSpeed = 1.0f;
         white = new Color(1f, 1f, 1f, 1f);
         red = new Color(1f, 0.1921569f, 0.2941177f, 1f);
