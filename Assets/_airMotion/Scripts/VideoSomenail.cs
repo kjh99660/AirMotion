@@ -42,6 +42,11 @@ public class VideoSomenail : MonoBehaviour
 
     public void TouchVedio()//비디오를 터치 시 실행되는 함수
     {
+        Home home = GameObject.Find("HomeManager").GetComponent<Home>();
+        if (home != null)
+        {
+            home.urlNowUse = url;
+        }
         VideoDetail VideoDetail = GameObject.Find("Canvas").transform.GetChild(4).GetChild(3).GetComponent<VideoDetail>();
         VideoDetail.Init(url);
         //세부 비디오를 초기화 하는 내용이 들어가야함

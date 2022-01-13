@@ -7419,6 +7419,8 @@ MonoBehaviour:
   informationContent: {fileID: 757401122}
   ID: {fileID: 1585535907}
   PW: {fileID: 394763287}
+  Time: {fileID: 123547309}
+  passNumber: {fileID: 1758162614}
 --- !u!4 &677116946
 Transform:
   m_ObjectHideFlags: 0
@@ -11512,7 +11514,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1031912232
 RectTransform:
   m_ObjectHideFlags: 0

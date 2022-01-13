@@ -57,6 +57,10 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
     public InputField ID;
     public InputField PW;
 
+    [Header("Certify")]
+    public Text Time;
+    public InputField passNumber;
+
     IEnumerator Splash_term_on() //½ÃÀÛ ¾Ö´Ï¸ÞÀÌ¼Ç
     {
         UM.PageMove(0);
@@ -429,9 +433,29 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
         if (UM.IsValidPhone(text.text))
         {
             MoveAfterCertify();
+            StartCoroutine(CountTime());
         }
     }
 
+    IEnumerator CountTime()//ÇÚµåÆù ÀÎÁõ Å¸ÀÌ¸Ó
+    {
+        System.DateTime now = System.DateTime.Now;
+        System.DateTime end = now.AddMinutes(3);
+        
+        for(int i = 0; i < 180; i++)
+        {
+            yield return new WaitForSecondsRealtime(1f);
+            now = System.DateTime.Now;
+            System.TimeSpan time = end - now;
+
+            Time.text = time.Minutes.ToString() + ":" + time.Seconds;
+            if(i == 10)
+            {
+                passNumber.text = Random.Range(10000, 99999).ToString();
+            }
+        }
+        //½Ã°£ ¸¸·á
+    }
 
 
 
@@ -442,8 +466,8 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
         NM.SignIn.memberLastName = userName;
         NM.SignIn.memberBirth = "20211216";
         NM.SignIn.memberEmailAddr = registerID;
-        //NM.SignIn.memberName = userName;
-        //NM.SignIn.memberHpNo = phoneNumber;
+        NM.SignIn.memberName = userName;
+        NM.SignIn.memberHpNo = phoneNumber;
         NM.SignIn.memberHandDrctCd = "RIGHT";
         NM.SignIn.memberHandicapCd = handycap.ToString();
         NM.SignIn.memberPs = registePassword;
@@ -489,10 +513,10 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
     //??
     public void ClickLogin()
     {
-        string userEmal = registerID;
-        Debug.Log(UM.IsValidEmail(userEmal));
+        string userEmail = registerID;
+        Debug.Log(UM.IsValidEmail(userEmail));
         //ÀÌ¸ÞÀÏ ÀÔ·Â Çü½Ä ÀÏÄ¡
-        if (!UM.IsValidEmail(userEmal))
+        if (!UM.IsValidEmail(userEmail))
         {
             //¿¡·¯ ¶ç¿ì±â
         }

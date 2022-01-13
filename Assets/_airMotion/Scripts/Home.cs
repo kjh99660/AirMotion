@@ -15,9 +15,11 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
     private GlobalCourutine GC;
     public GameObject Calendar; //달력 외부 플러그인
     public GameObject Time; //스크롤링 외부 플러그인
+    public int nowDisplayingVideo; //현재 화면에 있는 비디오의 수
     [Header("Main Has Video")]
     public GameObject Content;
     public GameObject VideoPrefabs;
+    public List<string> videoValue;
 
     [Header ("Sort Zero Page")]
     public GameObject[] TopButtons;
@@ -36,10 +38,12 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
     public GameObject[] TeaAndLockerInput;
 
     [Header("Detail Vedio")]
+    public string urlNowUse;
     public GameObject[] DownloaadToggle;
 
     [Header("DownloadProgress")]
     public GameObject DownloadProgress;
+    public GameObject DownloadEnd;
 
     private bool selectedCourse, selectedDay;
     private bool firstVisit;
@@ -47,11 +51,13 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
     private bool IsPremium;
     private bool HasVedio;
     private bool Download720, IsVedioOpen, IsDownloaded, PanoramaExplain, HasPanorama, SnapPhotoExplain, HasSnapPhoto;
+    private bool DownVideo;
     private Color red;
     private Color white;
     private Color black;
     private int downloadNumber;
-    private string urlNowUse;
+    private RectTransform videoRect;
+
 
     private void OnEnable()
     {
@@ -61,9 +67,22 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
 
 
     // #Home_main_0 and #Home_main_3
-    IEnumerator CheckNewVedio()//영상을 검색하는 내용 만약 영상이 이미 있으면 3번 페이지로 이동
+
+    private void GetVideo()
     {
-        PopUp_search();
+        if (DownVideo) return;
+        if (Content.transform.childCount < 2) return;
+        if(videoRect.sizeDelta.y + 250 < videoRect.anchoredPosition.y)
+        {
+            StartCoroutine(CheckNewVedio());
+
+            Debug.Log("get Video");
+            DownVideo = true;
+        }     
+    }
+
+    IEnumerator CheckNewVedio()//영상을 검색하는 내용 만약 영상이 이미 있으면 3번 페이지로 이동
+    {        
         NetworkManager.Instance.GetVedioData("20211210", "20211220", "3");
 
         yield return new WaitUntil(() => NetworkManager.Instance.isLoaded == true);
@@ -74,13 +93,17 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
         else HasVedio = false;
 
         MoveHomeOrMain();
+        PopUp_search();
 
-        yield return new WaitUntil(() => !UM.CheckPopUp());
+        yield return new WaitUntil(() => UM.CheckPopUp());
 
         //loading animation
         if (!HasVedio) PopUp_noVedio();
         if (newVedio) PopUp_vediolist();
         if (gameObject.transform.Find("GlobalCourutine") != null) GC.CheckCourutine();
+
+        yield return new WaitForSeconds(1f);
+        DownVideo = false;
 
     }
 
@@ -91,10 +114,23 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
 
         for (int i = 0; i < temp.Length; i++)
         {
+            bool duplicate = false;
             var inf = temp[i];
+            for (int j = 0; j < videoValue.Count; j++)
+            {
+                if (videoValue.Contains(inf.VideoOthers)) 
+                {
+                    duplicate = true;
+                    break;
+                }
+            }
+            if (duplicate) continue;
+            
             GameObject Video = Instantiate(VideoPrefabs);
             Video.GetComponent<VideoSomenail>().Init(inf.VideoOthers, inf.Time, inf.VideoKey, i);
             Video.transform.parent = Content.transform;
+            videoValue.Add(inf.VideoOthers);
+            nowDisplayingVideo++;
         }
         return true;
     }
@@ -245,14 +281,7 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
     {
         if (!IsDownloaded)
         {
-            if (IsPremium)
-            {
-                PopUp_download();
-            }
-            else
-            {
-                PopUp_normal_download();
-            }
+            PopUp_download();
         }
         else
         {
@@ -277,12 +306,16 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
         UM.CancelPopUp();
     }
 
-    public void ConfirmDownload()//다운로드 확인 버튼 주소는 아무 영상
+    public void ConfirmDownload()//다운로드 확인 버튼
     {
-        //화질 설정++
+        if(!Download720 && !IsPremium)
+        {
+            UM.PopUp(24);
+            return;
+        }
         
         PopUp_downprograss();
-        StartCoroutine(Downloadmp4("https://s3.ap-northeast-2.amazonaws.com/metaverse.file/meta/no1.mp4"));
+        StartCoroutine(Downloadmp4(urlNowUse));
         //다운로드 진행하는 함수 실행해야함 -> 다운로드가 끝나면 다운로드 완료 이미지로 교환해야함
         IsDownloaded = true;
         UM.CancelPopUp();
@@ -302,6 +335,11 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
         downloadNumber++;
         Debug.Log(savePath);
         File.WriteAllBytes(savePath, www.bytes);
+
+        DownloadEnd.transform.GetChild(1).GetComponent<Text>().text = savePath + "로 다운로드가 완료되었습니다";
+        DownloadEnd.SetActive(true);
+        yield return new WaitForSeconds(4f);
+        DownloadEnd.SetActive(false);
     }
 
     public void CancelDownload()
@@ -420,7 +458,7 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
     public void VedioShare()//영상에서 공유하기 버튼을 눌렀을 때
     {
         //PopUp_share();
-        ShareToSNS("https://s3.ap-northeast-2.amazonaws.com/metaverse.file/meta/no1.mp4");
+        ShareToSNS(urlNowUse);
     }
     public void ShareToSNS(string text)
     {
@@ -435,7 +473,7 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
     }
     public void DeleteVedio()//더보기에서 영상 삭제 버튼을 눌렀을 때
     {
-        
+        PopUp_delete();
     }
 
 
@@ -452,7 +490,7 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
     }
     private void MoveBest() => SceneManager.LoadScene("best");
     private void MoveGolfCourse() => SceneManager.LoadScene("golfCourse");
-    private void MoveMore() => SceneManager.LoadScene("more");
+    public void MoveMore() => SceneManager.LoadScene("more");
     private void MoveHome_re() => SceneManager.LoadScene("Home");
     private void MovePanorama() => SceneManager.LoadScene("PANORAMA");
     public void PopUp_noVedio() => UM.PopUp(0);
@@ -523,6 +561,7 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
             selectedCourse = false;
             selectedDay = false;
         }
+        GetVideo();
     }
 
     private void InitValue()
@@ -536,6 +575,9 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
         newVedio = false;
         IsPremium = false;
         selectedCourse = false; selectedDay = false;
+        DownVideo = false;
+        nowDisplayingVideo = 0;
+        videoRect = Content.GetComponent<RectTransform>();
 
         //vedio detail value
         Download720 = false; IsVedioOpen = false; IsDownloaded = false;  PanoramaExplain = true; HasPanorama = false; HasSnapPhoto = false; SnapPhotoExplain = true;
