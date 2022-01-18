@@ -393,11 +393,6 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
         UM.CancelPopUp();
     }
 
-    public void CancelOpenVedio()
-    {
-        UM.CancelPopUp();
-    }
-
     public void VedioOpenVedio()//영상 공개 버튼
     {
         if (IsVedioOpen)
@@ -467,13 +462,15 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
         //new NativeShare().SetText(Url).Share();     
     }
 
-    public void VedioMore()//영상에서 더보기 버튼을 눌렀을 때(동영상 플레이어에 포함)
-    {
-        
-    }
-    public void DeleteVedio()//더보기에서 영상 삭제 버튼을 눌렀을 때
+    public void DeleteVideo()//더보기에서 영상 삭제 버튼을 눌렀을 때
     {
         PopUp_delete();
+    }
+
+    public void ConfirmDeleteVideo()//영상 삭제 세부창에서 영상 삭제 버튼
+    {
+        //서버로 영상 삭제 내용 전달
+        UM.CancelPopUp();
     }
 
 

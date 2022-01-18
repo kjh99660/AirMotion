@@ -173,9 +173,7 @@ public class Panorama : MonoBehaviour
                 File.WriteAllBytes(path, texurePNG);
                 DestroyImmediate(texture2D);
             }
-            
-
-            
+                        
         }
 
         for (int i = 0; i < 6; i++)//이미지 만들기
