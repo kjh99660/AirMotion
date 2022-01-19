@@ -12,8 +12,9 @@ public class VideoDetail : MonoBehaviour
     public GameObject VideoPrefabs;
     public VideoPlayer video;
     public Button button;
-    public GameObject videoFullScreen;
+    public GameObject videoFullScreen;//풀스크린 프리펩
     private GameObject Content;
+    private GameObject fullScreenObject; //풀스크린 자체 오브젝트
 
     [Header("Text")]
     public Text t_tag;
@@ -79,9 +80,9 @@ public class VideoDetail : MonoBehaviour
     //#비디오 UI 관련
     public void FullScreen()//전체화면 버튼
     {
-        GameObject temp = Instantiate(videoFullScreen, gameObject.transform.parent);
-        temp.transform.position = transform.parent.position;
-        temp.GetComponent<VideoFullScreen>().Init(video.url);
+        fullScreenObject = Instantiate(videoFullScreen, gameObject.transform.parent);
+        fullScreenObject.transform.position = transform.parent.position;
+        fullScreenObject.GetComponent<VideoFullScreen>().Init(video, (float)video.time, (float)video.length);
     }
 
     public void DetailButton()//더보기 버튼
@@ -147,18 +148,14 @@ public class VideoDetail : MonoBehaviour
     {
         if (video.isPlaying && isSliderPause == false)
         {
-            print("ProgressBarSetting");
             timeSlider.value = (float)video.time;
+            if (fullScreenObject != null) fullScreenObject.GetComponent<VideoFullScreen>().timeSlider.value = timeSlider.value;
         }
     }
 
 
     private void Update()
     {
-        ProgressBarSetting();
-    }
-    void SliderPause()
-    {
-
+        ProgressBarSetting();       
     }
 }

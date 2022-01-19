@@ -7,10 +7,8 @@ using UnityEngine.Video;
 public class VideoFullScreen : MonoBehaviour
 {
     private UIManager UM;
-    public GameObject VideoPrefabs;
-    public VideoPlayer video;
+    private VideoPlayer video;
     public Button button;
-    private GameObject Content;
 
     [Header("Video UI")]
     public GameObject UI;
@@ -21,24 +19,15 @@ public class VideoFullScreen : MonoBehaviour
     public Slider timeSlider;
 
 
-    public void Init(string url)
+    public void Init(VideoPlayer videoPlayer, float videoTime, float videolength)
     {
         UI.SetActive(false);
-        video.url = url;
-        video.Prepare();
-        StartCoroutine(SetVideoInf());
+        video = videoPlayer;       
         UM = UIManager.Instance;
+        timeSlider.maxValue = videolength;
+        timeSlider.value = videoTime;
+        Debug.Log(video.length + "  :  " + video.time);       
     }
-
-    private IEnumerator SetVideoInf()//비디오 정보 초기화
-    {
-        while (!video.isPrepared)
-        {
-            yield return null;
-        }
-        timeSlider.maxValue = (float)video.length;
-    }
-
 
 
 
@@ -99,17 +88,4 @@ public class VideoFullScreen : MonoBehaviour
         if (already) UI.SetActive(false);
     }
 
-    private void ProgressBarSetting()//동영상 시간 진행
-    {
-        if (video.isPlaying)
-        {
-            timeSlider.value = (float)video.time;
-        }
-    }
-
-
-    private void Update()
-    {
-        ProgressBarSetting();
-    }
 }
