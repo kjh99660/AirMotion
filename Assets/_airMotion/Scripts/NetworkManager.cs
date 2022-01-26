@@ -167,7 +167,6 @@ public class SignIn //회원가입 관련 정보 + 자동 로그인 설정 + 이용약관 변경 동의
     public string updatedAt;                //2021-12-13T10:56:03.707Z
     public string updatedBy;                //string
     public string useYn;                    //사용_여부
-
 }
 
 
