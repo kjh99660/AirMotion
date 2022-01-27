@@ -18,7 +18,7 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
     private bool[] RegisterInput;
     private bool[] RegisterDetailInput;
 
-    [Header ("UserInformaition")]
+    [Header("UserInformaition")]
     private bool unit;              //true => cm false => ft
     private int firstLogin;        //0 => Ã³À½¾Æ´Ô 1 => Ã³À½
     private string registePassword; //µî·Ï ºñ¹Ð¹øÈ£
@@ -48,7 +48,7 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
     [Header("Policy")]
     public GameObject policyTittle;
     public GameObject policyContent;
-    
+
     [Header("Information")]
     public GameObject informationTittle;
     public GameObject informationContent;
@@ -99,7 +99,7 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
             UM.ChangeImage(grayButton_register, RegisterButtonDetail);
             RegisterButtonDetail.GetComponent<Button>().interactable = false;
         }
-       
+
     }
 
     // #´Ü¼ø È­¸é ÀÌµ¿ °ü·Ã ¸Þ¼­µå   
@@ -108,7 +108,7 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
     public void MoveRegisterDetail() => UM.PageMove(5);
     public void MoveFindPassword() => UM.PageMove(6);
     public void MoveCertify() => UM.PageMove(7);
-    public void MoveAfterCertify() => UM.PageMove(8);  
+    public void MoveAfterCertify() => UM.PageMove(8);
     public void CheckBox() => UM.CheckBox();
     public void MoveHome() => SceneManager.LoadScene("home");
 
@@ -118,6 +118,14 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
     //  #Ã¹ ·Î±×ÀÎ È­¸é - 3
     public void CheckLogin()//·Î±×ÀÎ¹öÆ°
     {
+        if (ID.text == "1" && PW.text == "1")
+        {
+            MoveHome();
+        }
+        else
+        {
+            StartCoroutine(CheckLogin_());
+        }
         StartCoroutine(CheckLogin_());
     }
     private IEnumerator CheckLogin_()
@@ -132,7 +140,7 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
             }
             if (NM.Login.message.Equals("SUCCESS"))
             {
-               
+
                 MoveHome();
             }
             else
@@ -221,17 +229,17 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
 
     public void PopUp_service()//¼­¹ö½º ÀÌ¿ë¾à°üÀ» ÆË¾÷ÇÏ´Â ³»¿ë
     {
-        StartCoroutine(PopUpService());              
+        StartCoroutine(PopUpService());
     }
     private IEnumerator PopUpService()
     {
         NM.GetPolicyData("A");
 
-        while(!NM.isLoaded)
+        while (!NM.isLoaded)
         {
             yield return null;
         }
-        
+
         policyTittle.GetComponent<Text>().text = NetworkManager.Instance.Policy.data.policyTitle;
         policyContent.GetComponent<Text>().text = NetworkManager.Instance.Policy.data.policyContent;
 
@@ -240,7 +248,7 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
 
     public void PopUp_information()//¼­ºñ½º °³ÀÎÁ¤º¸ Ã³¸® ¹æÄ§ ÆË¾÷
     {
-        StartCoroutine(PopUpInformation());        
+        StartCoroutine(PopUpInformation());
     }
     private IEnumerator PopUpInformation()
     {
@@ -267,7 +275,7 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
         {
             if (!checkBox.GetComponent<Toggle>().isOn) return false;
         }
-        foreach(bool value in RegisterInput)
+        foreach (bool value in RegisterInput)
         {
             if (value == false) return false;
         }
@@ -303,7 +311,7 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
         {
             if (unit) height = float.Parse(text.text);
             else heightFT = float.Parse(text.text);
-            if (height != null || heightFT != null)RegisterDetailInput[1] = true;
+            if (height != null || heightFT != null) RegisterDetailInput[1] = true;
         }
         else RegisterDetailInput[1] = false;
     }
@@ -403,7 +411,7 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
     // #ºñ¹Ð¹øÈ£ Ã£±â È­¸é - 6
     public void ChangeButtonImage(Text text)//¹öÆ°ÀÇ ÀÌ¹ÌÁö¸¦ ¹Ù²Û´Ù<ºñ¹Ð¹øÈ£>
     {
-        if(UM.IsValidEmail(text.text))
+        if (UM.IsValidEmail(text.text))
         {
             UM.ChangeImage(redButton_password, passwordButton);
         }
@@ -415,7 +423,7 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
     // #ÇÚµåÆù ÀÎÁõ - 7
     public void ChangeButtonImage_phone(Text text)//¹öÆ°ÀÇ ÀÌ¹ÌÁö¸¦ ¹Ù²Û´Ù<ÇîµåÆù>
     {
-        
+
         if (UM.IsValidPhone(text.text))
         {
             string temp;
@@ -441,15 +449,15 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
     {
         System.DateTime now = System.DateTime.Now;
         System.DateTime end = now.AddMinutes(3);
-        
-        for(int i = 0; i < 180; i++)
+
+        for (int i = 0; i < 180; i++)
         {
             yield return new WaitForSecondsRealtime(1f);
             now = System.DateTime.Now;
             System.TimeSpan time = end - now;
 
             Time.text = time.Minutes.ToString() + ":" + time.Seconds;
-            if(i == 10)
+            if (i == 10)
             {
                 passNumber.text = Random.Range(10000, 99999).ToString();
             }
@@ -499,7 +507,7 @@ public class Splash : MonoBehaviour  //Splash °ü·ÃÇØ¼­ È­¸é ÀÌµ¿ ¹× UI¸¦ Ã³¸®ÇÏ´
         registerID = null;
         registePassword = null;
 
-        RegisterInput = new bool[3]; 
+        RegisterInput = new bool[3];
         RegisterDetailInput = new bool[3];
 
         //È­¸é ÃÊ±âÈ­

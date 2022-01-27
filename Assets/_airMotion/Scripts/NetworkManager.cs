@@ -169,7 +169,6 @@ public class SignIn //회원가입 관련 정보 + 자동 로그인 설정 + 이용약관 변경 동의
     public string useYn;                    //사용_여부
 }
 
-
 //이용약관 조회 관련 API
 [Serializable]
 public class Policy //이용약관 조회
@@ -232,12 +231,12 @@ public class Banner //배너 목록 조회
     public CntMap cnt_map;
     public BannerList[] list;
 
-    
+
 }
 [Serializable]
 public class PagingList //배너 페이지 리스트
 {
-    public PageList[] pagingList;  
+    public PageList[] pagingList;
 }
 [Serializable]
 public class PageList //배너 페이지 리스트 세부 정보
@@ -294,7 +293,7 @@ public class Language //공통 언어 정보 - 추후 추가 가능
     public string error;
     public string message;
     public string redirect;
-    public LanguageKind[] data;      
+    public LanguageKind[] data;
 }
 [Serializable]
 public class LanguageKind //언어 세부 정보
@@ -425,6 +424,16 @@ public class VideoData //비디오 세부 데이터
     public string TotalTime;
     public string VideoKey;
 }
+[Serializable]
+public class Voice
+{
+    public int timestamp;
+    public int status;
+    public string error;
+    public string message;
+    public string path;
+    public int errorCode;
+}
 
 
 
@@ -447,6 +456,7 @@ public class NetworkManager : MonoBehaviour
     public Notice Notice = new Notice();
     public Video Video = new Video();
     public Banner Banner = new Banner();
+    public Voice Voice = new Voice();
 
     public ArrayList signInAnswer;
     /// <summary>
@@ -481,23 +491,23 @@ public class NetworkManager : MonoBehaviour
         isLoaded = false;
         signInAnswer = new ArrayList();
     }
- 
+
     private IEnumerator LoadData(string URL, int Type)//url 주소를 입력하면 정보를 받아오는 코루틴
     {
         isLoaded = false;
         string GetDataUrl = "http://211.33.44.93:8091" + URL;
         using (UnityWebRequest www = UnityWebRequest.Get(GetDataUrl))
         {
-            yield return www.SendWebRequest();
-            if(www.isNetworkError || www.isHttpError)
+            yield return www.SendWebRequest();//응답대기
+            if (www.isNetworkError || www.isHttpError)
             {
-                Debug.Log(www.error);
+                Debug.Log(www.error);//에러메시지호출
             }
             else
             {
-                if(www.isDone)
+                if (www.isDone)
                 {
-                    jsonResult = System.Text.Encoding.UTF8.GetString(www.downloadHandler.data);                    
+                    jsonResult = System.Text.Encoding.UTF8.GetString(www.downloadHandler.data);
                     Debug.Log(jsonResult);
                     switch (Type)
                     {
@@ -522,10 +532,9 @@ public class NetworkManager : MonoBehaviour
                         case 6://Get PopUp List
                             Banner = JsonUtility.FromJson<Banner>(jsonResult);
                             break;
-
-                            
-
-
+                        case 7://Get PopUp List
+                            Voice = JsonUtility.FromJson<Voice>(jsonResult);
+                            break;
                     }
                 }
             }
@@ -560,7 +569,7 @@ public class NetworkManager : MonoBehaviour
                         signInAnswer.Add(decoded["returnMsg"]);
                         signInAnswer.Add(decoded["returnData"]);
                         signInAnswer.Add(decoded["msg"]);
-                        signInAnswer.Add(decoded["path"]);                       
+                        signInAnswer.Add(decoded["path"]);
                         break;
                 }
             }
@@ -581,6 +590,7 @@ public class NetworkManager : MonoBehaviour
     public void GetVedioData(string start, string end, string ID)//비디오
     {
         string path = "/gzfx/service/shotdata/getShotVideoDataList.ajax?endDate=" + end + "&memberId=" + ID + "&startDate=" + start;
+
         StartCoroutine(LoadData(path, 5));
     }
     public void GetNoticeData(int pageNumber, int pageSize)//공지사항
@@ -607,11 +617,11 @@ public class NetworkManager : MonoBehaviour
     }
 
     public void GetPolicyData(string kind)//이용약관을 가져오는 메서드 약관유형코드(A:이용약관 B:개인정보보호 C:위치정보약관 D:마케팅수신동의)
-    {        
+    {
         string path = "/gzfx/service/policy/policyContent.ajax?policyTypeCd=" + kind;
-        StartCoroutine(LoadData(path, 1));        
+        StartCoroutine(LoadData(path, 1));
     }
-    
+
     public void GetOsVersionInformation()//버전OS코드(AND, IOS, WATCH)
     {
         string version;
@@ -623,6 +633,13 @@ public class NetworkManager : MonoBehaviour
 #endif
         string path = "/gzfx/operation/vermgmt/appVersion.ajax?verOsCd=" + version;
         StartCoroutine(LoadData(path, 2));
+    }
+    public void GetVoiceData(string filter, string mainParams, int offset, int pageNumber, int pageSize, bool paged, bool sorted, bool unsorted, bool unpaged, bool sortSorted, bool sortUnsorted)//
+    {
+        string path = "/gzfx/service/voice/list.ajax?" + "filter=" + filter + "&mainParams=" + mainParams + "&pageable.offset=" + offset + "&pageable.pageNumber=" + pageNumber
+            + "&pageable.pageSize=" + pageSize + "&pageable.paged=" + paged + "&pageable.sort.sorted=" + sorted + "&pageable.sort.unsorted=" + unsorted + "&pageable.unpaged="
+            + unpaged + "&sort.sorted=" + sortSorted + "&sort.unsorted=" + sortUnsorted;
+        StartCoroutine(LoadData(path, 1));
     }
     private void Update()
     {

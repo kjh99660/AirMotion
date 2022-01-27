@@ -6,25 +6,30 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
 public class UIManager : MonoBehaviour
-{
-    private static UIManager instance = null;
+{   
     private GameObject Canvas;
     private GameObject popup;
     private Dictionary<int, GameObject> LoginWindows;
     private Dictionary<int, GameObject> LoginPopUps;
     private Color black, white;
+
+    private static UIManager instance = null;
     public static UIManager Instance
     {
         get
         {
-            if(!instance)
+            if (!instance)
             {
                 GameObject.Find("UIManager").GetComponent<UIManager>().Awake();
             }
             return instance;
         }
     }
-    public void ResetUIManager() => GameObject.Find("UIManager").GetComponent<UIManager>().Awake();
+    public void ResetUIManager()
+    {
+        GameObject.Find("UIManager").GetComponent<UIManager>().Awake();
+    }
+
     public GameObject CurrentSelectedGameObject()
     {
         return EventSystem.current.currentSelectedGameObject.gameObject;
@@ -49,11 +54,11 @@ public class UIManager : MonoBehaviour
     public void ChildActiveOnOff()//자식 오브젝트를 키거나 끈다
     {
         GameObject parent = EventSystem.current.currentSelectedGameObject;
-        for(int i = 0; i < parent.transform.childCount; i++)
+        for (int i = 0; i < parent.transform.childCount; i++)
         {
             GameObject child = parent.transform.GetChild(i).gameObject;
             if (child.activeSelf) child.SetActive(false);
-            else child.SetActive(true);          
+            else child.SetActive(true);
         }
     }
     public void CheckBox()//체크박스
@@ -71,8 +76,8 @@ public class UIManager : MonoBehaviour
         }
     }
     public void PageMove(int PageNumber)//페이지 이동
-    {       
-        foreach(KeyValuePair<int, GameObject> Page in LoginWindows)
+    {
+        foreach (KeyValuePair<int, GameObject> Page in LoginWindows)
         {
             Page.Value.SetActive(false);
         }
@@ -121,7 +126,7 @@ public class UIManager : MonoBehaviour
 
     public bool IsValidPhone(string phone)//헨드폰 형식 일치 확인
     {
-        bool regPhone = Regex.IsMatch(phone,@"^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$", RegexOptions.IgnorePatternWhitespace);
+        bool regPhone = Regex.IsMatch(phone, @"^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$", RegexOptions.IgnorePatternWhitespace);
         Debug.Log("ISValidPhone: " + regPhone);
         return regPhone;
     }
@@ -134,7 +139,7 @@ public class UIManager : MonoBehaviour
     }
 
     public void ChangeImage(Sprite sprite, GameObject button)//이미지를 바꾼다
-    {       
+    {
         button.GetComponent<Button>().image.overrideSprite = sprite;
     }
 
@@ -157,7 +162,7 @@ public class UIManager : MonoBehaviour
         LoginWindows = new Dictionary<int, GameObject>();
         LoginPopUps = new Dictionary<int, GameObject>();
         Canvas = GameObject.Find("Canvas");
-        popup = Canvas.transform.Find("POPUP").gameObject;     
+        popup = Canvas.transform.Find("POPUP").gameObject;
         int temp = Canvas.transform.childCount;
         int temp2 = popup.transform.childCount;
         for (int value = 0; value < temp; value++)

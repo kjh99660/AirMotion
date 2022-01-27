@@ -58,18 +58,29 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
     private int downloadNumber;
     private RectTransform videoRect;
 
-
-    private void OnEnable()
+    private void Start()
     {
         InitValue();
+    }
+    private void OnEnable()
+    {
+        
     }
 
 
 
     // #Home_main_0 and #Home_main_3
 
-    private void GetVideo()
+    public void SearchDelete()//검색 중 제거
     {
+        //UM.CancelPopUp(1);
+        //MakeVideos();
+    }
+    private void GetVideo()//아래로 스크롤 해서 동영상 더 가져오기
+    {
+        Debug.Log(DownVideo);
+        Debug.Log(videoRect.sizeDelta.y + 250);
+        Debug.Log(videoRect.anchoredPosition.y);
         if (DownVideo) return;
         if (Content.transform.childCount < 2) return;
         if(videoRect.sizeDelta.y + 250 < videoRect.anchoredPosition.y)
@@ -83,12 +94,10 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
 
     IEnumerator CheckNewVedio()//영상을 검색하는 내용 만약 영상이 이미 있으면 3번 페이지로 이동
     {        
-        NetworkManager.Instance.GetVedioData("20211210", "20211220", "3");
+        NetworkManager.Instance.GetVedioData("20211210", "20211220", "3");//영상불러오는 시작날짜,끝나는날짜,ID
 
         yield return new WaitUntil(() => NetworkManager.Instance.isLoaded == true);
         yield return new WaitForSeconds(1f);
-
-
         if (MakeVideos()) HasVedio = true;
         else HasVedio = false;
 
@@ -104,33 +113,33 @@ public class Home : MonoBehaviour //영상 검색을 하는 씬의 스크립트
 
         yield return new WaitForSeconds(1f);
         DownVideo = false;
-
     }
 
-    private bool MakeVideos()//비디오를 초기화
+    public bool MakeVideos()//비디오를 초기화
     {
         var temp = NetworkManager.Instance.Video.data;
         if (temp.Length == 0) return false;
-
         for (int i = 0; i < temp.Length; i++)
         {
             bool duplicate = false;
             var inf = temp[i];
             for (int j = 0; j < videoValue.Count; j++)
             {
-                if (videoValue.Contains(inf.VideoOthers)) 
+                if (videoValue.Contains(inf.VideoOthers))
                 {
                     duplicate = true;
                     break;
                 }
             }
             if (duplicate) continue;
-            
-            GameObject Video = Instantiate(VideoPrefabs);
-            Video.GetComponent<VideoSomenail>().Init(inf.VideoOthers, inf.Time, inf.VideoKey, i);
-            Video.transform.parent = Content.transform;
-            videoValue.Add(inf.VideoOthers);
-            nowDisplayingVideo++;
+            for (int k = 0; k < 5; k++)
+            {
+                GameObject Video = Instantiate(VideoPrefabs);
+                Video.GetComponent<VideoSomenail>().Init(inf.VideoOthers, inf.Time, inf.VideoKey, i);
+                Video.transform.SetParent(Content.transform);
+                videoValue.Add(inf.VideoOthers);
+                nowDisplayingVideo++;
+            }
         }
         return true;
     }
